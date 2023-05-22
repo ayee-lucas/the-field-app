@@ -10,6 +10,14 @@ module.exports = {
       colors: {
         fieldGreen: "#03b50f",
       },
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)'],
+        inter: ['var(--font-inter)'],
+        poppins: ['var(--font-poppins)'],
+        roboto: ['var(--font-roboto)'],
+        openSans: ['var(--font-open-sans)'],
+        playfair: ['var(--font-playfair)'],
+      }
     },
   },
   plugins: [],
