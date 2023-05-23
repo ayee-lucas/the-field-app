@@ -1,19 +1,31 @@
 import React from "react";
-
 interface props {
   label: string;
   type: string;
   placeholder: string;
+  onChange?: any;
+  icon?: any;
+  error?: boolean;
 }
 
-const FormInput = ({ label, type, placeholder }: props) => {
+const FormInput = ({ label, type, placeholder, onChange, icon, error }: props) => {
   return (
-    <div className="py-2">
-      <label htmlFor=""> {label} </label>
+    <div className={!error ? "p-2 text-red-600" : "p-2"}>
+      <label
+        htmlFor=""
+        className={
+          icon ? "flex justify-between w-full items-center gap-2" : "text-sm"
+        }
+      >
+        {label}
+
+        {icon}
+      </label>
       <input
         type={type}
         placeholder={placeholder}
         required
+        onChange={onChange}
         className="w-full my-1 border transition-all border-lime-700 p-2 placeholder:text-sm placeholder:text-slate-700/70 font-roboto font-light  focus:outline-none focus:ring-1 focus:ring-lime-700 focus:shadow-xl empty:bg-slate-50 rounded-lg"
       />
     </div>

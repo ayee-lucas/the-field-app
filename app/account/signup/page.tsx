@@ -1,6 +1,6 @@
-
 import SignUpForm from "@/app/components/Account/SignUp/SignUpForm";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page() {
   return (
@@ -33,6 +33,15 @@ export default async function Page() {
               SIGN <span className="text-fieldGreen">UP</span>
             </h1>
             <SignUpForm />
+            <h1 className="text-sm py-4 ">
+              Already have an account?{" "}
+              <Link
+                href={"/account/signin"}
+                className="text-fieldGreen underline font-medium "
+              >
+                Login
+              </Link>
+            </h1>
           </div>
         </div>
       </div>
