@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 interface props {
   label: string;
   type: string;
@@ -8,13 +8,13 @@ interface props {
   error?: boolean;
 }
 
-const FormInput = ({ label, type, placeholder, onChange, icon, error }: props) => {
+const FormInput: FC<props> = ({label, placeholder, type, onChange, error, icon}) => {
   return (
     <div className={!error ? "p-2 text-red-600" : "p-2"}>
       <label
         htmlFor=""
         className={
-          icon ? "flex justify-between w-full items-center gap-2" : "text-sm"
+          icon ? "flex justify-between text-sm w-full items-center gap-2" : "text-sm"
         }
       >
         {label}

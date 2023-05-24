@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import FormInput from "./FormInput";
 import { montserrat, roboto } from "@/app/fonts";
 import { AiTwotoneLock } from "react-icons/ai";
