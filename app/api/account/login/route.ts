@@ -1,3 +1,4 @@
+
 import dbConnect from "@/app/db/Connection";
 import { NextRequest, NextResponse } from "next/server";
 import User, { IUser } from "@/app/models/User";
@@ -49,8 +50,6 @@ export async function POST(req: NextRequest) {
 
     const token = await JWT(user);
 
-    console.log({ token });
-
     const userLogged = {
       _id: user._id,
       name: user.name,
@@ -59,6 +58,8 @@ export async function POST(req: NextRequest) {
     };
 
     const result = { ...userLogged, token };
+
+    console.log({ login: result });
 
     return new NextResponse(JSON.stringify(result), { status: 200 });
   } catch (err) {
