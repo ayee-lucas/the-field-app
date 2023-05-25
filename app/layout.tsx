@@ -1,20 +1,23 @@
-import { inter } from './fonts'
-import './globals.css'
+import Provider from "./components/Provider";
+import { inter } from "./fonts";
 
+import "./globals.css";
 
 export const metadata = {
-  title: 'The Field',
-  description: 'Project',
-}
+  title: "The Field",
+  description: "Project",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Provider>{children}</Provider>
+      </body>
     </html>
-  )
+  );
 }
