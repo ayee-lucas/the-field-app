@@ -1,42 +1,39 @@
 import { Document, Schema, model, models } from "mongoose";
 import { IUser } from "./User";
 
-// Interface for User document
+// Interface for Notification document
 export interface INotification extends Document {
   recipient: IUser;
   sender: IUser;
   type: string;
-  updatedAt: Date;
+  createdAt: Date;
 }
 
-// Mongoose schema for User
-const UserSchema = new Schema<INotification>(
+// Mongoose schema for Notification
+const NotificationSchema = new Schema<INotification>(
   {
     recipient: {
-      type: Object,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Notification recipient is required."],
     },
     sender: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Notification sender is required."],
+    },
+    type: {
       type: String,
-      required: true,
-      unique: true,
-      trim: true, // Remove leading/trailing whitespaces
-      minlength: 3, // Minimum length of 3 characters
-      maxlength: 20, // Maximum length of 20 characters
+      required: [true, "Notification type is required."],
     },
     createdAt: {
       type: Date,
       default: Date.now,
     },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
   },
-  { timestamps: true, versionKey: false }
 );
 
-// Create and export the User model
-const User = models.User || model<IUser>("User", UserSchema);
+// Create and export the Notification model
+const Notification = models.Notification || model<INotification>("Notification", NotificationSchema);
 
-export default User;
+export default Notification;
