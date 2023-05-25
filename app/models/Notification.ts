@@ -10,30 +10,31 @@ export interface INotification extends Document {
 }
 
 // Mongoose schema for Notification
-const NotificationSchema = new Schema<INotification>(
-  {
-    recipient: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "Notification recipient is required."],
-    },
-    sender: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "Notification sender is required."],
-    },
-    type: {
-      type: String,
-      required: [true, "Notification type is required."],
-    },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
+const NotificationSchema = new Schema<INotification>({
+  recipient: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "Notification recipient is required."],
   },
-);
+  sender: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "Notification sender is required."],
+  },
+  type: {
+    type: String,
+    required: [true, "Notification type is required."],
+    maxlength: [25, "Notification type must not exceed 25 characters."],
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 // Create and export the Notification model
-const Notification = models.Notification || model<INotification>("Notification", NotificationSchema);
+const Notification =
+  models.Notification ||
+  model<INotification>("Notification", NotificationSchema);
 
 export default Notification;

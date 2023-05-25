@@ -18,6 +18,7 @@ export async function GET(request: Request, params: params) {
     const notification = await Notification.findById(id)
       .populate("recipient")
       .populate("sender");
+    // Validar si no se encontró la notificación
     if (!notification) {
       return new NextResponse("Notification not found", {
         status: 404,
@@ -37,20 +38,25 @@ export async function GET(request: Request, params: params) {
 export async function PUT(request: Request, params: params) {
   const id = params.params.id;
   const data = await request.json();
+
   try {
     const notification = await Notification.findByIdAndUpdate(id, data, {
       new: true,
     });
+
+    // Validar si no se encontró la notificación
     if (!notification) {
       return new NextResponse("Notification not found", {
         status: 404,
       });
     }
+
     return new NextResponse(JSON.stringify(notification), {
       status: 200,
     });
   } catch (err) {
     console.log(err);
+
     return new NextResponse(JSON.stringify(err), {
       status: 500,
     });
@@ -59,13 +65,17 @@ export async function PUT(request: Request, params: params) {
 
 export async function DELETE(request: Request, params: params) {
   const id = params.params.id;
+
   try {
     const notification = await Notification.findByIdAndDelete(id);
+
+    // Validar si no se encontró la notificación
     if (!notification) {
       return new NextResponse("Notification not found", {
         status: 404,
       });
     }
+
     return new NextResponse(JSON.stringify(notification), {
       status: 200,
     });
