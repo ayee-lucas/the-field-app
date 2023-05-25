@@ -3,6 +3,9 @@ import { playfair, poppins } from "@/app/fonts";
 import Image from "next/image";
 import Link from "next/link";
 
+import image_1 from "../../../public/images/About/image_about_1.jpeg";
+import image_2 from "../../../public/images/About/image_about_2.jpeg";
+
 const About = () => {
   return (
     <section
@@ -12,7 +15,7 @@ const About = () => {
         <h1 className="text-6xl max-sm:text-3xl font-bold text-center text-gray-800">
           ABOUT <span className="text-fieldGreen">US</span>
         </h1>
-        <div className="grid grid-cols-2 max-sm:grid-flow-row max-sm:grid-cols-1 gap-4 py-5">
+        <div className="grid  grid-cols-2 max-sm:grid-flow-row max-sm:grid-cols-1 gap-4 py-5">
           <div className="flex flex-col justify-around items-start text-lg">
             <p className="w-full p-4 first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold">
               Welcome to 'THE FIELD', a platform that connects talented
@@ -23,7 +26,7 @@ const About = () => {
               athletes can share and showcase their skills, with the hope of
               being discovered by organizations looking for talent.
             </p>
-            <p className="w-full px-4 py-8 text-white first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-lime-700 rounded-lg">
+            <p className="w-full px-4 py-8  first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-fieldGreen text-gray-800 rounded-lg">
               At 'THE FIELD', we are passionate about sports and believe in the
               power of technology to create new opportunities for athletes and
               sports organizations. Our platform is designed to be easy to use,
@@ -34,28 +37,29 @@ const About = () => {
             </p>
           </div>
 
-          <Image
-            src={
-              "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1190&q=80"
-            }
-            height={900}
-            width={900}
-            alt="about us 1"
-            className="w-full h-full"
-          />
+          <div className="w-full h-full relative">
+            <Image
+              src={image_1}
+              fill
+              alt="about us 1"
+              placeholder="blur"
+              className="absolute w-full h-full object-cover object-left-top"
+            />
+          </div>
         </div>
       </div>
       <div className="w-full bg-black  text-white h-full flex flex-col justify-center items-start px-4">
         <div className="grid grid-cols-2 max-sm:grid-flow-row max-sm:grid-cols-1 gap-4 py-5">
-          <Image
-            src={
-              "https://images.unsplash.com/photo-1524844972719-9ed0d97562e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
-            }
-            height={900}
-            width={900}
-            alt="about us 1"
-            className="w-full h-full"
-          />
+          <div className="w-full h-full relative">
+            <Image
+              src={image_2}
+              fill
+              alt="about us 1"
+              placeholder="blur"
+              className="absolute w-full h-full object-cover"
+            />
+          </div>
+
           <div className="flex flex-col justify-around items-start text-lg">
             <p className="w-full p-4 first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold">
               Our platform offers a range of features that allow athletes to
@@ -67,7 +71,7 @@ const About = () => {
               talent needs. We are a team of passionate professionals with
               experience in both the sports and technology industries.
             </p>
-            <p className="w-full px-4 py-8 text-white first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-fieldGreen rounded-lg">
+            <p className="w-full px-4 py-8 text-gray-800 first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-fieldGreen rounded-lg">
               We believe in the power of collaboration and are committed to
               working with our users to improve our platform and provide the
               best possible experience for everyone. We are excited to be part
