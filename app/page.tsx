@@ -22,7 +22,7 @@ export default function Home() {
         />
         
         {/** Overlay */}
-        <div className="absolute inset-0 bg-black/90 z-[1]"></div>
+        <div className="absolute inset-0 bg-black/80 z-[1]"></div>
         <Navbar />
         <div className="flex flex-col items-start px-5 justify-center z-20 h-[900px] w-full text-white">
           <h1 className={`${poppins.className} text-6xl font-medium`}>
