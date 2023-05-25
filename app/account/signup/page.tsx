@@ -1,3 +1,4 @@
+import LoginBtn from "@/app/components/Account/SignUp/LoginBtn";
 import SignUpForm from "@/app/components/Account/SignUp/SignUpForm";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,13 +35,7 @@ export default async function Page() {
             </h1>
             <SignUpForm />
             <h1 className="text-sm py-4 ">
-              Already have an account?{" "}
-              <Link
-                href={"/account/signin"}
-                className="text-fieldGreen underline font-medium "
-              >
-                Login
-              </Link>
+              Already have an account? <LoginBtn />
             </h1>
           </div>
         </div>
