@@ -17,6 +17,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.0",
     "next": "13.4.3",
+    "next-auth": "^4.22.1",
     "next-fonts": "^1.5.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
