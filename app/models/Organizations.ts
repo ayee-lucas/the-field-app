@@ -2,7 +2,7 @@ import { Document, Schema, model, models } from "mongoose";
 
 // Interface for Notification document
 export interface INotification extends Document {
-  name: string;
+  name?: string;
   description?: string;
   location?: string;
   website?: string;
