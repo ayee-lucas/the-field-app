@@ -1,22 +1,22 @@
 import { Document, Schema, model, models } from "mongoose";
 
 // Interface for Notification document
-export interface INotification extends Document {
+export interface IOrganization extends Document {
   name?: string;
   description?: string;
   location?: string;
   website?: string;
   contact?: string;
   email?: string;
-  type: string; // Removed optional flag, as it is required
+  type?: string; // Removed optional flag, as it is required
   affiliatedTeams?: string[];
   sponsorships?: string[];
   events?: string[];
   createdAt?: Date;
 }
 
-// Mongoose schema for Notification
-const NotificationSchema = new Schema<INotification>({
+// Mongoose schema for Organization
+const OrganizationSchema = new Schema<IOrganization>({
   name: {
     type: String,
     required: [true, "Organizations name is required."],
@@ -70,9 +70,9 @@ const NotificationSchema = new Schema<INotification>({
   },
 });
 
-// Create and export the Notification model
-const Notification =
-  models.Notification ||
-  model<INotification>("Notification", NotificationSchema);
+// Create and export the Organization model
+const Organization =
+  models.Organization ||
+  model<IOrganization>("Organization", OrganizationSchema);
 
-export default Notification;
+export default Organization;
