@@ -5,33 +5,27 @@ import Notification from "@/app/models/Notification";
 
 dbConnect();
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const notification = await Notification.find()
-      .populate("recipient")
-      .populate("sender");
+    // Obtener todos los usuarios
+    const users = await User.find();
 
-    // Validar si se encontraron notificaciones
-    if (notification.length === 0) {
-      return new NextResponse(
-        JSON.stringify({ message: "No notifications found." }),
-        {
-          status: 404,
-        }
-      );
-    }
+    // Obtener todas las notificaciones con datos relacionados
+    const notifications = await Notification.find()
+      .populate("recipient","name username")
+      .populate("sender", "name username");
 
-    return new NextResponse(JSON.stringify(notification), {
-      status: 200,
-    });
+    const data = {
+      notifications
+    };
+
+    return new NextResponse(JSON.stringify(data), { status: 200 });
   } catch (err) {
-    console.log(err);
-
-    return new NextResponse(JSON.stringify(err), {
-      status: 500,
-    });
+    console.error(err);
+    return new NextResponse(JSON.stringify(err), { status: 500 });
   }
 }
+
 
 export async function POST(request: NextRequest) {
   try {

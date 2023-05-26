@@ -11,19 +11,28 @@ interface params extends Request {
   };
 }
 
-export async function GET(request: Request, params: params) {
+export async function GET(request: NextRequest, params: params) {
   const id = params.params.id;
+
+  // Obtener todos los usuarios
+  const users = await User.find();
 
   try {
     const notification = await Notification.findById(id)
-      .populate("recipient")
-      .populate("sender");
+      .populate("recipient","name username")
+      .populate("sender", "name username");
+    
+      const data = {
+        notification
+      };  
+
     // Validar si no se encontró la notificación
     if (!notification) {
       return new NextResponse("Notification not found", {
         status: 404,
       });
     }
+
     return new NextResponse(JSON.stringify(notification), {
       status: 200,
     });

@@ -3,8 +3,8 @@ import { IUser } from "./User";
 
 // Interface for Notification document
 export interface INotification extends Document {
-  recipient: IUser;
-  sender: IUser;
+  recipient: IUser["_id"];
+  sender: IUser["_id"];
   type: string;
   createdAt: Date;
 }
@@ -32,9 +32,11 @@ const NotificationSchema = new Schema<INotification>({
   },
 });
 
+// Register the User model if it's not already registered
+const User = models.User || model<IUser>("User");
+
 // Create and export the Notification model
 const Notification =
-  models.Notification ||
-  model<INotification>("Notification", NotificationSchema);
+  models.Notification || model<INotification>("Notification", NotificationSchema);
 
 export default Notification;
