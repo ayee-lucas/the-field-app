@@ -1,23 +1,41 @@
 import LoginBtn from "@/app/components/Account/SignUp/LoginBtn";
 import SignUpForm from "@/app/components/Account/SignUp/SignUpForm";
 import Image from "next/image";
-import Link from "next/link";
+import formImage from "@/public/images/Background/court_grayscale.jpeg"
+import bg from "@/public/images/Background/bg_signup.jpeg"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
+
+  const session = await getServerSession(authOptions);
+
+  console.log(session?.user);
+
+  if (session?.user){
+    redirect('/Home')
+  }
+  
   return (
-    <main className="relative min-h-screen w-full flex flex-col justify-center items-center sign-up-bg bg-cover bg-center bg-no-repeat">
+    <main className="relative min-h-screen w-full flex flex-col justify-center items-center bg-black">
+      <Image
+      src={bg}
+      fill
+      placeholder="blur"
+      alt="bg"
+      className="absolute w-full h-full object-cover"
+      />
       {/** Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-[1]" />
       <div className="bg-white w-1/2 h-full rounded-lg shadow-lg z-10">
         <div className="flex items-center justify-between p-4">
-          <div className="relative max-w-[400px] min-h-[500px] w-full h-full">
+          <div className="relative max-w-[400px] min-h-[500px] w-full h-full bg-black">
             <Image
               className="absolute w-full h-full self-center object-cover"
-              src={
-                "https://images.unsplash.com/photo-1505666287802-931dc83948e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
-              }
-              width={1000}
-              height={1000}
+              src={formImage}
+              placeholder="blur"
+              fill
               alt="bg"
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-[1]" />
