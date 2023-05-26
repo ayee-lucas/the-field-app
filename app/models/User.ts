@@ -11,7 +11,7 @@ export interface IUser extends Document {
   updatedAt: Date;
   role: String;
   profilePicture?: string;
-  bio: string;
+  bio?: string;
   followers: IUser["_id"][];
   posts: IPost["_id"][];
 }
@@ -54,7 +54,7 @@ const userSchema = new Schema<IUser>(
     },
     bio: {
       type: String,
-      required: true,
+      default: "No bio yet"
     },
     followers: [
       {
