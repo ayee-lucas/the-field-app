@@ -53,7 +53,7 @@ const Navbar = () => {
           className={`flex items-center gap-10 ${textColor} text-xl max-sm:hidden`}
         >
           <li className="">
-            <Link href={"/"}>Home</Link>
+            <Link href={"/Home"}>Home</Link>
           </li>
           <li className="">
             <Link href={"/"}>About</Link>
