@@ -4,8 +4,8 @@ import { IPost } from "./Post";
 
 // Interface for Comment document
 export interface IComment extends Document {
-  author: Schema.Types.ObjectId;
-  post: Schema.Types.ObjectId;
+  author: IUser;
+  post: IPost;
   content: string;
   createdAt: Date;
 }

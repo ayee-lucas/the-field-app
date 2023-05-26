@@ -1,16 +1,17 @@
 import { Document, Schema, model, models } from "mongoose";
 import { IUser } from "./User";
+import { IComment } from "./Comment";
 
 // Interface for Post document
 export interface IPost extends Document {
-  author: Schema.Types.ObjectId;
+  author: IUser;
   content: {
     text: string;
     media: string[];
   };
   createdAt: Date;
-  comments: Schema.Types.ObjectId[];
-  likes: IUser[];
+  comments: IComment["_id"][];
+  likes: IUser["_id"][];
 }
 
 // Mongoose schema for User

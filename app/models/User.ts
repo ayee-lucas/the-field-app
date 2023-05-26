@@ -1,4 +1,5 @@
 import { Document, Schema, model, models } from "mongoose";
+import { IPost } from "./Post";
 
 // Interface for User document
 export interface IUser extends Document {
@@ -12,7 +13,7 @@ export interface IUser extends Document {
   profilePicture?: string;
   bio: string;
   followers: IUser["_id"][];
-  posts: Schema.Types.ObjectId[];
+  posts: IPost["_id"][];
 }
 
 // Mongoose schema for User
