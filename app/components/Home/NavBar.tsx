@@ -1,17 +1,15 @@
 import React from "react";
 import Link from "next/link";
-import { AiOutlineHome } from "react-icons/ai";
 import Image from "next/image";
-import logo from "../../../public/images/Logos/LogoDark.png";
 
 export const NavBar = () => {
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="min-h-[100px] flex flex-wrap items-center justify-between mx-auto p-4 px-6">
+    <nav className="bg-white border-gray-200 dark:bg-black">
+      <div className="min-h-[15vh] flex flex-wrap items-center justify-between mx-auto p-4 px-6">
         <Link href="/Home" className="flex items-center">
           <div className="flex img-toggle mr-3" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white max-sm:block max-md:text-lg">
-            THE FIELD
+          <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white max-sm:block max-md:text-lg">
+            THE <span className="text-fieldGreen">FIELD</span>
           </span>
         </Link>
 
@@ -42,14 +40,13 @@ export const NavBar = () => {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-96 max-md:w-auto pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-96 max-md:w-auto pl-10 p-2.5  dark:bg-black dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search"
-                required
               />
             </div>
             <button
               type="submit"
-              className="p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="p-2.5 text-sm font-medium text-white bg-fieldGreen rounded-r-lg border border-[#37a33f] dark:boder-gray-500 hover:bg-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
             >
               <svg
                 className="w-5 h-5"
