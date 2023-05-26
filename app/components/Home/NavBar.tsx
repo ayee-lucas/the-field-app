@@ -9,7 +9,8 @@ export const NavBar = () => {
       <div className="min-h-[15vh] flex flex-wrap items-center justify-between mx-auto p-4 px-6">
         <Link href="/Home" className="flex items-center">
           <div className="flex img-toggle mr-3 max-lg:mr-0 max-sm:hidden" />
-          <div className="text-white pr-2 sm:hidden text-xl">
+          <div className="text-white pr-2 sm:hidden text-xl+
+          ">
           <AiOutlineMenu/>
           </div>
           <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white max-sm:block max-md:text-2xl">
