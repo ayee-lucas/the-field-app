@@ -10,10 +10,6 @@ export default async function Page(){
     console.log({session})
 
     return (
-        <div className="w-full h-full p-3">
-            <Link href={`/Home/profile/${session?.user?.id}`}>
-                account
-            </Link>
-        </div>
+        <div className="fixed top-[9vh] left-[240px] max-md:left-0 w-full z-50 h-screen p-4">Home</div>
     );
-}
+}   

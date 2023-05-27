@@ -1,17 +1,26 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import UserMenu from "./UserMenu";
 
 export const NavBar = () => {
   return (
-    <nav className="bg-white border-gray-200 dark:bg-black">
-      <div className="min-h-[15vh] flex flex-wrap items-center justify-between mx-auto p-4 px-6">
-        <Link href="/Home" className="flex items-center">
-          <div className="flex img-toggle mr-3" />
-          <span className="self-center text-4xl font-semibold whitespace-nowrap dark:text-white max-sm:block max-md:text-lg">
-            THE <span className="text-fieldGreen">FIELD</span>
-          </span>
-        </Link>
+    <div className="fixed w-full">
+      <nav className="bg-white border-gray-200 dark:bg-black">
+      <div className="min-h-[9vh] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
+
+        <div className="sm:hidden">
+        <UserMenu/>
+        </div>
+
+        <div className="flex">
+          <Link href="/Home" className="flex items-center">
+            <div className="flex img-toggle mr-3" />
+            
+            <span className="self-center text-2xl pl-3 font-semibold whitespace-nowrap dark:text-white max-sm:hidden">
+              THE <span className="text-fieldGreen">FIELD</span>
+            </span>
+          </Link>
+        </div>
 
         <div
           className="flex items-center justify-between w-auto max-sm:hidden"
@@ -40,13 +49,38 @@ export const NavBar = () => {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-96 max-md:w-auto pl-10 p-2.5  dark:bg-black dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg block w-96 max-md:w-auto max-h-7 pl-10 p-2.5  dark:bg-black dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search"
               />
             </div>
             <button
               type="submit"
-              className="p-2.5 text-sm font-medium text-white bg-fieldGreen rounded-r-lg border border-[#37a33f] dark:boder-gray-500 hover:bg-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
+              className="max-h-7 p-2.5 -ml-1 text-sm font-medium text-white bg-fieldGreen rounded-r-lg border border-[#37a33f] dark:border-gray-500 hover:bg-[#37a33f] dark:hover:border-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
+            >
+              <svg
+                className="w-3 h-3 -mt-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        {/* Boton de Busqueda para la vista movil */}
+
+        <div>
+        <button
+              type="submit"
+              className="sm:hidden p-2.5  text-white bg-fieldGreen rounded-r-lg hover:bg-[#37a33f] dark:hover:border-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
             >
               <svg
                 className="w-5 h-5"
@@ -63,69 +97,14 @@ export const NavBar = () => {
                 ></path>
               </svg>
             </button>
-          </form>
         </div>
-        <div className="flex items-center">
-          <button
-            type="button"
-            className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
-          >
-            <span className="sr-only">Open user menu</span>
-            <Image className="w-8 h-8 rounded-full" src="" alt="user photo" />
-          </button>
-          <div
-            className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="user-dropdown"
-          >
-            <div className="px-4 py-3">
-              <span className="block text-sm text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                name@flowbite.com
-              </span>
-            </div>
-            <ul className="py-2" aria-labelledby="user-menu-button">
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Earnings
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Sign out
-                </a>
-              </li>
-            </ul>
-          </div>
+
+        <div className="max-sm:hidden">
+          <UserMenu/>
         </div>
+        
       </div>
     </nav>
+    </div>
   );
 };
