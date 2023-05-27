@@ -55,8 +55,6 @@ export async function POST(req: NextRequest) {
       token,
     }
 
-    console.log({ login: result });
-
     return new NextResponse(JSON.stringify(result), { status: 200 });
   } catch (err) {
     console.log(err);
