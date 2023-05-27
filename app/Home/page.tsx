@@ -6,7 +6,7 @@ export default async function Page(){
 
     const session = await getServerSession(authOptions);
 
-    console.log({session})
+    console.log({session: session?.user})
 
     return (
         <div className="w-full h-screen">

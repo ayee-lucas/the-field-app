@@ -50,14 +50,10 @@ export async function POST(req: NextRequest) {
 
     const token = await JWT(user);
 
-    const userLogged = {
-      _id: user._id,
-      name: user.name,
-      username: user.username,
-      email: user.email,
-    };
-
-    const result = { ...userLogged, token };
+    const result = {
+      user,
+      token,
+    }
 
     console.log({ login: result });
 
