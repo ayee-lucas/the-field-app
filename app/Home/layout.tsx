@@ -8,10 +8,12 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="h-full">
+    <section className="flex flex-col w-full min-h-screen">
       <NavBar />
-      <SideBar/>
-      {children}
+
+      <SideBar />
+
+      <div className="w-full h-full min-h-screen pl-60 pt-14">{children}</div>
     </section>
   );
 }

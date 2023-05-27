@@ -7,7 +7,7 @@ export default async function () {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="w-full h-full flex flex-col p-9">
+    <div className="w-full h-full flex flex-col">
       <div className="flex flex-col justify-center items-center">
         <div className="relative rounded-md h-full w-[200px] min-h-[200px]">
           <Image
