@@ -10,6 +10,7 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
   role: String;
+  online: boolean;
   profilePicture?: string;
   bio?: string;
   followers: IUser["_id"][];
@@ -42,6 +43,10 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       minlength: 6,
+    },
+    online: {
+      type: Boolean,
+      default: false,
     },
     role: {
       type: String,
