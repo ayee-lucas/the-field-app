@@ -11,7 +11,7 @@ export default async function Page(){
 
     return (
         <div className="w-full h-full p-3">
-            <Link href={`/Home/${session?.user?.id}/account/`}>
+            <Link href={`/Home/profile/${session?.user?.id}`}>
                 account
             </Link>
         </div>
