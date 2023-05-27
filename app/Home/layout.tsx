@@ -10,10 +10,9 @@ export default function HomeLayout({
   return (
     <section className="flex flex-col w-full min-h-screen">
       <NavBar />
-
       <SideBar />
 
-      <div className="w-full h-full min-h-screen pl-60 pt-14">{children}</div>
+      <div className="fixed top-[60px] left-[240px] max-md:left-0 w-full z-50 h-screen">{children}</div>
     </section>
   );
 }
