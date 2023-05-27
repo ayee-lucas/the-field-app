@@ -1,52 +1,54 @@
-"use client";
+'use client';
 
-import React, { useRef, MouseEvent, useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import bg from "../../../../public/images/Background/login_bg.jpg";
-import { useSearchParams } from "next/navigation";
-import { FaUserCircle } from "react-icons/fa";
-import { HiLockClosed } from "react-icons/hi";
-import { signIn } from "next-auth/react";
+import React, {
+  useRef, MouseEvent, useState, useEffect,
+} from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { FaUserCircle } from 'react-icons/fa';
+import { HiLockClosed } from 'react-icons/hi';
+import { signIn } from 'next-auth/react';
+import bg from '../../../../public/images/Background/login_bg.jpg';
 
-const LoginClient = () => {
-  const inputUsername = useRef("");
+function LoginClient() {
+  const inputUsername = useRef('');
 
-  const inputPassword = useRef("");
+  const inputPassword = useRef('');
 
   const params = useSearchParams();
 
-  const error = params.get("error");
+  const error = params.get('error');
 
   const [classError, setClassError] = useState(
-    "border-fieldGreen focus:ring-fieldGreen"
+    'border-fieldGreen focus:ring-fieldGreen',
   );
   const [isFormValid, setIsFormValid] = useState(true);
 
   useEffect(() => {
     if (error) {
-      setClassError("border-red-500 focus:ring-red-500");
+      setClassError('border-red-500 focus:ring-red-500');
       setIsFormValid(false);
     } else {
-      setClassError("border-fieldGreen focus:ring-fieldGreen");
+      setClassError('border-fieldGreen focus:ring-fieldGreen');
       setIsFormValid(true);
     }
   }, []);
 
   const googleHandler = async (e: MouseEvent<HTMLButtonElement>) => {
-    signIn("google", {
-      callbackUrl: "/Home/",
+    signIn('google', {
+      callbackUrl: '/Home/',
     });
   };
 
   const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const result = await signIn("credentials", {
+    const result = await signIn('credentials', {
       username: inputUsername.current,
       password: inputPassword.current,
       redirect: true,
-      callbackUrl: "/Home/",
+      callbackUrl: '/Home/',
     });
   };
 
@@ -56,7 +58,9 @@ const LoginClient = () => {
         <div className="min-w-[300px] min-h-[300px] w-[500px] h-[550px] bg-white rounded-lg flex flex-col items-center justify-between">
           <div className="flex flex-col justify-center items-center w-full pt-10 pb-5">
             <h1 className="text-6xl font-bold">
-              THE <span className="text-fieldGreen">FIELD</span>
+              THE
+              {' '}
+              <span className="text-fieldGreen">FIELD</span>
             </h1>
           </div>
           <h3 className="font-medium ml-1">Welcome back!</h3>
@@ -90,8 +94,8 @@ const LoginClient = () => {
                   size={20}
                   className={
                     isFormValid
-                      ? "ml-4 absolute right-3"
-                      : "ml-4 absolute right-3 text-red-500"
+                      ? 'ml-4 absolute right-3'
+                      : 'ml-4 absolute right-3 text-red-500'
                   }
                 />
               </div>
@@ -123,8 +127,8 @@ const LoginClient = () => {
                     size={20}
                     className={
                       isFormValid
-                        ? "ml-4 absolute right-3"
-                        : "ml-4 absolute right-3 text-red-500"
+                        ? 'ml-4 absolute right-3'
+                        : 'ml-4 absolute right-3 text-red-500'
                     }
                   />
                 </div>
@@ -178,7 +182,7 @@ const LoginClient = () => {
             <h1 className="py-3">
               Don't have an account yet?
               <Link
-                href={"/account/signup"}
+                href="/account/signup"
                 className="px-3 underline text-fieldGreen"
               >
                 Register
@@ -208,6 +212,6 @@ const LoginClient = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LoginClient;

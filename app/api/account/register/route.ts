@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const usernameTaken = await User.findOne({ username: json.username });
+    const usernameTaken = await User.findOne({username: json.username});
 
     if (usernameTaken)
       return new NextResponse(
