@@ -111,6 +111,14 @@ export default async function ProfileLayout({
         </div>
 
         <NavProfile />
+        <div className="w-full h-full my-2 bg-gray-100 border border-gray-500 rounded-lg p-4">
+          <h1>POST</h1>
+          <input
+            type="text"
+            placeholder="WHAT'S ON YOUR MIND?"
+            className="placeholder:text-sm placeholder:font-bold placeholder:text-gray-700 w-full h-full focus:outline-none"
+          />
+        </div>
         <div className="px-2">{children}</div>
       </div>
     </section>
