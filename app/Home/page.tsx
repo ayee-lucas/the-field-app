@@ -10,7 +10,7 @@ export default async function Page(){
 
     return (
         <div className="w-full h-screen">
-            <Link href={`/Home/profile/${session?.user?.id}`}>
+            <Link href={`/Home/profile/${session?.user.username}`}>
                 account
             </Link>
         </div>
