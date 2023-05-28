@@ -5,14 +5,11 @@ import {
   Open_Sans,
   Roboto,
   Playfair_Display,
+  Flow_Circular,
+  Quicksand,
+  Ubuntu,
 } from "next/font/google";
 
-import localFont from "next/font/local";
-
-const verdana = localFont({
-  src: "../public/verdana-font-family/verdana.ttf",
-  variable: "--font-verdana",
-});
 
 const montserrat = Montserrat({
   weight: ["300", "400", "500", "700", "900"],
@@ -21,13 +18,13 @@ const montserrat = Montserrat({
 });
 
 const inter = Inter({
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500", "600", "700", "900"],
   subsets: ["latin"],
   variable: "--font-inter",
 });
 
 const poppins = Poppins({
-  weight: ["300", "400", "500", "700", "900"],
+  weight: ["300", "400", "500","600", "700", "900"],
   subsets: ["latin"],
   variable: "--font-poppins",
 });
@@ -39,7 +36,7 @@ const roboto = Roboto({
 });
 
 const openSans = Open_Sans({
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-open-sans",
 });
@@ -50,4 +47,22 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
 });
 
-export { montserrat, inter, poppins, openSans, roboto, playfair, verdana };
+const flowCircular = Flow_Circular({
+    weight: ["400"],
+    subsets: ["latin"],
+    variable: "--font-flow-circular",
+})
+
+const quicksand = Quicksand({
+    weight: ["400", "500","600", "700"],
+    subsets: ["latin"],
+    variable: "--font-quicksand",
+})
+
+const ubuntu = Ubuntu({
+    weight: ["400", "500", "700"],
+    subsets: ["latin"],
+    variable: "--font-ubuntu",
+})
+
+export { montserrat, inter, poppins, openSans, roboto, playfair, flowCircular,  quicksand, ubuntu };
