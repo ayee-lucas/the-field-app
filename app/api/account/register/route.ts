@@ -9,9 +9,49 @@ export async function POST(req: NextRequest) {
   try {
     const json: IUser = await req.json();
 
-    if (json.password.length < 8) {
-      return new NextResponse(JSON.stringify({ err: "Password too short" }), {status: 400});
+    if (!json.username || !json.email) {
+      return new NextResponse(
+        JSON.stringify({ message: "Username and email are required" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
     }
+
+    if (json.password.length < 8) {
+      return new NextResponse(
+        JSON.stringify({ message: "Password should be at least 8 characters long" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    const usernameTaken = await User.findOne({ username: json.username });
+
+    if (usernameTaken)
+      return new NextResponse(
+        JSON.stringify({ message: "Username already exists" }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+    const emailTaken = await User.findOne({ email: json.email });
+
+    if (emailTaken)
+      return new NextResponse(
+        JSON.stringify({
+          message: "Email already exists",
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
     const hashedPassword = await hashPassword(json.password);
 
@@ -21,7 +61,9 @@ export async function POST(req: NextRequest) {
 
     await user.save();
 
-    return new NextResponse(JSON.stringify(user), {
+    console.log({userSaved: user})
+
+    return new NextResponse(JSON.stringify({message: 'success', user}), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

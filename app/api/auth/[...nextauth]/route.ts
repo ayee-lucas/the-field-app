@@ -1,10 +1,16 @@
 import NextAuth from "next-auth/next";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+
 const nextUrl = process.env.NEXTAUTH_URL as string;
 
-export const authOptions: NextAuthOptions ={
+export const authOptions: NextAuthOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -31,15 +37,15 @@ export const authOptions: NextAuthOptions ={
   pages: {
     signIn: "/account/signin",
   },
-  callbacks:{
-    async jwt({token, user}){
-        return {...token, ...user}
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
     },
-    async session({session, token}){
-        session.user = token as any;
-        return session;
-    }
-  }
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
