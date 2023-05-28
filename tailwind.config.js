@@ -17,6 +17,9 @@ module.exports = {
         roboto: ['var(--font-roboto)'],
         openSans: ['var(--font-open-sans)'],
         playfair: ['var(--font-playfair)'],
+        flowCircular: ['var(--font-flow-circular)'],
+        quicksand: ['var(--font-quicksand)'],
+        ubuntu: ['var(--font-ubuntu)'],
       }
     },
   },

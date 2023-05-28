@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { poppins, roboto } from "../fonts";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -13,7 +13,17 @@ const Navbar = () => {
 
   const [textColor, setTextColor] = useState("text-white");
 
+  const prevScrollPosition = useRef(0);
+
   useEffect(() => {
+
+    prevScrollPosition.current = window.pageYOffset;
+    window.scrollTo(0, prevScrollPosition.current-90);
+
+    const timeout = setTimeout(() => {
+      window.scrollTo(0, prevScrollPosition.current);
+    }, 0); 
+
     const changeColor = () => {
       if (window.scrollY >= 90) {
         setNavSticky("bg-white/80 py-6 dark:bg-black/80 backdrop-saturate-200 backdrop-blur-2xl");
@@ -22,6 +32,8 @@ const Navbar = () => {
         setNavSticky("bg-transparent py-10");
         setTextColor("text-white");
       }
+
+      return () => clearTimeout(timeout);
     };
 
     window.addEventListener("scroll", changeColor);
@@ -41,7 +53,7 @@ const Navbar = () => {
           className={`flex items-center gap-10 ${textColor} text-xl max-sm:hidden`}
         >
           <li className="">
-            <Link href={"/"}>Home</Link>
+            <Link href={"/Home"}>Home</Link>
           </li>
           <li className="">
             <Link href={"/"}>About</Link>
