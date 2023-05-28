@@ -29,7 +29,8 @@ const commentSchema = new Schema<IComment>(
     },
   },
   {
-    timestamps: true, versionKey: false
+    timestamps: true, 
+    versionKey: false,
   }
 );
 
