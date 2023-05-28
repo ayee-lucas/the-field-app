@@ -8,6 +8,8 @@ import Image from "next/image";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Messagebtn from "./components/Messagebtn";
 import NavProfile from "./components/NavProfile";
+import Editbtn from "./components/Editbtn";
+import Settigns from "./components/Settigns";
 
 export default async function ProfileLayout({
   params,
@@ -38,8 +40,15 @@ export default async function ProfileLayout({
             alt="banner"
             className="absolute rounded-lg w-full h-full object-cover"
           />
+
+          {session?.user?.username !== user.username ? null : (
+            <div className="opacity-0 text-sm hover:opacity-100 absolute bottom-0 left-0 w-full h-1/4 transition-all z-[1] cursor-pointer bg-black/70 text-white flex justify-center items-center">
+              Edit cover
+            </div>
+          )}
+
           <div className="absolute mt-28 ml-7">
-            <div className="relative rounded-full h-full w-[180px] min-h-[180px] bg-white ">
+            <div className="relative z-[2] rounded-full h-full w-[180px] min-h-[180px] bg-white ">
               <Image
                 src={
                   session?.user?.image
@@ -48,8 +57,13 @@ export default async function ProfileLayout({
                 }
                 alt="user image"
                 fill
-                className="absolute w-full h-full object-cover rounded-full border-[3px] border-gray-700"
+                className="absolute w-full h-full z-[2] object-cover rounded-full border-[3px] border-gray-700"
               />
+              {session?.user?.username !== user.username ? null : (
+                <div className="opacity-0 text-sm hover:opacity-100 absolute bottom-0 left-0 w-full h-1/2 transition-all z-[3] rounded-b-full cursor-pointer bg-black/70 text-white flex justify-center items-center">
+                  Edit picture
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -71,23 +85,33 @@ export default async function ProfileLayout({
         </div>
         <div className="flex w-full h-full justify-start items-center gap-5 select-none">
           <h1 className="px-2 text-xl text-gray-500">@{user.username}</h1>
-          <h1 className=" text-gray-800">{user.followers.length} followers</h1>
+          <h1 className=" text-gray-800 cursor-pointer">
+            {user.followers.length} followers
+          </h1>
 
-          <h1 className=" text-gray-800">{user.followers.length} following</h1>
+          <h1 className=" text-gray-800 cursor-pointer">
+            {user.followers.length} following
+          </h1>
         </div>
+        {session?.user?.username !== user.username ? (
+          <div className="flex w-full h-full justify-start items-center gap-5">
+            <Followbtn />
+            <Messagebtn />{" "}
+          </div>
+        ) : (
+          <div className="flex w-full h-full justify-start items-center gap-5">
+            <Editbtn />
+            <Settigns />
+          </div>
+        )}
 
-        <div className="flex w-full h-full justify-start items-center gap-5">
-          <Followbtn />
-          <Messagebtn />
-        </div>
         <div className="w-full h-full flex flex-col justify-center items-start p-4 gap-5 rounded-lg border border-gray-300">
           <h1 className="text-lg text-black font-semibold">BIO</h1>
           <p className="text-gray-600">{user.bio}</p>
         </div>
 
         <NavProfile />
-
-        {children}
+        <div className="px-2">{children}</div>
       </div>
     </section>
   );
