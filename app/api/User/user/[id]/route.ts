@@ -91,8 +91,6 @@ export async function PUT(request: Request, params: params) {
     delete data.followers;
     delete data.posts;
 
-    // Realizar otras validaciones según tus requisitos
-    // ...
 
     const updatedUser = await User.findByIdAndUpdate(id, data, {
       new: true,
