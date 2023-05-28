@@ -4,7 +4,7 @@ import UserMenu from "./UserMenu";
 
 export const NavBar = () => {
   return (
-    <div className="fixed w-full">
+    <div className="fixed w-full z-50">
       <nav className="bg-white border-gray-200 dark:bg-black">
       <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
 
