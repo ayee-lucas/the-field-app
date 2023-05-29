@@ -9,7 +9,7 @@ export default async function Page(){
     console.log({session})
 
     return (
-        <div className="w-full h-screen">
+        <div className="w-full h-screen dark:bg-black dark:text-white">
             <Link href={`/Home/profile/${session?.user?.id}`}>
                 account
             </Link>
