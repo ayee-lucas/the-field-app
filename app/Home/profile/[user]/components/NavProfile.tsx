@@ -12,6 +12,8 @@ const NavProfile = () => {
 
         <li>Posts 📈</li>
 
+        <li>Starred ⭐️</li>
+
         <li>Comments 📢</li>
 
         <li>Likes ❤️</li>
