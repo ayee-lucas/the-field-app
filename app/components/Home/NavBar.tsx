@@ -6,7 +6,7 @@ import SideBar from "./SideBar";
 
 export const NavBar = () => {
 
-  const [open,setOpen]= useState(false);
+  const [open,setOpen]= useState(true);
 
   return (
     <div>
@@ -18,14 +18,14 @@ export const NavBar = () => {
       <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
 
         
-        <div className="lg:hidden">
-          <UserMenu/>
+        <div className="lg:hidden" onClick={() => setOpen(!open)}>
+            <UserMenu isOpen={open}/>
         </div>
 
-        <div  onClick={()=>setOpen(!open)} className="flex">
+        <div  onClick={()=>setOpen(!open)} className="flex items-center">
           <Link href="/Home" className="flex items-center">
-            <div className="flex img-toggle mr-3" />
-            
+            <div className="flex img-toggle" />
+          
             <span className="self-center text-2xl pl-3 font-semibold whitespace-nowrap dark:text-white max-sm:hidden">
               THE <span className="text-fieldGreen">FIELD</span>
             </span>

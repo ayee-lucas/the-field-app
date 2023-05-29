@@ -1,16 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FC, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-export const UserMenu = () => {
-  const [open, setOpen] = useState(false);
+interface props {
+  isOpen?: boolean;
+}
+
+export const UserMenu:FC<props> = ({isOpen}) => {
+
+  const [a, setA] = useState(false);
 
   return (
     <div>
       <div className="flex items-center" >
         <div className="flex">
           <button
-            onClick={() => setOpen(!open)}
             type="button"
             className="flex mr-3 text-sm rounded-full lg:mr-0"
           >
@@ -25,51 +30,50 @@ export const UserMenu = () => {
         </div>
 
         <div
-          className={`absolute top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black dark:divide-gray-600 ${
-            open ? "translate-x-0" : "translate-x-52"
+          className={`absolute  border border-gray-200 dark:border-gray-800 top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black dark:divide-gray-600 ${
+            isOpen ? "translate-x-0" : "translate-x-52"
           }`}
           id="user-dropdown"
         >
-          <div className="px-6 py-3">
+          <div className="px-4 py-3">
             <span className="block text-xs text-gray-900 dark:text-white">
-              Bonnie Green
+              Username
             </span>
             <span className="block text-xs  text-gray-500 truncate dark:text-gray-400">
-              name@flowbite.com
+              email@gmail.com
             </span>
           </div>
-          <ul className="py-2">
-            <li>
-              <a
+          <ul className="py-2"> 
+          <li>
+              <Link
                 href="#"
                 className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
-                Dashboard
-              </a>
+                Notifications
+              </Link>
             </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+            {a ? <li>
+              <button
+                onClick={() => setA(false)}
+                className="w-full text-left block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
-                Settings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                Light Theme
+              </button>
+            </li> : <li>
+              <button
+                onClick={() => setA(true)}
+                className="w-full text-left block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
-                Earnings
-              </a>
-            </li>
+                Dark Theme
+              </button>
+            </li>}
             <li>
-              <a
+              <Link
                 href="#"
                 className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Sign out
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

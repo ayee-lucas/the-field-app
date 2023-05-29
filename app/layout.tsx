@@ -1,3 +1,4 @@
+import DarkMode from "./components/DarkMode";
 import Provider from "./components/Provider";
 import { inter } from "./fonts";
 
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+          <Provider>{children}</Provider>
       </body>
     </html>
   );
