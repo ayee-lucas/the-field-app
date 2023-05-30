@@ -10,10 +10,10 @@ export default function HomeLayout({
 }) {
   
   return (
-    <section className="dark">
+    <section>
         <DarkMode>
-          <NavBar />
           <NavDown/>
+          <NavBar />
           <div className="pt-[60px] pl-[240px] max-lg:pl-0">{children}</div>
         </DarkMode>
     </section>

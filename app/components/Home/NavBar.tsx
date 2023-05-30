@@ -10,16 +10,13 @@ export const NavBar = () => {
 
   return (
     <div>
-      
-      <SideBar/>
 
-      <div className="fixed w-full">
+      <div className="fixed w-full z-0">
       <nav className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
       <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
 
-        
-        <div className="lg:hidden" onClick={() => setOpen(!open)}>
-            <UserMenu isOpen={open}/>
+        <div className="lg:hidden z-50">
+          <UserMenu/>
         </div>
 
         <div  onClick={()=>setOpen(!open)} className="flex items-center">
