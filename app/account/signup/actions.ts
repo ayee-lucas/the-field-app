@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
 
 interface props {}
 
@@ -10,13 +10,11 @@ export async function signUp(data: props) {
   try {
     const response = await fetch(`${url}/api/account/register`, {
       body: JSON.stringify(data),
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
     });
 
-
-    return response.json();
-
+    return await response.json();
   } catch (err) {
     console.log(err);
   }

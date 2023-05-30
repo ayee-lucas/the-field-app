@@ -1,23 +1,23 @@
-import React from "react";
-import Link from "next/link";
-import UserMenu from "./UserMenu";
+import React from 'react';
+import Link from 'next/link';
+import UserMenu from './UserMenu';
 
-export const NavBar = () => {
-  return (
-    <div className="fixed w-full z-50">
-      <nav className="bg-white border-gray-200 dark:bg-black">
+export const NavBar = () => (
+  <div className="fixed w-full z-50">
+    <nav className="bg-white border-gray-200 dark:bg-black">
       <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
-
         <div className="sm:hidden">
-        <UserMenu/>
+          <UserMenu />
         </div>
 
         <div className="flex">
           <Link href="/Home" className="flex items-center">
             <div className="flex img-toggle mr-3" />
-            
+
             <span className="self-center text-2xl pl-3 font-semibold whitespace-nowrap dark:text-white max-sm:hidden">
-              THE <span className="text-fieldGreen">FIELD</span>
+              THE
+              {' '}
+              <span className="text-fieldGreen">FIELD</span>
             </span>
           </Link>
         </div>
@@ -40,10 +40,10 @@ export const NavBar = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"
-                  ></path>
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <input
@@ -65,11 +65,11 @@ export const NavBar = () => {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
+                />
               </svg>
             </button>
           </form>
@@ -78,33 +78,31 @@ export const NavBar = () => {
         {/* Boton de Busqueda para la vista movil */}
 
         <div>
-        <button
-              type="submit"
-              className="sm:hidden p-2.5  text-white bg-fieldGreen rounded-r-lg hover:bg-[#37a33f] dark:hover:border-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
+          <button
+            type="submit"
+            className="sm:hidden p-2.5  text-white bg-fieldGreen rounded-r-lg hover:bg-[#37a33f] dark:hover:border-[#37a33f] focus:outline-none dark:bg-black dark:hover:bg-[#37a33f]"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </button>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
         </div>
 
         <div className="max-sm:hidden">
-          <UserMenu/>
+          <UserMenu />
         </div>
-        
       </div>
     </nav>
-    </div>
-  );
-};
+  </div>
+);

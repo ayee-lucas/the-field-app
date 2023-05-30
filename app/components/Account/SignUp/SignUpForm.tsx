@@ -1,16 +1,12 @@
+import React from 'react';
+import SignUpFirst from './SignUpFirst';
 
-import React from 'react'
-import SignUpFirst from './SignUpFirst'
+const SignUpForm = () => (
+  <div className="w-full h-full flex justify-center items-center">
 
-const SignUpForm = () => {
-  return (
-    <div className='w-full h-full flex justify-center items-center'>
+    <SignUpFirst />
 
-      <SignUpFirst />
-      
+  </div>
+);
 
-    </div>
-  )
-}
-
-export default SignUpForm
+export default SignUpForm;

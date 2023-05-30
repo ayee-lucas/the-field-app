@@ -1,6 +1,6 @@
-import React from "react";
-import { NavBar } from "../components/Home/NavBar";
-import SideBar from "../components/Home/SideBar";
+import React from 'react';
+import { NavBar } from '../components/Home/NavBar';
+import SideBar from '../components/Home/SideBar';
 
 export default function HomeLayout({
   children,

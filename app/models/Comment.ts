@@ -1,6 +1,8 @@
-import { Document, Schema, model, models } from "mongoose";
-import { IUser } from "./User";
-import { IPost } from "./Post";
+import {
+  Document, Schema, model, models,
+} from 'mongoose';
+import { IUser } from './User';
+import { IPost } from './Post';
 
 // Interface for Comment document
 export interface IComment extends Document {
@@ -15,25 +17,25 @@ const commentSchema = new Schema<IComment>(
   {
     author: {
       type: Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "Author is required."],
+      ref: 'User',
+      required: [true, 'Author is required.'],
     },
     post: {
       type: Schema.Types.ObjectId,
-      ref: "Post",
-      required: [true, "Post is required."],
+      ref: 'Post',
+      required: [true, 'Post is required.'],
     },
     content: {
       type: String,
-      required: [true, "Content is required."],
+      required: [true, 'Content is required.'],
     },
   },
   {
-    timestamps: true, versionKey: false
-  }
+    timestamps: true, versionKey: false,
+  },
 );
 
 // Create and export the Comment model
-const Comment = models.Comment || model<IComment>("Comment", commentSchema);
+const Comment = models.Comment || model<IComment>('Comment', commentSchema);
 
 export default Comment;

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-const NavProfile = () => {
+function NavProfile() {
   return (
     <nav
       className="w-full relative h-full mt-2
@@ -20,6 +20,6 @@ const NavProfile = () => {
       </ul>
     </nav>
   );
-};
+}
 
 export default NavProfile;

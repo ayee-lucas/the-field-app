@@ -1,5 +1,5 @@
-import NavbarAccount from "@/app/components/Account/NavbarAccount";
-import { roboto } from "@/app/fonts";
+import NavbarAccount from '@/app/components/Account/NavbarAccount';
+import { roboto } from '@/app/fonts';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (

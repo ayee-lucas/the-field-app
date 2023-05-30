@@ -1,13 +1,12 @@
-import React from "react";
-import { ubuntu, quicksand } from "@/app/fonts";
-import { AiOutlineHeart, AiFillHeart, AiOutlineStar } from "react-icons/ai";
-import { BiRepost } from "react-icons/bi";
-import { FaRegComment } from "react-icons/fa";
-import { MdModeComment } from "react-icons/md";
-import { RiSendPlaneLine } from "react-icons/ri";
-import Image from "next/image";
+import React from 'react';
+import { ubuntu, quicksand } from '@/app/fonts';
+import { AiOutlineHeart, AiOutlineStar } from 'react-icons/ai';
+import { BiRepost } from 'react-icons/bi';
+import { FaRegComment } from 'react-icons/fa';
+import { RiSendPlaneLine } from 'react-icons/ri';
+import Image from 'next/image';
 
-const PostCard = () => {
+function PostCard() {
   return (
     <div
       className={` ${ubuntu.variable} ${quicksand.variable} w-full my-2 min-h-[200px] bg-zinc-50 px-3 py-3
@@ -53,9 +52,7 @@ const PostCard = () => {
         </div>
         <div className="relative min-h-[200px] min-w-[200px]">
           <Image
-            src={
-              "https://images.unsplash.com/photo-1533923156502-be31530547c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
-            }
+            src="https://images.unsplash.com/photo-1533923156502-be31530547c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
             fill
             alt="post"
             className="absolute w-full h-full object-cover"
@@ -64,6 +61,6 @@ const PostCard = () => {
       </div>
     </div>
   );
-};
+}
 
 export default PostCard;

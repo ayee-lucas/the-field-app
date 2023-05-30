@@ -1,3 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 'use client';
 
 import React, {
@@ -36,6 +39,7 @@ function LoginClient() {
   }, []);
 
   const googleHandler = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     signIn('google', {
       callbackUrl: '/Home/',
     });
@@ -44,14 +48,13 @@ function LoginClient() {
   const onSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const result = await signIn('credentials', {
+    await signIn('credentials', {
       username: inputUsername.current,
       password: inputPassword.current,
       redirect: true,
       callbackUrl: '/Home/',
     });
   };
-
   return (
     <div className="min-h-screen w-full grid grid-cols-2 bg-black">
       <div className="w-full h-full flex flex-col items-center justify-center bg-black">
@@ -70,7 +73,7 @@ function LoginClient() {
           >
             <div className="w-full">
               {isFormValid ? (
-                <label htmlFor="" className="text-sm">
+                <label className="text-sm">
                   Username
                 </label>
               ) : (
@@ -146,8 +149,8 @@ function LoginClient() {
           <div className="w-full px-3 py-4">
             <button
               aria-label="Continue with google"
+              type="button"
               onClick={(e) => googleHandler(e)}
-              role="button"
               className="focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-700 py-3.5 px-4 border rounded-lg border-gray-700 flex items-center w-full mt-2"
             >
               <svg
