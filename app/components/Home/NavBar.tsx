@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import UserMenu from './UserMenu';
-import SideBar from './SideBar';
 
 export const NavBar = () => {
   const [open, setOpen] = useState(true);
@@ -11,7 +10,7 @@ export const NavBar = () => {
   return (
     <div>
 
-      <div className="fixed w-full z-0">
+      <div className="fixed w-full z-50">
         <nav className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
           <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
 
@@ -19,7 +18,7 @@ export const NavBar = () => {
               <UserMenu />
             </div>
 
-            <div onClick={() => setOpen(!open)} className="flex items-center">
+            <div onClick={() => setOpen(!open)} aria-hidden="true" className="flex items-center">
               <Link href="/Home" className="flex items-center">
                 <div className="flex img-toggle" />
 

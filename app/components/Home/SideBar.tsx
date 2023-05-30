@@ -42,7 +42,7 @@ export const SideBar: FC<Props> = ({ close }) => {
           </div>
 
         </div>
-        <button className="p-2 text-2xl px-4">
+        <button type="button" className="p-2 text-2xl px-4">
           <AiOutlineClose onClick={close} />
         </button>
       </div>
@@ -54,7 +54,7 @@ export const SideBar: FC<Props> = ({ close }) => {
       <ul className="space-y-2 mx-5 font-medium">
         <li>
           <Link
-            href="#"
+            href="/Home"
             className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <AiOutlineUser className="w-6 h-6" />
@@ -63,7 +63,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         </li>
         <li>
           <Link
-            href="#"
+            href="/Home"
             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 max-lg:hidden"
           >
             <AiOutlineComment className="w-6 h-6" />
@@ -72,7 +72,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         </li>
         <li>
           <Link
-            href="#"
+            href="/Home"
             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 max-lg:hidden"
           >
             <AiOutlineStar className="w-6 h-6" />
@@ -81,6 +81,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         </li>
         <li>
           <button
+            type="button"
             className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
             aria-controls="dropdown-example"
             data-collapse-toggle="dropdown-example"
@@ -105,7 +106,7 @@ export const SideBar: FC<Props> = ({ close }) => {
           <ul id="dropdown-example" className="hidden py-2 space-y-2">
             <li>
               <Link
-                href="#"
+                href="/Home"
                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 Products
@@ -113,7 +114,7 @@ export const SideBar: FC<Props> = ({ close }) => {
             </li>
             <li>
               <Link
-                href="#"
+                href="/Home"
                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 Billing
@@ -121,7 +122,7 @@ export const SideBar: FC<Props> = ({ close }) => {
             </li>
             <li>
               <Link
-                href="#"
+                href="/Home"
                 className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
               >
                 Invoice
@@ -142,6 +143,7 @@ export const SideBar: FC<Props> = ({ close }) => {
 
         {a ? (
           <button
+            type="button"
             onClick={() => setA(false)}
             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
           >
@@ -150,6 +152,7 @@ export const SideBar: FC<Props> = ({ close }) => {
           </button>
         ) : (
           <button
+            type="button"
             onClick={() => setA(true)}
             className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
           >

@@ -13,9 +13,8 @@ export const UserMenu: FC = () => {
     <div>
       <div className="flex items-center">
 
-        <div className={`fixed lg:top-[60px] max-lg:top-0 left-0 w-[240px] max-lg:w-[60%] max-md:w-[80%] max-sm:w-[90%] h-full transition duration-200 lg:border-y border-r border-gray-200 dark:border-gray-800 ${
-          open ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'
-        }`}
+        <div className={`fixed lg:top-[60px] max-lg:top-0 left-0 w-[240px] max-lg:w-[60%] max-md:w-[80%] max-sm:w-[90%] h-full transition duration-300 lg:border-y border-r border-gray-200 dark:border-gray-800 
+          ${open ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'}`}
         >
           <SideBar close={() => setOpen(false)} />
         </div>
@@ -37,9 +36,8 @@ export const UserMenu: FC = () => {
         </div>
 
         <div
-          className={`absolute  border border-gray-200 dark:border-gray-800 top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black dark:divide-gray-600 ${
-            open ? 'translate-x-0' : 'translate-x-52'
-          }`}
+          className={`absolute  border border-gray-200 dark:border-gray-800 top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black dark:divide-gray-600 
+          ${open ? 'translate-x-0' : 'translate-x-52'}`}
           id="user-dropdown"
         >
           <div className="px-4 py-3">
@@ -53,7 +51,7 @@ export const UserMenu: FC = () => {
           <ul className="py-2">
             <li>
               <Link
-                href="#"
+                href="/Home"
                 className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Notifications
@@ -62,6 +60,7 @@ export const UserMenu: FC = () => {
             {a ? (
               <li>
                 <button
+                  type="button"
                   onClick={() => setA(!a)}
                   className="w-full text-left block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
@@ -71,6 +70,7 @@ export const UserMenu: FC = () => {
             ) : (
               <li>
                 <button
+                  type="button"
                   onClick={() => setA(!a)}
                   className="w-full text-left block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
@@ -80,7 +80,7 @@ export const UserMenu: FC = () => {
             )}
             <li>
               <Link
-                href="#"
+                href="/Home"
                 className="block px-4 py-2 text-xs text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
               >
                 Sign out
