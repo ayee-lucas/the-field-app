@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "next",
+    "plugin:react/jsx-runtime",
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "import/prefer-default-export": "off",
+    "react/no-unescaped-entities": "off",
+    "react/function-component-definition": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "linebreak-style": ["error", "unix"] 
+  }
+}

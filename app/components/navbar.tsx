@@ -1,42 +1,41 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef } from "react";
-import Link from "next/link";
-import { poppins, roboto } from "../fonts";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { RxCross2 } from "react-icons/rx";
+import React, { useEffect, useState, useRef } from 'react';
+import Link from 'next/link';
+import { HiMenuAlt3 } from 'react-icons/hi';
+import { RxCross2 } from 'react-icons/rx';
+import { poppins, roboto } from '../fonts';
 
 const Navbar = () => {
-  const [navSticky, setNavSticky] = useState("bg-transparent py-10");
+  const [navSticky, setNavSticky] = useState('bg-transparent py-10');
 
   const [mobileMenu, setMobileMenu] = useState(false);
 
-  const [textColor, setTextColor] = useState("text-white");
+  const [textColor, setTextColor] = useState('text-white');
 
   const prevScrollPosition = useRef(0);
 
   useEffect(() => {
-
     prevScrollPosition.current = window.pageYOffset;
-    window.scrollTo(0, prevScrollPosition.current-90);
+    window.scrollTo(0, prevScrollPosition.current - 90);
 
     const timeout = setTimeout(() => {
       window.scrollTo(0, prevScrollPosition.current);
-    }, 0); 
+    }, 0);
 
     const changeColor = () => {
       if (window.scrollY >= 90) {
-        setNavSticky("bg-white/80 py-6 dark:bg-black/80 backdrop-saturate-200 backdrop-blur-2xl");
-        setTextColor("text-fieldGreen");
+        setNavSticky('bg-white/80 py-6 dark:bg-black/80 backdrop-saturate-200 backdrop-blur-2xl');
+        setTextColor('text-fieldGreen');
       } else {
-        setNavSticky("bg-transparent py-10");
-        setTextColor("text-white");
+        setNavSticky('bg-transparent py-10');
+        setTextColor('text-white');
       }
 
       return () => clearTimeout(timeout);
     };
 
-    window.addEventListener("scroll", changeColor);
+    window.addEventListener('scroll', changeColor);
   }, []);
 
   return (
@@ -47,19 +46,21 @@ const Navbar = () => {
         <h1
           className={`${roboto.className} ${textColor} text-4xl font-semibold`}
         >
-          THE <span className="text-fieldGreen">FIELD</span>
+          THE
+          {' '}
+          <span className="text-fieldGreen">FIELD</span>
         </h1>
         <ul
           className={`flex items-center gap-10 ${textColor} text-xl max-sm:hidden`}
         >
           <li className="">
-            <Link href={"/Home"}>Home</Link>
+            <Link href="/Home">Home</Link>
           </li>
           <li className="">
-            <Link href={"/"}>About</Link>
+            <Link href="/">About</Link>
           </li>
           <li className="">
-            <Link href={"/account/signup"}>Get Started</Link>
+            <Link href="/account/signup">Get Started</Link>
           </li>
         </ul>
       </nav>
@@ -78,19 +79,19 @@ const Navbar = () => {
       <nav
         className={
           mobileMenu
-            ? "fixed grid place-content-center inset-0 bg-black z-[100] transition-all"
-            : "fixed inset-0 bg-black z-[100] left-[100%] transition-all"
+            ? 'fixed grid place-content-center inset-0 bg-black z-[100] transition-all'
+            : 'fixed inset-0 bg-black z-[100] left-[100%] transition-all'
         }
       >
-        <ul className={` h-full w-full flex flex-col text-center justify-center items-center gap-10 text-3xl text-white`}>
+        <ul className=" h-full w-full flex flex-col text-center justify-center items-center gap-10 text-3xl text-white">
           <li className="w-full">
-            <Link href={"/"}>Home</Link>
+            <Link href="/">Home</Link>
           </li>
           <li className="w-full">
-            <Link href={"/"}>About</Link>
+            <Link href="/">About</Link>
           </li>
           <li className="w-full">
-            <Link href={"/"}>Get Started</Link>
+            <Link href="/">Get Started</Link>
           </li>
         </ul>
       </nav>

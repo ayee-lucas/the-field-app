@@ -1,28 +1,26 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useTransition } from "react";
-import FormInput from "./FormInput";
-import { montserrat, roboto } from "@/app/fonts";
-import { AiTwotoneLock } from "react-icons/ai";
-import { signUp } from "@/app/account/signup/actions";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from 'react';
+import { montserrat, roboto } from '@/app/fonts';
+import { AiTwotoneLock } from 'react-icons/ai';
+import { signUp } from '@/app/account/signup/actions';
+import { useRouter } from 'next/navigation';
+import FormInput from './FormInput';
 
-const SignUpFirst = () => {
-  const [password, setPassword] = useState("");
+function SignUpFirst() {
+  const [password, setPassword] = useState('');
 
   const [data, setData] = useState({});
 
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const [validPassword, setValidPassword] = useState(true);
 
-  const [responseError, setResponseError] = useState("");
+  const [responseError, setResponseError] = useState('');
 
   const [defaultError, setDefaultError] = useState(true);
 
   const router = useRouter();
-
-
 
   const onClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -31,9 +29,9 @@ const SignUpFirst = () => {
       const response = await signUp(data);
       console.log(response);
 
-      if (response.message == 'success') {
-        setResponseError("");
-        router.push('/account/signin/')
+      if (response.message === 'success') {
+        setResponseError('');
+        router.push('/account/signin/');
       } else {
         setDefaultError(false);
         setResponseError(`${response.message}`);
@@ -47,10 +45,10 @@ const SignUpFirst = () => {
     if (password !== confirmPassword) {
       /** Password don't match */
       setValidPassword(false);
-      setResponseError("");
+      setResponseError('');
     } else {
       setValidPassword(true);
-      setData({ ...data, password: password });
+      setData({ ...data, password });
     }
   }, [password, confirmPassword]);
 
@@ -61,7 +59,7 @@ const SignUpFirst = () => {
     >
       <h1 className="text-xl py-6 font-medium">ACCOUNT INFORMATION</h1>
 
-      {responseError !== "" ? (
+      {responseError !== '' ? (
         <h1 className="text-red-600 text-sm px-2 font-medium italic">
           {responseError}
         </h1>
@@ -71,17 +69,17 @@ const SignUpFirst = () => {
         placeholder="Enter your username"
         error={defaultError}
         type="text"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setData({ ...data, username: e.target.value })
-        }
+        onChange={(
+          e: React.ChangeEvent<HTMLInputElement>,
+        ) => setData({ ...data, username: e.target.value })}
       />
       <FormInput
         error={defaultError}
         label="Email"
         placeholder="Enter your email"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setData({ ...data, email: e.target.value })
-        }
+        onChange={(
+          e: React.ChangeEvent<HTMLInputElement>,
+        ) => setData({ ...data, email: e.target.value })}
         type="email"
       />
       <div className="relative flex justify-between items-center gap-4">
@@ -92,13 +90,13 @@ const SignUpFirst = () => {
             type="password"
             onChange={(e: any) => setPassword(e.target.value)}
             error={validPassword}
-            icon={
+            icon={(
               <AiTwotoneLock
                 className={
-                  !validPassword ? "mx-2 text-red-600" : "mx-2 text-black"
+                  !validPassword ? 'mx-2 text-red-600' : 'mx-2 text-black'
                 }
               />
-            }
+            )}
           />
         </div>
 
@@ -108,13 +106,13 @@ const SignUpFirst = () => {
             placeholder="Enter your password"
             type="password"
             error={validPassword}
-            icon={
+            icon={(
               <AiTwotoneLock
                 className={
-                  !validPassword ? "mx-2 text-red-600" : "mx-2 text-black"
+                  !validPassword ? 'mx-2 text-red-600' : 'mx-2 text-black'
                 }
               />
-            }
+            )}
             onChange={(e: any) => setConfirmPassword(e.target.value)}
           />
         </div>
@@ -129,7 +127,7 @@ const SignUpFirst = () => {
       <div className="flex justify-start items-center mt-2 ">
         <button
           type="submit"
-          disabled={!validPassword ? true : false}
+          disabled={!validPassword}
           className="hover:text-white ml-3 w-full hover:bg-green-600 rounded-lg py-2 px-6 border-green-600 border-[2px] disabled:border-[1px] disabled:hover:bg-transparent transition-all disabled:text-gray-500 disabled:border-black"
           onClick={(e) => onClick(e)}
         >
@@ -138,6 +136,6 @@ const SignUpFirst = () => {
       </div>
     </form>
   );
-};
+}
 
 export default SignUpFirst;
