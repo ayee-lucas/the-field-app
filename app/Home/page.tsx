@@ -7,11 +7,11 @@ export default async function Page() {
 
   console.log({ session: session?.user });
 
-  return (
-    <div className="w-full h-screen">
-      <Link href={`/Home/profile/${session?.user.username}`}>
-        account
-      </Link>
-    </div>
-  );
-}
+    return (
+        <div className="w-full h-screen dark:bg-black dark:text-white">
+            <Link href={`/Home/profile/${session?.user?.id}`}>
+                account
+            </Link>
+        </div>
+    );
+}   
