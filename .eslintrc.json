@@ -14,6 +14,8 @@
     "react/no-unescaped-entities": "off",
     "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "linebreak-style": ["error", "unix"] 
+    "linebreak-style": ["error", "unix"], 
+    "import/no-named-as-default": "off"
+
   }
 }
