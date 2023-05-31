@@ -27,7 +27,7 @@ const PostFooterActions = () => (
         <span className="text-sm">3 </span>
       </div>
     </div>
-    <div className="flex items-center gap-3  cursor-pointer text-sm text-white bg-green-800 px-5 py-1 rounded-full">
+    <div className="flex items-center gap-3  cursor-pointer text-sm text-white bg-fieldGreen px-5 py-1 rounded-full">
       <RiSendPlaneLine />
       <span>Send</span>
     </div>

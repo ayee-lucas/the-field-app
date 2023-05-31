@@ -7,7 +7,7 @@ import AddComment from '../../components/AddComment';
 export default function Post() {
   return (
     <div
-      className="w-full h-full flex flex-col text-black pt-5 justify-center items-center px-4"
+      className="w-full  h-full min-h-[200vh] flex flex-col text-black pt-5 justify-start items-center px-4"
       aria-hidden
     >
       <div className=" bg-white py-2">
