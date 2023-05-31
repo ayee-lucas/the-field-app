@@ -83,7 +83,11 @@ const AddComment = () => {
         ) : null}
       </div>
 
-      <AlertPost discard={discard} setDiscard={setDiscard} />
+      <AlertPost
+        discard={discard}
+        setDiscard={setDiscard}
+        setComment={setComment}
+      />
 
     </form>
   );
