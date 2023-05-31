@@ -27,10 +27,6 @@ const DarkMode: FC<Props> = ({ children }) => {
     }
   }, [theme]);
 
-  const handleThemeSwitch = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
   return <div>{children}</div>;
 };
 

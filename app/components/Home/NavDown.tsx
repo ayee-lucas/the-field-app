@@ -5,8 +5,8 @@ import {
 } from 'react-icons/ai';
 
 export const NavDown = () => (
-  <div className="fixed bottom-0 w-full h-[50px] text-lg z-50">
-    <div className="border-t border-gray-200 dark:border-gray-800 flex justify-evenly text-center h-full px-3 py-4 bg-gray-50 dark:bg-black dark:text-white lg:hidden">
+  <div className="fixed bottom-0 w-full h-[50px] text-lg z-50 lg:translate-y-full">
+    <div className="border-t border-gray-200 dark:border-gray-800 flex justify-evenly text-center h-full px-3 py-4 bg-gray-50 dark:bg-black dark:text-white">
       <Link href="/Home">
         <AiOutlineHome />
       </Link>
