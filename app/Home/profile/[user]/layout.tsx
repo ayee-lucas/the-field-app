@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth';
 import { IUser } from '@/app/models/User';
 import { RxDotFilled } from 'react-icons/rx';
+import { AiFillEdit } from 'react-icons/ai';
 import Image from 'next/image';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import defaultImage from '../../../../public/images/default_user.png';
@@ -20,7 +21,7 @@ export default async function ProfileLayout({
 }) {
   const session = await getServerSession(authOptions);
 
-  const id = session?.user?.sub;
+  //  const id = session?.user?.sub;
 
   const user: IUser = await getProfile(params.user);
 
@@ -117,13 +118,11 @@ export default async function ProfileLayout({
         </div>
 
         <NavProfile />
-        <div className="w-full h-full my-2 bg-gray-100 border border-gray-500 rounded-lg p-4">
-          <h1>POST</h1>
-          <input
-            type="text"
-            placeholder="WHAT'S ON YOUR MIND?"
-            className="placeholder:text-sm placeholder:font-bold placeholder:text-gray-700 w-full h-full focus:outline-none"
-          />
+        <div className="w-full h-full my-2 select-none cursor-pointer bg-gray-100 border flex gap-2 items-center border-gray-500 rounded-lg p-4">
+          <h1 className="text-xl text-black font-semibold">
+            What's on your mind?
+          </h1>
+          <AiFillEdit className="text-black" size={20} />
         </div>
         <div className="px-2">{children}</div>
       </div>
