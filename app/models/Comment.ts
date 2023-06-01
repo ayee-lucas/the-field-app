@@ -31,8 +31,9 @@ const commentSchema = new Schema<IComment>(
     },
   },
   {
-    timestamps: true, versionKey: false,
-  },
+    timestamps: true, 
+    versionKey: false,
+  }
 );
 
 // Create and export the Comment model
