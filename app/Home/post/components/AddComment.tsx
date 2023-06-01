@@ -46,6 +46,7 @@ const AddComment = () => {
           />
           <input
             type="text"
+            onBlur={() => setDiscard(true)}
             placeholder="Reply..."
             className="w-full h-full focus:outline-none focus:placeholder:text-black"
           />

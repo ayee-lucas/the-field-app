@@ -2,6 +2,9 @@ import {
   FC, useEffect, useState,
 } from 'react';
 
+import { IoCheckmarkCircle } from 'react-icons/io5';
+import { GiCancel } from 'react-icons/gi';
+
 interface Props {
   setDiscard: (discard: boolean) => void;
   setComment: (comment: boolean) => void;
@@ -42,10 +45,22 @@ const AlertPost:FC<Props> = ({
         className="bg-white/90 p-4 rounded-md text-center transition-all"
         id="alertPopUp"
       >
-        <h1>Are you sure you want to discard this post ?</h1>
-        <div className="flex justify-center gap-4 mt-4">
-          <button type="button" onClick={handleDiscard}>yes</button>
-          <button type="button" onClick={() => setDiscard(false)}>no</button>
+        <h1 className="text-2xl font-bold py-10 px-7">Are you sure you want to discard this post ?</h1>
+        <div className="flex justify-center gap-4 py-5 mt-4">
+          <button type="button" className="flex items-center gap-2 bg-fieldGreen hover:bg-lime-600 text-white px-4 py-2 rounded-md" onClick={handleDiscard}>
+            <IoCheckmarkCircle />
+            {' '}
+            yes
+          </button>
+          <button
+            type="button"
+            className="flex items-center gap-2 bg-red-600 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+            onClick={() => setDiscard(false)}
+          >
+            {' '}
+            <GiCancel />
+            no
+          </button>
         </div>
 
       </div>
