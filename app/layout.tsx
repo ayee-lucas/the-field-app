@@ -1,11 +1,11 @@
-import Provider from "./components/Provider";
-import { inter } from "./fonts";
+import Provider from './components/Provider';
+import { inter } from './fonts';
 
-import "./globals.css";
+import './globals.css';
 
 export const metadata = {
-  title: "The Field",
-  description: "Project",
+  title: 'The Field',
+  description: 'Project',
 };
 
 export default function RootLayout({

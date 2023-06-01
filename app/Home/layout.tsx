@@ -1,6 +1,6 @@
-import React from "react";
-import { NavBar } from "../components/Home/NavBar";
-import SideBar from "../components/Home/SideBar";
+import React from 'react';
+import { NavBar } from '../components/Home/NavBar';
+import NavDown from '../components/Home/NavDown';
 
 export default function HomeLayout({
   children,
@@ -9,10 +9,9 @@ export default function HomeLayout({
 }) {
   return (
     <section>
+      <NavDown />
       <NavBar />
-      <SideBar />
-
-      <div className="pt-[60px] pl-[240px] max-md:pl-0">{children}</div>
+      <div className="pt-[60px] pl-[240px] max-lg:pl-0">{children}</div>
     </section>
   );
 }

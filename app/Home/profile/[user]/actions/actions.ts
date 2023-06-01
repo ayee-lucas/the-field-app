@@ -1,14 +1,12 @@
+import dbConnect from '@/app/db/Connection';
+import User from '@/app/models/User';
 
-import dbConnect from "@/app/db/Connection";
-import User from "@/app/models/User";
-
-dbConnect()
+dbConnect();
 
 export async function getProfile(username: any) {
-  "use server";
+  'use server';
 
-  const userFind = await User.findOne({username: username});
+  const userFind = await User.findOne({ username });
 
   return userFind;
 }
-

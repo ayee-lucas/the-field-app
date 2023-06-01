@@ -1,23 +1,25 @@
-import React from "react";
+import React from 'react';
 
-const NavProfile = () => {
+function NavProfile() {
   return (
-    <nav className="w-full relative h-full mt-2
+    <nav
+      className="w-full relative h-full mt-2
     after:content-[''] after:w-full after:h-1 after:bg-fieldGreen after:absolute after:bottom-0 after:left-0
-    ">
-      <ul className=" flex justify-start text-black items-center bg-slate-100 px-7 py-6 gap-4 font-medium">
-        <li>Recent</li>
+    "
+    >
+      <ul className=" flex justify-start text-black items-center bg-gray-100 px-7 py-6 gap-4 font-medium">
+        <li>Recent 🕑</li>
 
-        <li>Posts</li>
+        <li>Posts 📈</li>
 
-        <li>Comments</li>
+        <li>Starred ⭐️</li>
 
-        <li>Followers</li>
+        <li>Comments 📢</li>
 
-        <li>Following</li>
+        <li>Likes ❤️</li>
       </ul>
     </nav>
   );
-};
+}
 
 export default NavProfile;

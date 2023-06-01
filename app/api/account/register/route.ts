@@ -1,7 +1,7 @@
-import { NextResponse, NextRequest } from "next/server";
-import dbConnect from "@/app/db/Connection";
-import User, { IUser } from "@/app/models/User";
-import { hashPassword } from "@/app/tools/encrypt";
+import { NextResponse, NextRequest } from 'next/server';
+import dbConnect from '@/app/db/Connection';
+import User, { IUser } from '@/app/models/User';
+import { hashPassword } from '@/app/tools/encrypt';
 
 dbConnect();
 
@@ -11,47 +11,49 @@ export async function POST(req: NextRequest) {
 
     if (!json.username || !json.email) {
       return new NextResponse(
-        JSON.stringify({ message: "Username and email are required" }),
+        JSON.stringify({ message: 'Username and email are required' }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+          headers: { 'Content-Type': 'application/json' },
+        },
       );
     }
 
     if (json.password.length < 8) {
       return new NextResponse(
-        JSON.stringify({ message: "Password should be at least 8 characters long" }),
+        JSON.stringify({ message: 'Password should be at least 8 characters long' }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+          headers: { 'Content-Type': 'application/json' },
+        },
       );
     }
 
     const usernameTaken = await User.findOne({ username: json.username });
 
-    if (usernameTaken)
+    if (usernameTaken) {
       return new NextResponse(
-        JSON.stringify({ message: "Username already exists" }),
+        JSON.stringify({ message: 'Username already exists' }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+          headers: { 'Content-Type': 'application/json' },
+        },
       );
+    }
 
     const emailTaken = await User.findOne({ email: json.email });
 
-    if (emailTaken)
+    if (emailTaken) {
       return new NextResponse(
         JSON.stringify({
-          message: "Email already exists",
+          message: 'Email already exists',
         }),
         {
           status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+          headers: { 'Content-Type': 'application/json' },
+        },
       );
+    }
 
     const hashedPassword = await hashPassword(json.password);
 
@@ -61,11 +63,11 @@ export async function POST(req: NextRequest) {
 
     await user.save();
 
-    console.log({userSaved: user})
+    console.log({ userSaved: user });
 
-    return new NextResponse(JSON.stringify({message: 'success', user}), {
+    return new NextResponse(JSON.stringify({ message: 'success', user }), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
     console.log(err);
