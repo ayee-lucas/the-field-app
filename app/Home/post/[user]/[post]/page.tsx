@@ -3,6 +3,7 @@ import { BsFillBookmarkDashFill } from 'react-icons/bs';
 import defaultImage from '../../../../../public/images/default_user.png';
 import PostFooterActions from '../../components/PostFooterActions';
 import AddComment from '../../components/AddComment';
+import Comments from '../../components/comments';
 
 export default function Post() {
   return (
@@ -59,6 +60,7 @@ export default function Post() {
       </div>
       <PostFooterActions />
       <AddComment />
+      <Comments />
 
     </div>
   );

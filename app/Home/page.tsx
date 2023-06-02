@@ -1,17 +1,18 @@
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import FeedBar from './components/FeedBar';
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
 
-  console.log({ session: session?.user });
-
   return (
-    <div className="w-full h-screen dark:bg-black dark:text-white">
-      <Link href={`/Home/profile/${session?.user?.id}`}>
-        account
-      </Link>
+    <div className="w-full h-screen dark:bg-black p-2 dark:text-white">
+      <h1 className="text-4xl py-3 font-bold">
+        Feed
+      </h1>
+
+      <FeedBar />
     </div>
   );
 }
