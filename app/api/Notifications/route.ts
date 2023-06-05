@@ -1,7 +1,7 @@
-import { NextResponse, NextRequest } from "next/server";
-import dbConnect from "@/app/db/Connection";
-import User from "@/app/models/User";
-import Notification from "@/app/models/Notification";
+import { NextResponse, NextRequest } from 'next/server';
+import dbConnect from '@/app/db/Connection';
+import User from '@/app/models/User';
+import Notification from '@/app/models/Notification';
 
 dbConnect();
 
@@ -12,11 +12,11 @@ export async function GET(request: NextRequest) {
 
     // Obtener todas las notificaciones con datos relacionados
     const notifications = await Notification.find()
-      .populate("recipient","name username")
-      .populate("sender", "name username");
+      .populate('recipient', 'name username')
+      .populate('sender', 'name username');
 
     const data = {
-      notifications
+      notifications,
     };
 
     return new NextResponse(JSON.stringify(data), { status: 200 });
@@ -25,7 +25,6 @@ export async function GET(request: NextRequest) {
     return new NextResponse(JSON.stringify(err), { status: 500 });
   }
 }
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,9 +36,9 @@ export async function POST(request: NextRequest) {
     if (!json.recipient || !json.sender || !json.type) {
       return new NextResponse(
         JSON.stringify({
-          message: "Missing required fields in the request body.",
+          message: 'Missing required fields in the request body.',
         }),
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -53,14 +52,14 @@ export async function POST(request: NextRequest) {
     // Return a NextResponse object with the saved notification data and a 200 status code
     return new NextResponse(JSON.stringify(notification), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
     console.log({ err });
 
     // If there is any other error, return a NextResponse object with an error message and a 500 status code
     const error = {
-      message: "Error saving notification.",
+      message: 'Error saving notification.',
       error: err,
     };
     return new NextResponse(JSON.stringify(error), { status: 500 });

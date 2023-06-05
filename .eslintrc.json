@@ -15,7 +15,8 @@
     "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "linebreak-style": ["error", "unix"], 
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "no-underscore-dangle": "off",
 
   }
 }

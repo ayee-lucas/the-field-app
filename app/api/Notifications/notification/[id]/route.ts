@@ -1,7 +1,7 @@
-import { NextResponse, NextRequest } from "next/server";
-import dbConnect from "@/app/db/Connection";
-import User from "@/app/models/User";
-import Notification from "@/app/models/Notification";
+import { NextResponse, NextRequest } from 'next/server';
+import dbConnect from '@/app/db/Connection';
+import User from '@/app/models/User';
+import Notification from '@/app/models/Notification';
 
 dbConnect();
 
@@ -12,23 +12,23 @@ interface params extends Request {
 }
 
 export async function GET(request: NextRequest, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
 
   // Obtener todos los usuarios
   const users = await User.find();
 
   try {
     const notification = await Notification.findById(id)
-      .populate("recipient","name username")
-      .populate("sender", "name username");
-    
-      const data = {
-        notification
-      };  
+      .populate('recipient', 'name username')
+      .populate('sender', 'name username');
+
+    const data = {
+      notification,
+    };
 
     // Validar si no se encontró la notificación
     if (!notification) {
-      return new NextResponse("Notification not found", {
+      return new NextResponse('Notification not found', {
         status: 404,
       });
     }
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest, params: params) {
 }
 
 export async function PUT(request: Request, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
   const data = await request.json();
 
   try {
@@ -55,7 +55,7 @@ export async function PUT(request: Request, params: params) {
 
     // Validar si no se encontró la notificación
     if (!notification) {
-      return new NextResponse("Notification not found", {
+      return new NextResponse('Notification not found', {
         status: 404,
       });
     }
@@ -73,14 +73,14 @@ export async function PUT(request: Request, params: params) {
 }
 
 export async function DELETE(request: Request, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
 
   try {
     const notification = await Notification.findByIdAndDelete(id);
 
     // Validar si no se encontró la notificación
     if (!notification) {
-      return new NextResponse("Notification not found", {
+      return new NextResponse('Notification not found', {
         status: 404,
       });
     }

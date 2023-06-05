@@ -1,8 +1,8 @@
-import dbConnect from "@/app/db/Connection";
-import User from "@/app/models/User";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { NextRequest, NextResponse } from "next/server";
+import dbConnect from '@/app/db/Connection';
+import User from '@/app/models/User';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { NextRequest, NextResponse } from 'next/server';
 
 // Conectar a la base de datos
 dbConnect();
@@ -14,22 +14,22 @@ interface params extends Request {
 }
 
 export async function GET(request: Request, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
   const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
 
   try {
     const user = await User.findById(id);
     if (!user) {
-      return new NextResponse("User not found", {
+      return new NextResponse('User not found', {
         status: 404,
       });
     }
 
-    if (session?.user.role == "user") {
+    if (session?.user.role == 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
-        return new NextResponse("You are not authorized to view this user", {
+        return new NextResponse('You are not authorized to view this user', {
           status: 401,
         });
       }
@@ -38,7 +38,7 @@ export async function GET(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == "admin") {
+    if (session?.user.role == 'admin') {
       return new NextResponse(JSON.stringify(user), {
         status: 200,
       });
@@ -52,7 +52,7 @@ export async function GET(request: Request, params: params) {
 }
 
 export async function PUT(request: Request, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
   const data = await request.json();
   const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
@@ -60,29 +60,29 @@ export async function PUT(request: Request, params: params) {
   try {
     const user = await User.findById(id);
     if (!user) {
-      return new NextResponse("User not found", {
+      return new NextResponse('User not found', {
         status: 404,
       });
     }
 
-    if (session?.user.role == "user") {
+    if (session?.user.role == 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
-        return new NextResponse("You are not authorized to update this user", {
+        return new NextResponse('You are not authorized to update this user', {
           status: 401,
         });
       }
 
       // Validar la dirección de correo electrónico si se proporciona
       if (data.email && !isValidEmail(data.email)) {
-        return new NextResponse("Invalid email address", {
+        return new NextResponse('Invalid email address', {
           status: 400,
         });
       }
 
       // Validar la contraseña si se proporciona
       if (data.password && !isValidPassword(data.password)) {
-        return new NextResponse("Password should have at least 8 characters", {
+        return new NextResponse('Password should have at least 8 characters', {
           status: 400,
         });
       }
@@ -99,17 +99,17 @@ export async function PUT(request: Request, params: params) {
         status: 200,
       });
     }
-    if (session?.user.role == "admin") {
+    if (session?.user.role == 'admin') {
       // Validar la dirección de correo electrónico si se proporciona
       if (data.email && !isValidEmail(data.email)) {
-        return new NextResponse("Invalid email address", {
+        return new NextResponse('Invalid email address', {
           status: 400,
         });
       }
 
       // Validar la contraseña si se proporciona
       if (data.password && !isValidPassword(data.password)) {
-        return new NextResponse("Password should have at least 8 characters", {
+        return new NextResponse('Password should have at least 8 characters', {
           status: 400,
         });
       }
@@ -134,24 +134,23 @@ export async function PUT(request: Request, params: params) {
   }
 }
 
-
 export async function DELETE(request: Request, params: params) {
-  const id = params.params.id;
+  const { id } = params.params;
   const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
 
   try {
     const user = await User.findById(id);
     if (!user) {
-      return new NextResponse("User not found", {
+      return new NextResponse('User not found', {
         status: 404,
       });
     }
 
-    if (session?.user.role == "user") {
+    if (session?.user.role == 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
-        return new NextResponse("You are not authorized to delete this user", {
+        return new NextResponse('You are not authorized to delete this user', {
           status: 401,
         });
       }
@@ -159,16 +158,16 @@ export async function DELETE(request: Request, params: params) {
       // Eliminar al usuario
       await User.findByIdAndDelete(id);
 
-      return new NextResponse("User deleted successfully", {
+      return new NextResponse('User deleted successfully', {
         status: 200,
       });
     }
 
-    if (session?.user.role == "admin") {
+    if (session?.user.role == 'admin') {
       // Eliminar al usuario
       await User.findByIdAndDelete(id);
 
-      return new NextResponse("User deleted successfully", {
+      return new NextResponse('User deleted successfully', {
         status: 200,
       });
     }
@@ -179,7 +178,6 @@ export async function DELETE(request: Request, params: params) {
     });
   }
 }
-
 
 // Función de validación de dirección de correo electrónico
 function isValidEmail(email: string): boolean {

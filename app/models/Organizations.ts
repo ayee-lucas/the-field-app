@@ -1,4 +1,6 @@
-import { Document, Schema, model, models } from "mongoose";
+import {
+  Document, Schema, model, models,
+} from 'mongoose';
 
 // Interface for Notification document
 export interface IOrganization extends Document {
@@ -19,38 +21,38 @@ export interface IOrganization extends Document {
 const OrganizationSchema = new Schema<IOrganization>({
   name: {
     type: String,
-    required: [true, "Organizations name is required."],
-    maxlength: [50, "Name must not exceed 50 characters."],
+    required: [true, 'Organizations name is required.'],
+    maxlength: [50, 'Name must not exceed 50 characters.'],
   },
   description: {
     type: String,
-    required: [true, "Organizations description is required."],
-    maxlength: [250, "Description must not exceed 250 characters."],
+    required: [true, 'Organizations description is required.'],
+    maxlength: [250, 'Description must not exceed 250 characters.'],
   },
   location: {
     type: String,
-    required: [true, "Organizations location is required."],
-    maxlength: [100, "Location must not exceed 100 characters."],
+    required: [true, 'Organizations location is required.'],
+    maxlength: [100, 'Location must not exceed 100 characters.'],
   },
   website: {
     type: String,
-    required: [true, "Organizations website is required."],
-    maxlength: [100, "Website URL must not exceed 100 characters."],
+    required: [true, 'Organizations website is required.'],
+    maxlength: [100, 'Website URL must not exceed 100 characters.'],
   },
   contact: {
     type: String,
-    required: [true, "Organizations contact is required."],
-    maxlength: [50, "Contact information must not exceed 50 characters."],
+    required: [true, 'Organizations contact is required.'],
+    maxlength: [50, 'Contact information must not exceed 50 characters.'],
   },
   email: {
     type: String,
-    required: [true, "Organizations email is required."],
-    maxlength: [50, "Email address must not exceed 50 characters."],
+    required: [true, 'Organizations email is required.'],
+    maxlength: [50, 'Email address must not exceed 50 characters.'],
   },
   type: {
     type: String,
-    required: [true, "Organizations type is required."],
-    maxlength: [25, "Organizations type must not exceed 25 characters."],
+    required: [true, 'Organizations type is required.'],
+    maxlength: [25, 'Organizations type must not exceed 25 characters.'],
   },
   affiliatedTeams: {
     type: [String],
@@ -71,8 +73,7 @@ const OrganizationSchema = new Schema<IOrganization>({
 });
 
 // Create and export the Organization model
-const Organization =
-  models.Organization ||
-  model<IOrganization>("Organization", OrganizationSchema);
+const Organization = models.Organization
+  || model<IOrganization>('Organization', OrganizationSchema);
 
 export default Organization;

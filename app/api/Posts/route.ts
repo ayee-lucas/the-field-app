@@ -1,10 +1,10 @@
-import { NextResponse, NextRequest } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import dbConnect from "@/app/db/Connection";
-import User from "@/app/models/User";
-import Post from "@/app/models/Post";
-import Comment from "@/app/models/Comment";
+import { NextResponse, NextRequest } from 'next/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import dbConnect from '@/app/db/Connection';
+import User from '@/app/models/User';
+import Post from '@/app/models/Post';
+import Comment from '@/app/models/Comment';
 
 dbConnect();
 
@@ -16,16 +16,16 @@ export async function GET(request: NextRequest) {
 
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
-      .populate("author", "name username")
-      .populate("comments", "author content")
-      .populate("likes", "name username");
+      .populate('author', 'name username')
+      .populate('comments', 'author content')
+      .populate('likes', 'name username');
 
     const data = {
       posts,
     };
 
     if (posts.length === 0) {
-      return new NextResponse(JSON.stringify({ message: "No Posts Yet" }), {
+      return new NextResponse(JSON.stringify({ message: 'No Posts Yet' }), {
         status: 200,
       });
     }
@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   try {
     // Check if user is authenticated and has the required role
-    if (!session || session.user.role !== "user") {
-      return new NextResponse("Unauthorized", {
+    if (!session || session.user.role !== 'user') {
+      return new NextResponse('Unauthorized', {
         status: 401,
       });
     }
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
     const user = await User.findById(author);
     if (!user) {
-      return new NextResponse("User not found", {
+      return new NextResponse('User not found', {
         status: 404,
       });
     }
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
 
     return new NextResponse(JSON.stringify(savedPost), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
     console.log({ err });
