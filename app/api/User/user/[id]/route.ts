@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import dbConnect from '@/app/db/Connection';
 import User from '@/app/models/User';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 
 // Conectar a la base de datos
 dbConnect();
@@ -15,7 +17,6 @@ interface params extends Request {
 
 export async function GET(request: Request, params: params) {
   const { id } = params.params;
-  const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
 
   try {
@@ -26,7 +27,7 @@ export async function GET(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == 'user') {
+    if (session?.user.role === 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
         return new NextResponse('You are not authorized to view this user', {
@@ -38,7 +39,7 @@ export async function GET(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == 'admin') {
+    if (session?.user.role === 'admin') {
       return new NextResponse(JSON.stringify(user), {
         status: 200,
       });
@@ -54,7 +55,6 @@ export async function GET(request: Request, params: params) {
 export async function PUT(request: Request, params: params) {
   const { id } = params.params;
   const data = await request.json();
-  const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
 
   try {
@@ -65,7 +65,7 @@ export async function PUT(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == 'user') {
+    if (session?.user.role === 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
         return new NextResponse('You are not authorized to update this user', {
@@ -99,7 +99,7 @@ export async function PUT(request: Request, params: params) {
         status: 200,
       });
     }
-    if (session?.user.role == 'admin') {
+    if (session?.user.role === 'admin') {
       // Validar la dirección de correo electrónico si se proporciona
       if (data.email && !isValidEmail(data.email)) {
         return new NextResponse('Invalid email address', {
@@ -136,7 +136,6 @@ export async function PUT(request: Request, params: params) {
 
 export async function DELETE(request: Request, params: params) {
   const { id } = params.params;
-  const url = process.env.NEXTAUTH_URL as string;
   const session = await getServerSession(authOptions);
 
   try {
@@ -147,7 +146,7 @@ export async function DELETE(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == 'user') {
+    if (session?.user.role === 'user') {
       // Verificar si el usuario actual es el propietario del perfil
       if (user._id.toString() !== session?.user.id) {
         return new NextResponse('You are not authorized to delete this user', {
@@ -163,7 +162,7 @@ export async function DELETE(request: Request, params: params) {
       });
     }
 
-    if (session?.user.role == 'admin') {
+    if (session?.user.role === 'admin') {
       // Eliminar al usuario
       await User.findByIdAndDelete(id);
 

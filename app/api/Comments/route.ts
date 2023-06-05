@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-
 import Comment from '@/app/models/Comment';
 import Post from '@/app/models/Post';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -37,6 +36,7 @@ export async function get() {
 export async function post(request: NextRequest) {
   const session = await getServerSession(authOptions);
   try {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     const { post, content } = await request.json();
 
     if (!post || !content) {

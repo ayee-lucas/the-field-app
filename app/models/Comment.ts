@@ -1,4 +1,6 @@
-import { Document, Schema, model, Model } from 'mongoose';
+import {
+  Document, Schema, model, Model,
+} from 'mongoose';
 import { IUser } from './User';
 import { IPost } from './Post';
 

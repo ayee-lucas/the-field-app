@@ -1,14 +1,12 @@
 import { NextResponse, NextRequest } from 'next/server';
 import dbConnect from '@/app/db/Connection';
-import User from '@/app/models/User';
 import Notification from '@/app/models/Notification';
 
 dbConnect();
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     // Obtener todos los usuarios
-    const users = await User.find();
 
     // Obtener todas las notificaciones con datos relacionados
     const notifications = await Notification.find()
@@ -55,9 +53,6 @@ export async function POST(request: NextRequest) {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err) {
-    console.log({ err });
-
-    // If there is any other error, return a NextResponse object with an error message and a 500 status code
     const error = {
       message: 'Error saving notification.',
       error: err,

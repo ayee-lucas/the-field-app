@@ -1,19 +1,14 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import dbConnect from '@/app/db/Connection';
 import User from '@/app/models/User';
 import Post from '@/app/models/Post';
-import Comment from '@/app/models/Comment';
 
 dbConnect();
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    // Obtener todos los usuarios
-    const users = await User.find();
-    const comments = await Comment.find();
-
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
       .populate('author', 'name username')
@@ -37,7 +32,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   // Get the user session
   const session = await getServerSession(authOptions);
   try {

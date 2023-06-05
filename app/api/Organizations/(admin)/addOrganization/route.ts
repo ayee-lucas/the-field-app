@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
 import dbConnect from '@/app/db/Connection';
 import Organization from '@/app/models/Organizations';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+/* import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'; */
 
 dbConnect();
 
@@ -11,16 +11,6 @@ export async function POST(request: NextRequest) {
     // Parse the request body as JSON
     const json = await request.json();
     console.log({ DataRequest: json });
-
-    // Validate the required fields in the request body
-    /* if (!json.recipient || !json.sender || !json.type) {
-          return new NextResponse(
-            JSON.stringify({
-              message: "Missing required fields in the request body.",
-            }),
-            { status: 400 }
-          );
-        } */
 
     // Create a new notification object with the parsed data
     const data = new Organization(json);
@@ -37,7 +27,6 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.log({ err });
 
-    // If there is any other error, return a NextResponse object with an error message and a 500 status code
     const error = {
       message: 'Error saving notification.',
       error: err,

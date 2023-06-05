@@ -1,4 +1,4 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import dbConnect from '@/app/db/Connection';
 import Organization from '@/app/models/Organizations';
 

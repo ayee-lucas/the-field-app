@@ -16,7 +16,7 @@
     "jsx-a11y/label-has-associated-control": "off",
     "linebreak-style": ["error", "unix"], 
     "import/no-named-as-default": "off",
-    "no-underscore-dangle": "off",
+    "no-underscore-dangle": "off"
 
   }
 }

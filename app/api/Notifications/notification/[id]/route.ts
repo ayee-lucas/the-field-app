@@ -1,10 +1,10 @@
 import { NextResponse, NextRequest } from 'next/server';
 import dbConnect from '@/app/db/Connection';
-import User from '@/app/models/User';
 import Notification from '@/app/models/Notification';
 
 dbConnect();
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 interface params extends Request {
   params: {
     id: string;
@@ -13,9 +13,6 @@ interface params extends Request {
 
 export async function GET(request: NextRequest, params: params) {
   const { id } = params.params;
-
-  // Obtener todos los usuarios
-  const users = await User.find();
 
   try {
     const notification = await Notification.findById(id)
@@ -27,13 +24,13 @@ export async function GET(request: NextRequest, params: params) {
     };
 
     // Validar si no se encontró la notificación
-    if (!notification) {
+    if (!data) {
       return new NextResponse('Notification not found', {
         status: 404,
       });
     }
 
-    return new NextResponse(JSON.stringify(notification), {
+    return new NextResponse(JSON.stringify(data), {
       status: 200,
     });
   } catch (err) {

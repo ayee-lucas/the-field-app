@@ -1,11 +1,12 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import dbConnect from '@/app/db/Connection';
 import Organization from '@/app/models/Organizations';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+/* import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'; */
 
 dbConnect();
 
+// eslint-disable-next-line @typescript-eslint/naming-convention
 interface params extends Request {
   params: {
     id: string;
