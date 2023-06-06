@@ -1,17 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import UserMenu from './UserMenu';
 
 export const NavBar = () => {
   const [open, setOpen] = useState(true);
+  const [shadow, setShadow] = useState<string>('');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.scrollY > 0) {
+        setShadow('shadow-lg');
+      } else {
+        setShadow('');
+      }
+    };
+    window.addEventListener('scroll', handleResize);
+  }, []);
 
   return (
     <div>
 
       <div className="fixed w-full z-50">
-        <nav className="bg-white dark:bg-black border-b border-gray-200 dark:border-gray-800">
+        <nav className={`bg-white dark:bg-black border-b transition-all border-gray-200 dark:border-zinc-800 ${shadow}`}>
           <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
 
             <div className="lg:hidden z-50">
