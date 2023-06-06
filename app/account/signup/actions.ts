@@ -1,11 +1,11 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
+// eslint-disable-next-line @typescript-eslint/naming-convention
 interface props {}
 
 const url = process.env.NEXTAUTH_URL as string;
 
+// eslint-disable-next-line consistent-return
 export async function signUp(data: props) {
   try {
     const response = await fetch(`${url}/api/account/register`, {

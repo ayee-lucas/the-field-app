@@ -1,11 +1,11 @@
 import {
-  Document, Schema, model, models,
+  Document, Schema, model, Model,
 } from 'mongoose';
 import { IUser } from './User';
 import { IPost } from './Post';
 
-// Interface for Comment document
 export interface IComment extends Document {
+  _id?: string;
   author: IUser;
   post: IPost;
   content: string;
@@ -29,13 +29,17 @@ const commentSchema = new Schema<IComment>(
       type: String,
       required: [true, 'Content is required.'],
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
-    timestamps: true, versionKey: false,
+    versionKey: false,
   },
 );
 
 // Create and export the Comment model
-const Comment = models.Comment || model<IComment>('Comment', commentSchema);
+const Comment: Model<IComment> = model<IComment>('Comment', commentSchema);
 
 export default Comment;
