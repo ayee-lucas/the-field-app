@@ -1,7 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { IUser } from '@/app/models/User';
 import { RxDotFilled } from 'react-icons/rx';
-import { AiFillEdit } from 'react-icons/ai';
 import Image from 'next/image';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import defaultImage from '../../../../public/images/default_user.png';
@@ -11,6 +10,7 @@ import Messagebtn from './components/Messagebtn';
 import NavProfile from './components/NavProfile';
 import Editbtn from './components/Editbtn';
 import Settigns from './components/Settigns';
+import NewPost from './components/NewPost';
 
 export default async function ProfileLayout({
   params,
@@ -118,12 +118,9 @@ export default async function ProfileLayout({
         </div>
 
         <NavProfile />
-        <div className="w-full h-full my-2 select-none cursor-pointer bg-gray-100 border flex gap-2 items-center border-gray-500 rounded-lg p-4">
-          <h1 className="text-xl text-black font-semibold">
-            What's on your mind?
-          </h1>
-          <AiFillEdit className="text-black" size={20} />
-        </div>
+        { session?.user?.username !== user.username ? null
+
+          : <NewPost />}
         <div className="px-2">{children}</div>
       </div>
     </section>
