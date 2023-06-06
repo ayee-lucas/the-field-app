@@ -13,7 +13,7 @@ export const UserMenu: FC = () => {
     <div>
       <div className="flex items-center">
 
-        <div className={`fixed lg:top-[60px] max-lg:top-0 left-0 w-[240px] max-lg:w-[60%] max-md:w-[80%] max-sm:w-[90%] h-full transition duration-300 lg:border-y border-r border-gray-200 dark:border-gray-800 
+        <div className={`fixed lg:top-[60px] max-lg:top-0 left-0 w-[240px] max-lg:w-[60%] max-md:w-[80%] max-sm:w-[90%] h-full transition duration-300 lg:border-y border-r border-gray-200 dark:border-zinc-800 
           ${open ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'}`}
         >
           <SideBar close={() => setOpen(false)} />

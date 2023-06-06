@@ -48,14 +48,14 @@ export const SideBar: FC<Props> = ({ close }) => {
       </div>
 
       <div className="flex justify-center">
-        <div className="my-4 w-[90%] border-t border-gray-200 dark:border-gray-800 lg:hidden" />
+        <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
 
       <ul className="space-y-2 mx-5 font-medium">
         <li>
           <Link
             href="/Home"
-            className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700"
           >
             <AiOutlineUser className="w-6 h-6" />
             <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
@@ -64,7 +64,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         <li>
           <Link
             href="/Home"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 max-lg:hidden"
+            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
           >
             <AiOutlineComment className="w-6 h-6" />
             <span className="flex-1 ml-3 whitespace-nowrap">Chats</span>
@@ -73,7 +73,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         <li>
           <Link
             href="/Home"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 max-lg:hidden"
+            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
           >
             <AiOutlineStar className="w-6 h-6" />
             <span className="flex-1 ml-3 whitespace-nowrap">Starred</span>
@@ -82,7 +82,7 @@ export const SideBar: FC<Props> = ({ close }) => {
         <li>
           <button
             type="button"
-            className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+            className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
             aria-controls="dropdown-example"
             data-collapse-toggle="dropdown-example"
           >
@@ -133,12 +133,12 @@ export const SideBar: FC<Props> = ({ close }) => {
       </ul>
 
       <div className="flex justify-center">
-        <div className="my-4 w-[90%] border-t border-gray-200 dark:border-gray-800 lg:hidden" />
+        <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
 
       <div className="absolute bottom-0 p-6">
         <div className="flex justify-center">
-          <div className="my-4 w-[90%] border-t border-gray-200 dark:border-gray-800 lg:hidden" />
+          <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
         </div>
 
         {a ? (
