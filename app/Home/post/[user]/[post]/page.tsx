@@ -31,7 +31,7 @@ export default function Post() {
 
         </div>
         <h1 className="text-2xl font-semibold">LEBRON JAMES JA MORANT</h1>
-        <p className="text-justify mt-2">
+        <p className="text-justify mt-2 text-gray-700">
           The more I think about this streak, the more I believe it's the most
           unbeatable of all records. LBJ is on an open streak of 1,151 consecutive
           double digit Regular Season games (the streak doesn't include Playoffs
