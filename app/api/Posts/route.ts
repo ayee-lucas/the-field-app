@@ -4,6 +4,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import dbConnect from '@/app/db/Connection';
 import User from '@/app/models/User';
 import Post from '@/app/models/Post';
+import Comment from '@/app/models/Comment';
 
 dbConnect();
 
@@ -11,13 +12,9 @@ export async function GET() {
   try {
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
-      .populate('author', 'name username')
-      .populate('comments', 'author content')
-      .populate('likes', 'name username');
-
-    const data = {
-      posts,
-    };
+      .populate('author', 'username')
+      .populate('comments', 'author', Comment)
+      .populate('likes', 'username', User);
 
     if (posts.length === 0) {
       return new NextResponse(JSON.stringify({ message: 'No Posts Yet' }), {
@@ -25,7 +22,7 @@ export async function GET() {
       });
     }
 
-    return new NextResponse(JSON.stringify(data), { status: 200 });
+    return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (err) {
     console.error(err);
     return new NextResponse(JSON.stringify(err), { status: 500 });
