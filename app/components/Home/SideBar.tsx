@@ -20,7 +20,7 @@ export const SideBar: FC<Props> = ({ close }) => {
   const [a, setA] = useState(true);
 
   return (
-    <div className="h-full px-1 pt-5 bg-gray-50 dark:bg-black">
+    <div className="h-full px-1 pt-5 bg-white/60 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200 max-sm:backdrop-blur-3xl">
       <div className="flex justify-between lg:hidden p-2 dark:text-white">
         <div className="flex font-medium text-sm max-sm:text-xs">
           <button

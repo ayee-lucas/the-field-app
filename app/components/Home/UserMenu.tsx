@@ -36,7 +36,7 @@ export const UserMenu: FC = () => {
         </div>
 
         <div
-          className={`absolute  border border-gray-200 dark:border-gray-800 top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black dark:divide-gray-600 
+          className={`absolute  border border-gray-200 dark:border-gray-800 top-[60px] lg:right-0 max-lg:hidden m-3 transition-transform text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-black/25 dark:divide-gray-600 
           ${open ? 'translate-x-0' : 'translate-x-52'}`}
           id="user-dropdown"
         >
