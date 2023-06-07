@@ -5,7 +5,7 @@ import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 
 const PostFooterActions = () => (
-  <div className="flex justify-between items-center gap-3 py-1 px-2 w-full border-t border-t-gray-300 text-xl text-gray-600">
+  <div className="flex justify-between items-center gap-3 py-1 px-2 w-full border-t border-t-gray-300 dark:border-t-zinc-600 text-xl text-gray-600 dark:text-gray-300">
     <div className="flex items-center gap-3 w-full h-full">
       <div className="flex items-center gap-1">
         <AiOutlineHeart className="cursor-pointer" />
@@ -27,9 +27,9 @@ const PostFooterActions = () => (
         <span className="text-sm">3 </span>
       </div>
     </div>
-    <div className="flex items-center gap-3  cursor-pointer text-sm text-white bg-fieldGreen px-5 py-1 rounded-full">
+    <div className="flex items-center gap-3 mt-3 max-sm:mt-0 cursor-pointer text-sm text-white dark:text-fieldGreen bg-fieldGreen dark:bg-black border dark:border-fieldGreen px-5 py-1 rounded-full">
       <RiSendPlaneLine />
-      <span>Send</span>
+      <span className="max-sm:hidden">Send</span>
     </div>
   </div>
 );

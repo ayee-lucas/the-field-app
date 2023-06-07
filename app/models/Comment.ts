@@ -1,5 +1,5 @@
 import {
-  Document, Schema, model, Model,
+  Document, Schema, model, models,
 } from 'mongoose';
 import { IUser } from './User';
 import { IPost } from './Post';
@@ -40,6 +40,7 @@ const commentSchema = new Schema<IComment>(
 );
 
 // Create and export the Comment model
-const Comment: Model<IComment> = model<IComment>('Comment', commentSchema);
+// const Comment: models.Comments || Model<IComment> = model<IComment>('Comment', commentSchema);
+const Comment = models.Comment || model<IComment>('Comment', commentSchema);
 
 export default Comment;
