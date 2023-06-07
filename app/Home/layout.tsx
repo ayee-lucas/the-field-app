@@ -13,7 +13,7 @@ export default function HomeLayout({
       <NavDown />
       <NavBar />
       <RightBar />
-      <div className="pt-[60px] pl-[240px] pr-[20rem] max-lg:pl-0">{children}</div>
+      <div className="pt-[60px] pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0">{children}</div>
     </section>
   );
 }
