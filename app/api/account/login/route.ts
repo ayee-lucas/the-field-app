@@ -10,6 +10,8 @@ export async function POST(req: NextRequest) {
   try {
     const json: IUser = await req.json();
 
+    console.log(json);
+
     const credentials = {
       username: json.username,
       password: json.password,
