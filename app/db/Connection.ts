@@ -8,6 +8,7 @@ const conn: any = {
 
 const dbName = process.env.MONGO_DB as string;
 
+// eslint-disable-next-line consistent-return
 export default async function dbConnect() {
   try {
     // Check if database is already connected

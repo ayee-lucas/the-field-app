@@ -9,9 +9,9 @@ export async function hashPassword(password: string) {
   }
 }
 
-export async function comparePassword(password: string, hash: string) {
+export async function comparePassword(password: string, hashPass: string) {
   try {
-    return await compare(password, hash);
+    return await compare(password, hashPass);
   } catch (err) {
     console.log(err);
     return false;
