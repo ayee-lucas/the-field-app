@@ -7,7 +7,7 @@ import dbConnect from '@/app/db/Connection';
 
 dbConnect();
 
-export async function get() {
+export async function GET() {
   try {
     const comments = await Comment.find()
       .populate({
@@ -33,7 +33,7 @@ export async function get() {
   }
 }
 
-export async function post(request: NextRequest) {
+export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions);
   try {
     // eslint-disable-next-line @typescript-eslint/no-shadow
