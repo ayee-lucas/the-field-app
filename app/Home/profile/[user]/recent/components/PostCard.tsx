@@ -10,6 +10,10 @@ import PostFooterActions from '@/app/Home/post/components/PostFooterActions';
 const PostCard = () => {
   const router = useRouter();
 
+  const test = () => {
+    console.log('clicked');
+  };
+
   return (
     <div
       className={` ${ubuntu.variable} ${quicksand.variable} w-full my-2 min-h-[200px] bg-zinc-50 pl-3
@@ -47,7 +51,7 @@ const PostCard = () => {
           />
         </div>
       </div>
-      <PostFooterActions />
+      <PostFooterActions onClick={test} />
 
     </div>
   );
