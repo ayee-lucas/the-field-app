@@ -53,9 +53,6 @@ const PostSchema = new Schema<IPost>(
   },
 );
 
-// No exceda los 500 caracteres
-PostSchema.path('content.text').validate((text: string) => text.length <= 500, 'Text cannot exceed 500 characters.');
-
 // No mas de 10 items
 PostSchema.path('content.media').validate((media: string[]) => media.length <= 10, 'Media cannot exceed 10 items.');
 

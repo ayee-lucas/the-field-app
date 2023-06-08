@@ -1,10 +1,17 @@
-import React from 'react';
+'use client';
+
+import { FC } from 'react';
 import { AiOutlineHeart, AiOutlineStar } from 'react-icons/ai';
 import { BiRepost } from 'react-icons/bi';
 import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 
-const PostFooterActions = () => (
+interface Props {
+  onClick: () => void;
+}
+
+const PostFooterActions:FC<Props> = ({ onClick }) => (
+
   <div className="flex justify-between items-center gap-3 py-1 px-2 w-full border-t border-t-gray-300 dark:border-t-zinc-600 text-xl text-gray-600 dark:text-gray-300">
     <div className="flex items-center gap-3 w-full h-full">
       <div className="flex items-center gap-1">
@@ -23,7 +30,7 @@ const PostFooterActions = () => (
       </div>
 
       <div className="flex items-center gap-1">
-        <FaRegComment className="cursor-pointer" size={16} />
+        <FaRegComment onClick={onClick} className="cursor-pointer" size={16} />
         <span className="text-sm">3 </span>
       </div>
     </div>

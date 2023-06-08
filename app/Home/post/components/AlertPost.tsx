@@ -1,4 +1,4 @@
-import {
+import React, {
   FC, useEffect, useState,
 } from 'react';
 
@@ -9,16 +9,23 @@ interface Props {
   setDiscard: (discard: boolean) => void;
   setComment: (comment: boolean) => void;
   discard: boolean;
+  textareaRef: React.RefObject<HTMLTextAreaElement>;
+  setCharCount: (charCount: number) => void;
 }
 
 const AlertPost:FC<Props> = ({
-  discard, setDiscard, setComment,
+  discard, setDiscard, setComment, textareaRef, setCharCount,
 }) => {
   const [alertClass, setAlertClass] = useState('');
 
   const handleDiscard = () => {
     setDiscard(!discard);
     setComment(false);
+    if (textareaRef.current) {
+      // eslint-disable-next-line no-param-reassign
+      textareaRef.current.value = '';
+      setCharCount(0);
+    }
   };
 
   useEffect(
@@ -42,10 +49,10 @@ const AlertPost:FC<Props> = ({
       role="button"
     >
       <div
-        className="bg-white/90 p-4 rounded-md text-center transition-all"
+        className="bg-white/90 p-4 rounded-md text-center transition-all m-10 dark:bg-black"
         id="alertPopUp"
       >
-        <h1 className="text-2xl font-bold py-10 px-7">Are you sure you want to discard this post ?</h1>
+        <h1 className="text-2xl font-bold py-10 px-7">Are you sure you want to discard this reply?</h1>
         <div className="flex justify-center gap-4 py-5 mt-4">
           <button type="button" className="flex items-center gap-2 bg-fieldGreen hover:bg-lime-600 text-white px-4 py-2 rounded-md" onClick={handleDiscard}>
             <IoCheckmarkCircle />
