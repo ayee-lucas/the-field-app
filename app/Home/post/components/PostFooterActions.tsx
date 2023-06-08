@@ -7,7 +7,8 @@ import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 
 interface Props {
-  onClick: () => void;
+  // eslint-disable-next-line react/require-default-props
+  onClick?: () => void;
 }
 
 const PostFooterActions:FC<Props> = ({ onClick }) => (
