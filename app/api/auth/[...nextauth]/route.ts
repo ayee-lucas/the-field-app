@@ -5,6 +5,8 @@ import GoogleProvider from 'next-auth/providers/google';
 
 const url = process.env.NEXTAUTH_URL as string;
 
+console.log(`${url}/api/account/login/`);
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
