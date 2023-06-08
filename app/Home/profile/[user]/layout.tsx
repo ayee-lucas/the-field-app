@@ -20,6 +20,10 @@ export default async function ProfileLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+  // Delete this code
+  const test = () => {
+    console.log('clicked');
+  };
 
   //  const id = session?.user?.sub;
 
@@ -120,7 +124,7 @@ export default async function ProfileLayout({
         <NavProfile />
         { session?.user?.username !== user.username ? null
 
-          : <NewPost />}
+          : <NewPost onClick={test} />}
         <div className="px-2">{children}</div>
       </div>
     </section>
