@@ -3,6 +3,8 @@ import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
+const url = process.env.NEXTAUTH_URL as string;
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -16,7 +18,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const res = await fetch('http://localhost:3000/api/account/login/', {
+        const res = await fetch(`${url}/api/account/login/`, {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { 'Content-Type': 'application/json' },

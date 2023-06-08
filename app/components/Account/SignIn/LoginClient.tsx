@@ -56,11 +56,11 @@ function LoginClient() {
     });
   };
   return (
-    <div className="min-h-screen w-full grid grid-cols-2 bg-black">
-      <div className="w-full h-full flex flex-col items-center justify-center bg-black">
-        <div className="min-w-[300px] min-h-[300px] w-[500px] h-[550px] bg-white rounded-lg flex flex-col items-center justify-between">
+    <div className="min-h-screen w-full grid grid-cols-2 max-sm:grid-cols-1 bg-black">
+      <div className="w-full h-full flex flex-col items-center justify-center bg-black max-sm:px-3">
+        <div className="min-w-[300px] max-sm:w-full min-h-[300px] w-[500px] h-[550px] bg-white rounded-lg flex flex-col items-center justify-between">
           <div className="flex flex-col justify-center items-center w-full pt-10 pb-5">
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-6xl max-sm:text-4xl font-bold">
               THE
               {' '}
               <span className="text-fieldGreen">FIELD</span>
@@ -194,7 +194,7 @@ function LoginClient() {
           </div>
         </div>
       </div>
-      <div className="w-full relative h-full">
+      <div className="w-full relative h-full max-sm:hidden">
         <Image
           src={bg}
           className="absolute w-full h-full object-cover"

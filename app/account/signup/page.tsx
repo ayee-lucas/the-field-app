@@ -17,7 +17,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col justify-center items-center bg-black">
+    <main className="relative min-h-screen w-full flex flex-col max-sm:px-2 justify-center items-center bg-black">
       <Image
         src={bg}
         fill
@@ -27,9 +27,9 @@ export default async function Page() {
       />
       {/** Overlay */}
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-[1]" />
-      <div className="bg-white w-1/2 h-full rounded-lg shadow-lg z-10">
+      <div className="bg-white w-1/2 max-sm:w-full h-full rounded-lg shadow-lg z-10">
         <div className="flex items-center justify-between p-4">
-          <div className="relative max-w-[400px] min-h-[500px] w-full h-full bg-black">
+          <div className="relative max-w-[400px] min-h-[500px] w-full h-full bg-black max-sm:hidden">
             <Image
               className="absolute w-full h-full self-center object-cover"
               src={formImage}

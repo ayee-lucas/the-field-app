@@ -7,7 +7,7 @@ interface Props {
 }
 
 const PostBody: FC<Props> = ({ title, body }) => {
-  const bodyFormat = body.length > 250 ? `${body.substring(0, 250)}...` : body;
+  const bodyFormat = body.length > 200 ? `${body.substring(0, 200)}...` : body;
   const [showFullBody, setShowFullBody] = useState(false);
 
   return (

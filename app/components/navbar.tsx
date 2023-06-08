@@ -85,13 +85,13 @@ const Navbar = () => {
       >
         <ul className=" h-full w-full flex flex-col text-center justify-center items-center gap-10 text-3xl text-white">
           <li className="w-full">
-            <Link href="/">Home</Link>
+            <Link href="/Home">Home</Link>
           </li>
           <li className="w-full">
             <Link href="/">About</Link>
           </li>
           <li className="w-full">
-            <Link href="/">Get Started</Link>
+            <Link href="/account/signup">Get Started</Link>
           </li>
         </ul>
       </nav>

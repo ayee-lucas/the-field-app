@@ -55,9 +55,9 @@ function SignUpFirst() {
   return (
     <form
       action=""
-      className={`${montserrat.className} ${roboto.variable} w-full h-full min-h-[200px] p-2`}
+      className={`${montserrat.className} ${roboto.variable} w-full h-full min-h-[200px]`}
     >
-      <h1 className="text-xl py-6 font-medium">ACCOUNT INFORMATION</h1>
+      <h1 className="text-xl py-6 font-medium">CREATE AN ACCOUNT</h1>
 
       {responseError !== '' ? (
         <h1 className="text-red-600 text-sm px-2 font-medium italic">
@@ -82,41 +82,35 @@ function SignUpFirst() {
         ) => setData({ ...data, email: e.target.value })}
         type="email"
       />
-      <div className="relative flex justify-between items-center gap-4">
-        <div className="flex justify-between items-center gap-4 h-full">
-          <FormInput
-            label="Password"
-            placeholder="Enter your password"
-            type="password"
-            onChange={(e: any) => setPassword(e.target.value)}
-            error={validPassword}
-            icon={(
-              <AiTwotoneLock
-                className={
+      <FormInput
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
+        onChange={(e: any) => setPassword(e.target.value)}
+        error={validPassword}
+        icon={(
+          <AiTwotoneLock
+            className={
                   !validPassword ? 'mx-2 text-red-600' : 'mx-2 text-black'
                 }
-              />
-            )}
           />
-        </div>
+            )}
+      />
 
-        <div className="flex justify-between items-center gap-4 h-full">
-          <FormInput
-            label="Confirm Password"
-            placeholder="Enter your password"
-            type="password"
-            error={validPassword}
-            icon={(
-              <AiTwotoneLock
-                className={
+      <FormInput
+        label="Confirm Password"
+        placeholder="Enter your password"
+        type="password"
+        error={validPassword}
+        icon={(
+          <AiTwotoneLock
+            className={
                   !validPassword ? 'mx-2 text-red-600' : 'mx-2 text-black'
                 }
-              />
-            )}
-            onChange={(e: any) => setConfirmPassword(e.target.value)}
           />
-        </div>
-      </div>
+            )}
+        onChange={(e: any) => setConfirmPassword(e.target.value)}
+      />
 
       {validPassword ? null : (
         <h1 className="text-red-600 text-sm px-2 font-light">

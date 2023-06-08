@@ -31,12 +31,12 @@ export default async function Home() {
         <div className="absolute inset-0 bg-black/80 z-[1]" />
         <Navbar />
         <div className="flex flex-col items-start px-5 justify-center z-20 h-[900px] w-full text-white">
-          <h1 className={`${poppins.className} text-6xl font-medium`}>
+          <h1 className={`${poppins.className} text-6xl max-sm:text-4xl font-medium`}>
             <span className="text-fieldGreen">Discovering</span>
             {' '}
             Sports Talent
           </h1>
-          <h3 className="py-3 text-xl">
+          <h3 className="py-3 text-xl max-sm:text-lg">
             The Global Platform for Talent and Sports Organizations
           </h3>
           <Link

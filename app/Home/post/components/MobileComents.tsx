@@ -1,16 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import defaultImage from '../../../../public/images/default_user.png';
 
 const MobileComents = () => {
   const [commentPop, setCommentPop] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (!menuRef.current?.contains(e.target as Node)) {
+        setCommentPop(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div
-        className="sm:hidden mt-4 w-full h-full select-none cursor-pointer"
+        className="sm:hidden w-full h-full select-none cursor-pointer pb-5"
         aria-hidden
         role="button"
         onClick={() => setCommentPop(!commentPop)}
@@ -31,9 +47,14 @@ const MobileComents = () => {
 
         </div>
       </div>
-      { commentPop ? (
-        <div className={commentPop ? 'absolute inset-x-0 top-32 transition-all bg-white rounded-t-xl bottom-0 translate-y-0' : 'absolute inset-x-0 top-32 transition-all bg-white rounded-t-xl bottom-0 '}>a</div>
-      ) : null}
+      <div
+        ref={menuRef}
+        className={commentPop ? 'fixed inset-x-0 top-24 transition-all  bg-white dark:bg-zinc-900 rounded-t-xl bottom-0 shadow-[0_0_0_100vmax]  shadow-black/80 z-[999]'
+          : 'fixed inset-x-0 top-full transition-all rounded-t-xl bottom-0'}
+      >
+        a
+
+      </div>
     </>
   );
 };
