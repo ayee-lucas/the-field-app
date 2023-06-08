@@ -6,9 +6,9 @@ import User from '@/app/models/User';
 import Post from '@/app/models/Post';
 import Comment from '@/app/models/Comment';
 
-dbConnect();
-
 export async function GET() {
+// Conectar a la base de datos
+  dbConnect();
   try {
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()

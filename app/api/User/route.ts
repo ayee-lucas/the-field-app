@@ -4,9 +4,6 @@ import User from '@/app/models/User';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'; */
 import { NextResponse } from 'next/server';
 
-// Conectar a la base de datos
-dbConnect();
-
 // eslint-disable-next-line @typescript-eslint/naming-convention
 interface params extends Request {
   params: {
@@ -17,6 +14,8 @@ interface params extends Request {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function GET(request: Request, params: params) {
   try {
+    // Conectar a la base de datos
+    dbConnect();
     const users = await User.find({});
     return new NextResponse(JSON.stringify(users), {
       status: 200,

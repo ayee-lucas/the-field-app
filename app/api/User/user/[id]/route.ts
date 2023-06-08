@@ -6,9 +6,6 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 
-// Conectar a la base de datos
-dbConnect();
-
 interface params extends Request {
   params: {
     id: string;
@@ -16,6 +13,8 @@ interface params extends Request {
 }
 
 export async function GET(request: Request, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
   const session = await getServerSession(authOptions);
 
@@ -53,6 +52,8 @@ export async function GET(request: Request, params: params) {
 }
 
 export async function PUT(request: Request, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
   const data = await request.json();
   const session = await getServerSession(authOptions);
@@ -135,6 +136,8 @@ export async function PUT(request: Request, params: params) {
 }
 
 export async function DELETE(request: Request, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
   const session = await getServerSession(authOptions);
 

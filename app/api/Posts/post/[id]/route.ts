@@ -4,8 +4,6 @@ import Post from '@/app/models/Post';
 import User from '@/app/models/User';
 import Comment from '@/app/models/Comment';
 
-dbConnect();
-
 // eslint-disable-next-line @typescript-eslint/naming-convention
 interface params extends Request {
   params: {
@@ -14,6 +12,8 @@ interface params extends Request {
 }
 
 export async function GET(request: NextRequest, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
 
   try {
@@ -45,6 +45,8 @@ export async function GET(request: NextRequest, params: params) {
 }
 
 export async function PUT(request: Request, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
   const data = await request.json();
 
@@ -73,6 +75,8 @@ export async function PUT(request: Request, params: params) {
 }
 
 export async function DELETE(request: Request, params: params) {
+// Conectar a la base de datos
+  dbConnect();
   const { id } = params.params;
 
   try {
