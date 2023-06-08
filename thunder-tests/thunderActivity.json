@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "c1303b35-b691-4107-add5-9bdc8b2baec3",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/Posts/post/6473841091b57fd3497e0159",
+    "url": "http://localhost:3000/api/Posts/post/6473841091b57fd3497e0159",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-06-07T07:05:37.243Z",
+    "modified": "2023-06-07T07:05:37.243Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
