@@ -23,6 +23,12 @@ export default async function Post({
 
   const { formatedDate, formatedTime } = formatDate(post.createdAt);
 
+  // Delete this code
+
+  const test = () => {
+    console.log('clicked');
+  };
+
   return (
     <div
       className="w-full h-full px-[5rem] max-sm:px-3 flex flex-col text-black dark:text-white pt-5 max-sm:pt-0 justify-start items-center dark:bg-black"
@@ -71,7 +77,7 @@ export default async function Post({
           {formatedDate}
         </span>
       </div>
-      <PostFooterActions />
+      <PostFooterActions onClick={test} />
       <AddComment postAuthor={post.author.username} />
       <MobileComents />
       {children}
