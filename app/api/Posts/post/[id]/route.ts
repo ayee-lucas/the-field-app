@@ -1,6 +1,8 @@
 import { NextResponse, NextRequest } from 'next/server';
 import dbConnect from '@/app/db/Connection';
 import Post from '@/app/models/Post';
+import User from '@/app/models/User';
+import Comment from '@/app/models/Comment';
 
 dbConnect();
 
@@ -16,9 +18,9 @@ export async function GET(request: NextRequest, params: params) {
 
   try {
     const post = await Post.findById(id)
-      .populate('author', 'name username')
-      .populate('comments', 'author content')
-      .populate('likes', 'name username');
+      .populate('author', 'name username', User)
+      .populate('comments', 'author content', Comment)
+      .populate('likes', 'name username', User);
 
     const data = {
       post,

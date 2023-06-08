@@ -12,7 +12,7 @@ export async function GET() {
   try {
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
-      .populate('author', 'username')
+      .populate('author', 'username name')
       .populate('comments', 'author', Comment)
       .populate('likes', 'username', User);
 
