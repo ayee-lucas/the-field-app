@@ -1,25 +1,21 @@
 import { useEffect, useRef } from 'react';
 
-/* interface Props {
-  hadnler: () => void
-} */
-
 export const useClickOutside = (handler: () => void) => {
-  function handling() {
-    handler();
-  }
-
   const domNode = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    const maybeHandler = (event: MouseEvent) => {
-      if (!domNode.current?.contains(event.target as Node)) {
-        handling();
+    const handleClickOutside = (event: MouseEvent) => {
+      if (domNode.current && !domNode.current.contains(event.target as Node)) {
+        handler();
       }
     };
-    document.addEventListener('mousedown', maybeHandler);
+
+    document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
-      document.removeEventListener('mousedown', maybeHandler);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  });
+  }, [handler]);
+
   return domNode;
 };

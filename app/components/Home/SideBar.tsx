@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BsMoon, BsSun } from 'react-icons/bs';
@@ -14,19 +14,33 @@ import {
 // import { useClickOutside } from '@/app/hooks/clickOutside';
 
 interface Props {
-  handler: () => void
+  handler: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SideBar: FC<Props> = ({ handler }) => {
   const [a, setA] = useState(true);
 
-  /*   const domNode = React.useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let prevScrollPos = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      const scrollingDown = prevScrollPos > currentScrollPos
+      || prevScrollPos < currentScrollPos;
+      handler(!scrollingDown);
+      prevScrollPos = currentScrollPos;
+    };
 
-  useClickOutside({ handler, domNode }); */
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div
       className="h-full px-1 pt-5 bg-white/60 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200 max-sm:backdrop-blur-3xl"
+
     >
       <div className="flex justify-between lg:hidden p-2 dark:text-white">
         <div className="flex font-medium text-sm max-sm:text-xs">
@@ -50,7 +64,7 @@ export const SideBar: FC<Props> = ({ handler }) => {
 
         </div>
         <button type="button" className="p-2 text-2xl px-4">
-          <AiOutlineClose onClick={handler} />
+          <AiOutlineClose onClick={() => handler(false)} />
         </button>
       </div>
 

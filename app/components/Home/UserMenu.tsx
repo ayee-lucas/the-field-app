@@ -9,10 +9,6 @@ export const UserMenu: FC = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [a, setA] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <div>
       <div className="flex items-center">
@@ -20,7 +16,7 @@ export const UserMenu: FC = () => {
         <div className={`fixed lg:top-[60px] max-lg:top-0 left-0 w-[240px] max-lg:w-[60%] max-md:w-[80%] max-sm:w-[90%] h-full transition duration-300 lg:border-y border-r border-gray-200 dark:border-zinc-800 
           ${open ? 'max-lg:translate-x-0' : 'max-lg:-translate-x-full'}`}
         >
-          <SideBar handler={handleClose} />
+          <SideBar handler={setOpen} />
         </div>
 
         <div className="flex">
