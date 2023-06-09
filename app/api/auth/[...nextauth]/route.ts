@@ -20,7 +20,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        const res = await fetch(`${url}/api/account/login/`, {
+        const res = await fetch('https://the-field-app.vercel.app/api/account/login', {
           method: 'POST',
           body: JSON.stringify(credentials),
           headers: { 'Content-Type': 'application/json' },
