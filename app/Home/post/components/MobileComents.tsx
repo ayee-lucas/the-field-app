@@ -1,27 +1,16 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
+import { useClickOutside } from '@/app/hooks/clickOutside';
 import defaultImage from '../../../../public/images/default_user.png';
 
 const MobileComents = () => {
   const [commentPop, setCommentPop] = useState(false);
 
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (!menuRef.current?.contains(e.target as Node)) {
-        setCommentPop(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  const domNode = useClickOutside(() => {
+    setCommentPop(false);
+  });
 
   return (
     <>
@@ -48,13 +37,12 @@ const MobileComents = () => {
         </div>
       </div>
       <div
-        ref={menuRef}
+        ref={domNode}
         className={commentPop ? 'fixed inset-x-0 top-24 transition-all  bg-white dark:bg-zinc-900 rounded-t-xl bottom-0 shadow-[0_0_0_100vmax]  shadow-black/80 z-[999]'
           : 'fixed inset-x-0 top-full transition-all rounded-t-xl bottom-0'}
-      >
-        a
+      />
 
-      </div>
+      <div className={`absolute top-0 bottom-0 left-0 right-0 w-full h-full bg-black/10 backdrop-blur-sm backdrop-saturate-200 z-[998] ${commentPop ? 'block' : 'hidden'}`} />
     </>
   );
 };

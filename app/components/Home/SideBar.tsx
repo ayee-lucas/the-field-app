@@ -11,16 +11,23 @@ import {
   AiOutlineStar,
   AiOutlineComment,
 } from 'react-icons/ai';
+// import { useClickOutside } from '@/app/hooks/clickOutside';
 
 interface Props {
-  close: () => void
+  handler: () => void
 }
 
-export const SideBar: FC<Props> = ({ close }) => {
+export const SideBar: FC<Props> = ({ handler }) => {
   const [a, setA] = useState(true);
 
+  /*   const domNode = React.useRef<HTMLDivElement>(null);
+
+  useClickOutside({ handler, domNode }); */
+
   return (
-    <div className="h-full px-1 pt-5 bg-white/60 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200 max-sm:backdrop-blur-3xl">
+    <div
+      className="h-full px-1 pt-5 bg-white/60 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200 max-sm:backdrop-blur-3xl"
+    >
       <div className="flex justify-between lg:hidden p-2 dark:text-white">
         <div className="flex font-medium text-sm max-sm:text-xs">
           <button
@@ -43,7 +50,7 @@ export const SideBar: FC<Props> = ({ close }) => {
 
         </div>
         <button type="button" className="p-2 text-2xl px-4">
-          <AiOutlineClose onClick={close} />
+          <AiOutlineClose onClick={handler} />
         </button>
       </div>
 
