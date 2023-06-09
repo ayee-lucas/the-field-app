@@ -66,6 +66,8 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.log(err);
-    return new NextResponse(JSON.stringify(err), { status: 500 });
+    const json = await req.json();
+    console.log(json);
+    return new NextResponse(JSON.stringify({ err, json }), { status: 500 });
   }
 }
