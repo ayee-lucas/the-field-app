@@ -2,7 +2,8 @@ import { FC } from 'react';
 import { AiFillEdit } from 'react-icons/ai';
 
 interface Props {
-  onClick: () => void;
+  // eslint-disable-next-line react/require-default-props
+  onClick?: () => void;
 }
 
 const NewPost: FC<Props> = ({ onClick }) => (

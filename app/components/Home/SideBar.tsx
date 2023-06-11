@@ -3,6 +3,7 @@
 import React, { useState, FC, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import {
   AiOutlineClose,
@@ -11,7 +12,6 @@ import {
   AiOutlineStar,
   AiOutlineComment,
 } from 'react-icons/ai';
-// import { useClickOutside } from '@/app/hooks/clickOutside';
 
 interface Props {
   handler: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +19,10 @@ interface Props {
 
 export const SideBar: FC<Props> = ({ handler }) => {
   const [a, setA] = useState(true);
+
+  const { data: session, status } = useSession();
+
+  console.log(session, status);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -75,7 +79,7 @@ export const SideBar: FC<Props> = ({ handler }) => {
       <ul className="space-y-2 mx-5 font-medium">
         <li>
           <Link
-            href="/Home"
+            href={`/Home/profile/${session?.user?.username}`}
             className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700"
           >
             <AiOutlineUser className="w-6 h-6" />
