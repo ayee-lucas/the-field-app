@@ -3,7 +3,7 @@
 import React, { useState, FC, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
+import { useSession, signIn } from 'next-auth/react';
 import { BsMoon, BsSun } from 'react-icons/bs';
 import {
   AiOutlineClose,
@@ -21,8 +21,6 @@ export const SideBar: FC<Props> = ({ handler }) => {
   const [a, setA] = useState(true);
 
   const { data: session, status } = useSession();
-
-  console.log(session, status);
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -61,10 +59,18 @@ export const SideBar: FC<Props> = ({ handler }) => {
             />
           </button>
 
-          <div className="ml-3 text-left text-md">
-            <p>username</p>
-            <p>email@gmail.com</p>
-          </div>
+          { status === 'unauthenticated'
+            ? (
+              <div className="grid place-items-center ml-5 text-xl">
+                Guest
+              </div>
+            )
+            : (
+              <div className="ml-3 text-left text-md">
+                <p>{session?.user?.username}</p>
+                <p>{session?.user?.email}</p>
+              </div>
+            )}
 
         </div>
         <button type="button" className="p-2 text-2xl px-4">
@@ -76,87 +82,99 @@ export const SideBar: FC<Props> = ({ handler }) => {
         <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
 
-      <ul className="space-y-2 mx-5 font-medium">
-        <li>
-          <Link
-            href={`/Home/profile/${session?.user?.username}`}
-            className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700"
-          >
-            <AiOutlineUser className="w-6 h-6" />
-            <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/Home"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
-          >
-            <AiOutlineComment className="w-6 h-6" />
-            <span className="flex-1 ml-3 whitespace-nowrap">Chats</span>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/Home"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
-          >
-            <AiOutlineStar className="w-6 h-6" />
-            <span className="flex-1 ml-3 whitespace-nowrap">Starred</span>
-          </Link>
-        </li>
-        <li>
-          <button
-            type="button"
-            className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
-            aria-controls="dropdown-example"
-            data-collapse-toggle="dropdown-example"
-          >
-            <AiOutlineSetting className="w-6 h-6" />
-            <span className="flex-1 ml-3 text-left whitespace-nowrap">
-              Settings
-            </span>
-            <svg
-              className="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-          <ul id="dropdown-example" className="hidden py-2 space-y-2">
+      { status === 'unauthenticated'
+        ? (
+          <div className="w-full h-full grid place-items-center">
+            <button type="button" className="dark:bg-white rounded-xl py-1 px-5" onClick={() => signIn()}>
+              Sign in
+            </button>
+          </div>
+
+        )
+
+        : (
+          <ul className="space-y-2 mx-5 font-medium">
             <li>
               <Link
-                href="/Home"
-                className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                href={`/Home/profile/${session?.user?.username}`}
+                onClick={() => handler(false)}
+                className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700"
               >
-                Products
+                <AiOutlineUser className="w-6 h-6" />
+                <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
               </Link>
             </li>
             <li>
               <Link
                 href="/Home"
-                className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
               >
-                Billing
+                <AiOutlineComment className="w-6 h-6" />
+                <span className="flex-1 ml-3 whitespace-nowrap">Chats</span>
               </Link>
             </li>
             <li>
               <Link
                 href="/Home"
-                className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700 max-lg:hidden"
               >
-                Invoice
+                <AiOutlineStar className="w-6 h-6" />
+                <span className="flex-1 ml-3 whitespace-nowrap">Starred</span>
               </Link>
+            </li>
+            <li>
+              <button
+                type="button"
+                className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-zinc-700"
+                aria-controls="dropdown-example"
+                data-collapse-toggle="dropdown-example"
+              >
+                <AiOutlineSetting className="w-6 h-6" />
+                <span className="flex-1 ml-3 text-left whitespace-nowrap">
+                  Settings
+                </span>
+                <svg
+                  className="w-6 h-6"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+              <ul id="dropdown-example" className="hidden py-2 space-y-2">
+                <li>
+                  <Link
+                    href="/Home"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Products
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/Home"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Billing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/Home"
+                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  >
+                    Invoice
+                  </Link>
+                </li>
+              </ul>
             </li>
           </ul>
-        </li>
-      </ul>
-
+        )}
       <div className="flex justify-center">
         <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
