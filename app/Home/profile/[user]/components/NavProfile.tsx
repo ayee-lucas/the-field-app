@@ -1,6 +1,9 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 function NavProfile() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <nav
       className="w-full relative h-full mt-2
@@ -20,7 +23,11 @@ function NavProfile() {
 
         <li className="max-sm:hidden">Likes ❤️</li>
 
-        <li className="flex items-center justify-center gap-3 border border-white rounded-xl p-2">
+        <li
+          className={`flex items-center justify-center gap-3 border ${selectedIndex === 0 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          onClick={() => setSelectedIndex(0)}
+          aria-hidden
+        >
           <span>
             Recent
           </span>
@@ -28,7 +35,11 @@ function NavProfile() {
             🕑
           </span>
         </li>
-        <li className="flex items-center justify-center gap-3">
+        <li
+          className={`flex items-center justify-center gap-3 border ${selectedIndex === 1 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          onClick={() => setSelectedIndex(1)}
+          aria-hidden
+        >
           <span>
             Posts
           </span>
@@ -36,7 +47,11 @@ function NavProfile() {
             📈
           </span>
         </li>
-        <li className="flex items-center justify-center gap-3">
+        <li
+          className={`flex items-center justify-center gap-3 border ${selectedIndex === 2 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          onClick={() => setSelectedIndex(2)}
+          aria-hidden
+        >
           <span>
             Starred
           </span>
@@ -44,7 +59,11 @@ function NavProfile() {
             ⭐️
           </span>
         </li>
-        <li className="flex items-center justify-center gap-3">
+        <li
+          className={`flex items-center justify-center gap-3 border ${selectedIndex === 3 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          onClick={() => setSelectedIndex(3)}
+          aria-hidden
+        >
           <span>
             Comments
           </span>
@@ -52,7 +71,11 @@ function NavProfile() {
             📢
           </span>
         </li>
-        <li className="flex items-center justify-center gap-3">
+        <li
+          className={`flex items-center justify-center gap-3 border ${selectedIndex === 4 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          onClick={() => setSelectedIndex(4)}
+          aria-hidden
+        >
           <span>
             Likes
           </span>

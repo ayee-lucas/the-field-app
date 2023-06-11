@@ -20,10 +20,6 @@ export default async function ProfileLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-  // Delete this code
-  const test = () => {
-    console.log('clicked');
-  };
 
   //  const id = session?.user?.sub;
 
@@ -34,7 +30,7 @@ export default async function ProfileLayout({
   }
 
   return (
-    <section className="w-full h-full flex flex-col pt-9 px-20">
+    <section className="w-full h-full flex flex-col pt-9 px-20 max-sm:px-3">
       <div className="relative flex flex-col justify-center items-center rounded-lg">
         <div className="w-full h-[200px] bg-black">
           <Image
@@ -50,8 +46,8 @@ export default async function ProfileLayout({
             </div>
           )}
 
-          <div className="absolute mt-28 ml-7">
-            <div className="relative z-[2] rounded-full h-full w-[180px] min-h-[180px] bg-white ">
+          <div className="absolute mt-28 ml-7 max-sm:ml-3 max-sm:mt-32">
+            <div className="relative z-[2] rounded-full h-full w-[180px] min-h-[180px] max-sm:w-[120px] max-sm:min-h-[120px] bg-white">
               <Image
                 src={
                   session?.user?.image
@@ -71,33 +67,33 @@ export default async function ProfileLayout({
           </div>
         </div>
       </div>
-      <div className="w-full h-full flex flex-col px-3 pt-24 text-black">
+      <div className="w-full h-full flex flex-col px-3 pt-24 max-sm:pt-14 text-black">
         <div className="flex w-full h-full justify-start items-center gap-5">
-          <h1 className="text-6xl">{user.name}</h1>
+          <h1 className="text-6xl max-sm:text-3xl dark:text-white">{user.name}</h1>
           {user.online ? (
-            <div className="text-lg text-gray-500 flex items-center gap-1">
+            <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
               <RxDotFilled className="text-green-500" />
               ONLINE
             </div>
           ) : (
-            <div className="text-lg text-gray-500 flex items-center gap-1">
+            <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
               <RxDotFilled className="text-red-500" />
               OFFLINE
             </div>
           )}
         </div>
-        <div className="flex w-full h-full justify-start items-center gap-5 select-none">
-          <h1 className="px-2 text-xl text-gray-500">
+        <div className="flex w-full h-full justify-start items-center gap-5 select-none max-sm:text-sm">
+          <h1 className="px-2 text-xl max-sm:text-sm text-gray-500 max-sm:px-0">
             @
             {user.username}
           </h1>
-          <h1 className=" text-gray-800 cursor-pointer">
+          <h1 className=" text-gray-800 max-sm:text-gray-500 cursor-pointer">
             {user.followers.length}
             {' '}
             followers
           </h1>
 
-          <h1 className=" text-gray-800 cursor-pointer">
+          <h1 className=" text-gray-800 max-sm:text-gray-500 cursor-pointer">
             {user.followers.length}
             {' '}
             following
@@ -110,21 +106,21 @@ export default async function ProfileLayout({
             {' '}
           </div>
         ) : (
-          <div className="flex w-full h-full justify-start items-center gap-5">
+          <div className="flex w-full h-full justify-start max-sm:justify-between max-sm:items-center items-center gap-5 max-sm:gap-0">
             <Editbtn />
             <Settigns />
           </div>
         )}
 
         <div className="w-full h-full flex flex-col justify-center items-start p-4 gap-5 rounded-lg border border-gray-300">
-          <h1 className="text-lg text-black font-semibold">BIO</h1>
-          <p className="text-gray-600">{user.bio}</p>
+          <h1 className="text-lg text-black font-semibold dark:text-white">BIO</h1>
+          <p className="text-gray-600 dark:text-zinc-400">{user.bio}</p>
         </div>
 
         <NavProfile />
         { session?.user?.username !== user.username ? null
 
-          : <NewPost onClick={test} />}
+          : <NewPost />}
         <div className="px-2">{children}</div>
       </div>
     </section>
