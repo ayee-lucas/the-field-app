@@ -106,7 +106,7 @@ export default async function ProfileLayout({
             {' '}
           </div>
         ) : (
-          <div className="flex w-full h-full justify-start max-sm:justify-between max-sm:items-center items-center gap-5 max-sm:gap-0">
+          <div className="flex w-full h-full justify-start max-sm:items-center items-center gap-5">
             <Editbtn />
             <Settigns />
           </div>
