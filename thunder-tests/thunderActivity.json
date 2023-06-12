@@ -12,5 +12,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "8de1a2be-2953-4fc0-ae4a-1daf33da86d7",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:3000/api/Posts",
+    "url": "localhost:3000/api/Posts",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-06-12T03:31:36.115Z",
+    "modified": "2023-06-12T03:31:36.115Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
