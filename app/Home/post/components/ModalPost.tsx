@@ -1,6 +1,8 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import {
+  FC, useEffect, useState, useTransition,
+} from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { RxCross2 } from 'react-icons/rx';
@@ -9,6 +11,7 @@ import { montserrat } from '@/app/fonts';
 import { IUser } from '@/app/models/User';
 import defaultImage from '../../../../public/images/default_user.png';
 import TextArea from './TextArea';
+import { createPost } from '../actions/Actions';
 
 interface Props {
   isOpen: boolean;
@@ -26,7 +29,7 @@ async function fetchUserById(id: any) {
   return user;
 }
 
-async function postData(text: any) {
+/* async function postData(text: any) {
   const res = await fetch('/api/Posts/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -38,7 +41,7 @@ async function postData(text: any) {
   const data = await res.json();
 
   return data;
-}
+} */
 
 const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   const { data: session } = useSession();
@@ -47,6 +50,9 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [postText, setPostText] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+
+  const id = session?.user?.id.toString();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,10 +80,10 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
     }
   }, [isOpen]);
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  /*   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     postData(postText);
-  };
+  }; */
 
   if (loading) {
     <div>loading</div>;
@@ -132,7 +138,8 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
             <button
               type="button"
               disabled={postText.length === 0 || postText === ''}
-              onClick={(e) => handleSubmit(e)}
+              // eslint-disable-next-line max-len
+              onClick={() => startTransition(() => createPost(postText, id))}
               className="text-[13px] dark:bg-white bg-black dark:text-black py-1 px-4 rounded-lg disabled:bg-zinc-800"
             >
               POST
