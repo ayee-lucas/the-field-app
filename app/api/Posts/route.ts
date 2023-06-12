@@ -34,7 +34,7 @@ export async function POST() {
   const session = await getServerSession(authOptions);
   try {
     // Check if user is authenticated and has the required role
-    if (!session || session.user.role !== 'user') {
+    if (!session?.user.username) {
       return new NextResponse('Unauthorized', {
         status: 401,
       });

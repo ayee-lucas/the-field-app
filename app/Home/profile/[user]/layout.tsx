@@ -10,7 +10,7 @@ import Messagebtn from './components/Messagebtn';
 import NavProfile from './components/NavProfile';
 import Editbtn from './components/Editbtn';
 import Settigns from './components/Settigns';
-import NewPost from './components/NewPost';
+import ClientNewPost from '../../components/ClientNewPost';
 
 export default async function ProfileLayout({
   params,
@@ -120,7 +120,7 @@ export default async function ProfileLayout({
         <NavProfile />
         { session?.user?.username !== user.username ? null
 
-          : <NewPost />}
+          : <ClientNewPost session={session} />}
         <div className="px-2">{children}</div>
       </div>
     </section>

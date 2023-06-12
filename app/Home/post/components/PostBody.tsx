@@ -16,7 +16,8 @@ const PostBody: FC<Props> = ({ title, body }) => {
       <p className="text-justify mt-2 text-gray-700 dark:text-zinc-400">
         {showFullBody ? body : bodyFormat}
       </p>
-      {showFullBody ? <button type="button" onClick={() => setShowFullBody(false)} className="text-gray-200">Show less</button> : <button type="button" onClick={() => setShowFullBody(true)} className="text-gray-200">Show more</button>}
+      {showFullBody ? <button type="button" onClick={() => setShowFullBody(false)} className="dark:text-gray-200 text-gray-800">Show less</button>
+        : <button type="button" onClick={() => setShowFullBody(true)} className="dark:text-gray-200 text-gray-800">Show more</button>}
     </>
   );
 };
