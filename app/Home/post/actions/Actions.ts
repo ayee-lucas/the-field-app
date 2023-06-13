@@ -60,12 +60,16 @@ export async function createPost(data: any, id : any) {
 
     const post = await new Post(body);
 
+    console.log(post);
+
     const user = await User.findById(author);
 
     if (!user) {
       return new Error('User not found');
     }
     user.posts.push(post);
+
+    await post.save();
 
     await user.save();
 

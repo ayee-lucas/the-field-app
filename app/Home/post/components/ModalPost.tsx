@@ -50,6 +50,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [postText, setPostText] = useState<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition();
 
   const id = session?.user?.id.toString();
@@ -80,10 +81,13 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
     }
   }, [isOpen]);
 
-  /*   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    postData(postText);
-  }; */
+    startTransition(() => {
+      createPost(postText, id);
+      setOpen();
+    });
+  };
 
   if (loading) {
     <div>loading</div>;
@@ -139,7 +143,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
               type="button"
               disabled={postText.length === 0 || postText === ''}
               // eslint-disable-next-line max-len
-              onClick={() => startTransition(() => createPost(postText, id))}
+              onClick={(e) => handleSubmit(e)}
               className="text-[13px] dark:bg-white bg-black dark:text-black py-1 px-4 rounded-lg disabled:bg-zinc-800"
             >
               POST

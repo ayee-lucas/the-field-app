@@ -50,7 +50,11 @@ const PostHomeCard: FC<Props> = ({ post }) => {
   };
 
   return (
-    <div className="w-full min-h-[500px] bg-gray-100 dark:bg-black dark:border-zinc-800 border rounded-lg p-5 my-3 grid grid-flow-row gap-2">
+    <div
+      className="w-full min-h-[500px] bg-gray-100 dark:bg-black dark:border-zinc-800 border rounded-lg p-5 my-3 grid grid-flow-row gap-2"
+      aria-hidden
+      onClick={() => redirect()}
+    >
       <Link
         className="w-full flex items-center gap-2"
         href={`/Home/profile/${post.author.username}`}
