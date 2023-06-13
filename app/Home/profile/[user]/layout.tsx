@@ -120,7 +120,7 @@ export default async function ProfileLayout({
         <NavProfile />
         { session?.user?.username !== user.username ? null
 
-          : <ClientNewPost session={session} />}
+          : <ClientNewPost />}
         <div className="px-2">{children}</div>
       </div>
     </section>
