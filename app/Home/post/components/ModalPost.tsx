@@ -97,7 +97,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
 
   return (
     <div
-      className={`fixed transition-all left-0 right-0 top-0 ${openClass} bg-black/50 z-[60] ${montserrat.variable}`}
+      className={`fixed transition-all left-0 right-0 top-0 ${openClass} bg-black/50 backdrop-blur-sm z-[60] ${montserrat.variable}`}
     >
       <div className="w-full h-full flex items-center justify-center">
         {/** Overlay */}
@@ -130,7 +130,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
           </ul>
         </div>
         {/** Mobile Overlay */}
-        <div className="sm:hidden bg-white dark:bg-zinc-800 w-full min-h-screen flex flex-col">
+        <div className="sm:hidden absolute bg-white dark:bg-zinc-800 w-full h-full bottom-0 top-24 flex flex-col">
           <div className="flex relative items-center w-full justify-between p-2 dark:text-white
           after:content-[''] after:h-[1px] after:bg-fieldGreen after:absolute after:inset-x-0 after:bottom-0
           "
