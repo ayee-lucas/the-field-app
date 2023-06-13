@@ -27,10 +27,10 @@ export default async function Post({
 
   return (
     <div
-      className="w-full h-full px-[5rem] max-sm:px-3 flex flex-col text-black dark:text-white pt-5 max-sm:pt-0 justify-start items-center dark:bg-black"
+      className="w-full min-w-full h-full px-[5rem] max-sm:px-3 flex flex-col text-black dark:text-white pt-5 max-sm:pt-0 justify-start items-center dark:bg-black"
       aria-hidden
     >
-      <div className="py-2">
+      <div className="py-2 w-full">
         <div className="flex items-center justify-between w-full gap-2 my-3">
           <Link
             href={`/Home/profile/${post.author.username}`}

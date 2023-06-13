@@ -68,7 +68,7 @@ const AddComment = ({ postAuthor }: { postAuthor: string }) => {
               ref={textareaRef}
               onInput={adjustTextAreaHeight}
               placeholder="Write a reply..."
-              className="w-full h-full focus:outline-none focus:placeholder:text-black bg-transparent dark:text-gray-200 px-1 break-words overflow-x-clip"
+              className="w-full h-full focus:outline-none resize-none focus:placeholder:text-black bg-transparent dark:text-gray-200 px-1 break-words overflow-x-clip"
             />
             { comment ? (
               <span className={charCount <= 300 ? 'text-sm text-gray-400 w-full text-start' : 'text-sm text-red-500 w-full text-start'}>
