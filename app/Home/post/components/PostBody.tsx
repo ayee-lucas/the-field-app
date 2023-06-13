@@ -8,7 +8,7 @@ interface Props {
 
 const PostBody: FC<Props> = ({ title, body }) => {
   const bodyFormat = body.length > 200 ? `${body.substring(0, 200)}...` : body;
-  const [showFullBody, setShowFullBody] = useState(false);
+  const [showFullBody, setShowFullBody] = useState<boolean>(false);
 
   return (
     <>
@@ -16,8 +16,11 @@ const PostBody: FC<Props> = ({ title, body }) => {
       <p className="text-justify mt-2 text-gray-700 dark:text-zinc-400">
         {showFullBody ? body : bodyFormat}
       </p>
-      {showFullBody ? <button type="button" onClick={() => setShowFullBody(false)} className="dark:text-gray-200 text-gray-800">Show less</button>
-        : <button type="button" onClick={() => setShowFullBody(true)} className="dark:text-gray-200 text-gray-800">Show more</button>}
+      <div className={body.length < 200 ? 'hidden' : ''}>
+        {showFullBody ? <button type="button" onClick={() => setShowFullBody(false)} className="dark:text-gray-200 text-gray-800">Show less</button>
+          : <button type="button" onClick={() => setShowFullBody(true)} className="dark:text-gray-200 text-gray-800">Show more</button>}
+      </div>
+
     </>
   );
 };
