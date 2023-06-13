@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  FC, useEffect, useState, useTransition,
+  FC, useEffect, useState, useTransition, useRef,
 } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
@@ -29,20 +29,6 @@ async function fetchUserById(id: any) {
   return user;
 }
 
-/* async function postData(text: any) {
-  const res = await fetch('/api/Posts/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: text,
-  });
-
-  console.log(text);
-
-  const data = await res.json();
-
-  return data;
-} */
-
 const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   const { data: session } = useSession();
   const [openClass, setOpenClass] = useState<string>('hidden');
@@ -50,6 +36,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>();
   const [postText, setPostText] = useState<string>('');
+  const textArea = useRef<HTMLTextAreaElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = useTransition();
 
@@ -82,15 +69,20 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   }, [isOpen]);
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    setLoading(true);
     e.preventDefault();
     startTransition(() => {
       createPost(postText, id);
-      setOpen();
+      if (textArea.current) {
+        textArea.current.value = '';
+      }
     });
+    setLoading(false);
+    setOpen();
   };
 
   if (loading) {
-    <div>loading</div>;
+    <div className="fixed inset-0 bg-white">loading</div>;
   }
 
   console.log({ POST_TEXT: postText });
@@ -164,7 +156,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
                   {userData?.name}
                   <span className="text-sm text-gray-400">{`@${userData?.username}`}</span>
                 </div>
-                <TextArea setText={setPostText} />
+                <TextArea setText={setPostText} textAreaRef={textArea} />
               </div>
           )}
 

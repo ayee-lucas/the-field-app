@@ -14,9 +14,10 @@ import PostFooterActions from '../post/components/PostFooterActions';
 
 interface Props {
   post: IPost;
+  sessionId: string;
 }
 
-const PostHomeCard: FC<Props> = ({ post }) => {
+const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
   const router = useRouter();
   const postContentRef = useRef<HTMLParagraphElement>(null);
   const [isTruncated, setIsTruncated] = useState(false);
@@ -53,7 +54,6 @@ const PostHomeCard: FC<Props> = ({ post }) => {
     <div
       className="w-full min-h-[500px] bg-gray-100 dark:bg-black dark:border-zinc-800 border rounded-lg p-5 my-3 grid grid-flow-row gap-2"
       aria-hidden
-      onClick={() => redirect()}
     >
       <Link
         className="w-full flex items-center gap-2"
@@ -99,7 +99,7 @@ const PostHomeCard: FC<Props> = ({ post }) => {
         />
       </div>
 
-      <PostFooterActions onClick={redirect} />
+      <PostFooterActions onClick={redirect} Post={post} sessionId={sessionId} />
     </div>
   );
 };

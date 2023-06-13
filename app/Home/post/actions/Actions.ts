@@ -56,11 +56,7 @@ export async function createPost(data: any, id : any) {
       },
     };
 
-    console.log(body);
-
     const post = await new Post(body);
-
-    console.log(post);
 
     const user = await User.findById(author);
 
@@ -76,6 +72,58 @@ export async function createPost(data: any, id : any) {
     revalidatePath('/Home');
   } catch (err) {
     console.log(err);
+    return err;
+  }
+}
+
+// Like Post
+
+export async function likePost(postId: any, userId: any) {
+  try {
+    dbConnect();
+    console.log({ postId, userId });
+
+    const post = await Post.findById(postId).exec();
+    if (!post) {
+      console.error('Post not found');
+      return;
+    }
+
+    post.likes.push(userId);
+    const updatedPost = await post.save();
+
+    console.log({ POST_UPDATED: updatedPost });
+    revalidatePath('/Home');
+    return;
+  } catch (err) {
+    console.error(err);
+    // eslint-disable-next-line consistent-return
+    return err;
+  }
+}
+
+// Dislike Post
+
+export async function dislikePost(postId: any, userId: any) {
+  try {
+    dbConnect();
+    console.log({ postId, userId });
+
+    const post = await Post.findById(postId).exec();
+    if (!post) {
+      console.error('Post not found');
+      return;
+    }
+
+    post.likes.pull(userId);
+    const updatedPost = await post.save();
+
+    console.log({ POST_UPDATED: updatedPost });
+    revalidatePath('/Home');
+    return;
+  } catch (err) {
+    console.error(err);
+    // eslint-disable-next-line consistent-return
     return err;
   }
 }
