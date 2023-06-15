@@ -29,7 +29,7 @@ const PostFooterActions:FC<Props> = ({ onClick, Post, sessionId }) => {
 
   const handleLiked = () => {
     if (!sessionId) {
-      router.push('/account/sigin');
+      router.push('/account/signin');
     } else {
       setLiked(true);
       startTransition(() => {

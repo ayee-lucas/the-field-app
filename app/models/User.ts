@@ -14,6 +14,7 @@ export interface IUser extends Document {
   role: String;
   online: boolean;
   profilePicture?: string;
+  likes?: IPost['_id'][];
   bio?: string;
   followers: IUser['_id'][];
   posts: IPost['_id'][];
@@ -58,6 +59,13 @@ const userSchema = new Schema<IUser>(
     profilePicture: {
       type: String,
     },
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Post',
+      },
+
+    ],
     bio: {
       type: String,
       default: 'No bio yet',

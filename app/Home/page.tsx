@@ -9,7 +9,6 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 export default async function Page() {
   const postsData: IPost[] = await fetchAllPosts();
   const session = await getServerSession(authOptions);
-
   const idUser = session?.user?.id.toString() ?? '';
 
   return (
@@ -21,7 +20,11 @@ export default async function Page() {
       <ClientNewPost />
       {
         postsData.map((post: IPost) => (
-          <PostHomeCard key={post.id} post={post} sessionId={idUser} />
+          <PostHomeCard
+            key={post.id}
+            post={post}
+            sessionId={idUser}
+          />
         ))
       }
     </div>

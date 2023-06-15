@@ -2,7 +2,7 @@
 
 import dbConnect from '@/app/db/Connection';
 import Post from '@/app/models/Post';
-import User from '@/app/models/User';
+import User, { IUser } from '@/app/models/User';
 import { revalidatePath } from 'next/cache';
 
 const url = process.env.NEXTAUTH_URL as string;
@@ -88,6 +88,13 @@ export async function likePost(postId: any, userId: any) {
       console.error('Post not found');
       return;
     }
+
+    const user: IUser | null = await User.findById(userId);
+
+    user?.likes?.push(postId);
+    const userUpdated = await user?.save();
+
+    console.log({ USER_UPDATED: userUpdated });
 
     post.likes.push(userId);
     const updatedPost = await post.save();
