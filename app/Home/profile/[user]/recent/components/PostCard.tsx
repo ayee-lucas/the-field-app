@@ -5,14 +5,9 @@ import { ubuntu, quicksand } from '@/app/fonts';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import PostFooterActions from '@/app/Home/post/components/PostFooterActions';
 
 const PostCard = () => {
   const router = useRouter();
-
-  const test = () => {
-    console.log('clicked');
-  };
 
   return (
     <div
@@ -51,7 +46,6 @@ const PostCard = () => {
           />
         </div>
       </div>
-      <PostFooterActions onClick={test} />
 
     </div>
   );
