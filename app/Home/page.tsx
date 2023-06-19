@@ -1,10 +1,10 @@
 import { getServerSession } from 'next-auth';
 import FeedBar from './components/FeedBar';
 import ClientNewPost from './components/ClientNewPost';
-import PostHomeCard from './components/PostHomeCard';
 import { fetchAllPosts } from './actions/FetchPost';
 import { IPost } from '../models/Post';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import FeedPostsClient from './components/FeedPostsClient';
 
 export default async function Page() {
   const postsData: IPost[] = await fetchAllPosts();
@@ -18,15 +18,7 @@ export default async function Page() {
       </h1>
       <FeedBar />
       <ClientNewPost />
-      {
-        postsData.map((post: IPost) => (
-          <PostHomeCard
-            key={post.id}
-            post={post}
-            sessionId={idUser}
-          />
-        ))
-      }
+      <FeedPostsClient sessionId={idUser} initialPosts={postsData} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
@@ -6,15 +7,26 @@ import User from '@/app/models/User';
 import Post from '@/app/models/Post';
 import Comment from '@/app/models/Comment';
 
-export async function GET() {
+export async function GET(req: Request) {
 // Conectar a la base de datos
   dbConnect();
+
+  const url = new URL(req.url);
+
+  const { limit, page } = {
+    limit: url.searchParams.get('limit'),
+    page: url.searchParams.get('page'),
+  };
+
   try {
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
       .populate('author', 'username name')
       .populate('comments', 'author', Comment)
-      .populate('likes', 'username', User);
+      .populate('likes', 'username', User)
+      .sort({ createdAt: 'desc' })
+      .limit(parseInt(limit as string))
+      .skip((parseInt(page as string) - 1) * parseInt(limit as string));
 
     if (posts.length === 0) {
       return new NextResponse(JSON.stringify({ message: 'No Posts Yet' }), {

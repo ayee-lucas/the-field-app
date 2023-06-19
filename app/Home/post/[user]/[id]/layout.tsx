@@ -6,7 +6,6 @@ import PostFormatted from '@/app/tools/postFormatter';
 import { formatDate } from '@/app/tools/datesFormatter';
 import Link from 'next/link';
 import defaultImage from '../../../../../public/images/default_user.png';
-import PostFooterActions from '../../components/PostFooterActions';
 import AddComment from '../../components/AddComment';
 import { fetchPostById } from '../../actions/Actions';
 import PostBody from '../../components/PostBody';
@@ -73,7 +72,6 @@ export default async function Post({
           {formatedDate}
         </span>
       </div>
-      <PostFooterActions />
       <AddComment postAuthor={post.author.username} />
       <MobileComents />
       {children}

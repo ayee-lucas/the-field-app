@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { IPost } from '@/app/models/Post';
 import PostFormatted from '@/app/tools/postFormatter';
 import Link from 'next/link';
+import { formatDate } from '@/app/tools/datesFormatter';
 import imagePost from '../../../public/images/Background/card_example.jpg';
 import defaultImage from '../../../public/images/default_user.png';
 import PostFooterActions from '../post/components/PostFooterActions';
@@ -20,6 +21,7 @@ interface Props {
 const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
   const router = useRouter();
   const postContentRef = useRef<HTMLParagraphElement>(null);
+
   const [isTruncated, setIsTruncated] = useState(false);
 
   const resizeContent = () => {
@@ -45,6 +47,8 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
   }, []);
 
   const { title, body } = PostFormatted(post.content.text);
+
+  const { formatedDate, formatedTime } = formatDate(post.createdAt);
 
   const redirect = () => {
     router.push(`/Home/post/${post.author.username}/${post._id}/`);
@@ -97,6 +101,15 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
           fill
           className="rounded-lg  object-cover"
         />
+      </div>
+
+      <div className="flex items-center text-sm text-gray-700 dark:text-zinc-500 gap-3 w-full">
+        <span>
+          {formatedTime}
+        </span>
+        <span>
+          {formatedDate}
+        </span>
       </div>
 
       <PostFooterActions onClick={redirect} Post={post} sessionId={sessionId} />

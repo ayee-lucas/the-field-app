@@ -100,7 +100,6 @@ export async function likePost(postId: any, userId: any) {
     const updatedPost = await post.save();
 
     console.log({ POST_UPDATED: updatedPost });
-    revalidatePath('/Home');
     return;
   } catch (err) {
     console.error(err);
@@ -126,7 +125,6 @@ export async function dislikePost(postId: any, userId: any) {
     const updatedPost = await post.save();
 
     console.log({ POST_UPDATED: updatedPost });
-    revalidatePath('/Home');
     return;
   } catch (err) {
     console.error(err);
