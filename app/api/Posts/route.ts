@@ -29,8 +29,8 @@ export async function GET(req: Request) {
       .skip((parseInt(page as string) - 1) * parseInt(limit as string));
 
     if (posts.length === 0) {
-      return new NextResponse(JSON.stringify({ message: 'No Posts Yet' }), {
-        status: 200,
+      return new NextResponse(JSON.stringify({ message: 'No Posts to show' }), {
+        status: 404,
       });
     }
 

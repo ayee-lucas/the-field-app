@@ -1,3 +1,4 @@
+import CheckUserOnline from './components/CheckUserOnline';
 import Provider from './components/Provider';
 import { inter } from './fonts';
 
@@ -16,7 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark:bg-black scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-600 ">
       <body className={inter.className}>
-        <Provider>{children}</Provider>
+        <Provider>
+          <CheckUserOnline>
+            {children}
+          </CheckUserOnline>
+        </Provider>
       </body>
     </html>
   );

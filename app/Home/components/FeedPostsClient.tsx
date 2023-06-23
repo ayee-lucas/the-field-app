@@ -3,7 +3,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import {
-  FC, useRef, useEffect,
+  FC, useRef, useEffect, useState,
 } from 'react';
 import { IPost } from '@/app/models/Post';
 import { useIntersection } from '@mantine/hooks';
@@ -17,8 +17,9 @@ type Props = {
   sessionId: string;
 };
 
-const FeedPostsClient:FC<Props> = ({ initialPosts, sessionId }) => {
+const FeedPostsClient: FC<Props> = ({ initialPosts, sessionId }) => {
   const lastPostRef = useRef<HTMLElement>(null);
+  const [noPosts, setNoPosts] = useState<boolean>(false);
 
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -27,12 +28,11 @@ const FeedPostsClient:FC<Props> = ({ initialPosts, sessionId }) => {
 
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['infinite-query'],
+    // eslint-disable-next-line consistent-return
     async ({ pageParam = 1 }) => {
       const query = `/api/Posts?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
-
       // eslint-disable-next-line @typescript-eslint/no-shadow
       const { data } = await axios.get(query);
-
       return data as IPost[];
     },
     {
@@ -50,6 +50,10 @@ const FeedPostsClient:FC<Props> = ({ initialPosts, sessionId }) => {
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
+  if (posts.length === 0) {
+    setNoPosts(true);
+  }
+
   return (
     <>
       <ul className="flex flex-col">
@@ -57,27 +61,33 @@ const FeedPostsClient:FC<Props> = ({ initialPosts, sessionId }) => {
           if (index === posts.length - 1) {
             return (
               <li
-              // @ts-expect-error
+                // @ts-expect-error
                 key={post?.id}
                 ref={ref}
               >
+
                 <PostHomeCard
                   post={post as IPost}
                   sessionId={sessionId}
+                // @ts-expect-error
+                  key={post?.id}
                 />
               </li>
-
             );
           }
-          return (
-            <PostHomeCard
-              post={post as IPost}
-              sessionId={sessionId}
-            />
-          );
+          return <PostHomeCard post={post as IPost} sessionId={sessionId} />;
         })}
       </ul>
-      {isFetchingNextPage && <div className="text-white text-3xl w-full flex items-center justify-center animate-pulse">...</div>}
+      {isFetchingNextPage && (
+        <div className="text-white text-3xl w-full flex items-center justify-center animate-pulse">
+          ...
+        </div>
+      )}
+      {noPosts && (
+        <div className="text-white text-3xl w-full flex items-center justify-center">
+          No more posts to show.
+        </div>
+      )}
     </>
   );
 };
