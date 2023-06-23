@@ -12,12 +12,10 @@ interface Props {
 
 const CheckUserOnline: FC<Props> = ({ children }) => {
   const { data: session } = useSession();
-  // const [id, setId] = useState<string | undefined>(session?.user?.id.toString());
   const id = session?.user?.id.toString();
 
   useEffect(() => {
     const handleUserEntrance = async () => {
-      console.log(id);
       // Perform actions when the user enters the website
       console.log('User entered the website');
       if (id) {
