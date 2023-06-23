@@ -10,7 +10,11 @@ interface Params extends Request {
 export async function PUT(req: Request, params: Params) {
   try {
     dbConnect();
+
+    if (params.params.id.length !== 24) return new Response('User not found', { status: 404 });
+
     const user:IUser | null = await User.findById(params.params.id);
+
     if (!user) {
       return new Response('User not found', { status: 404 });
     }

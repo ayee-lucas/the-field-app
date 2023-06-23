@@ -16,6 +16,7 @@ const CheckUserOnline: FC<Props> = ({ children }) => {
   const [isPageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
+    // eslint-disable-next-line consistent-return
     const handleUserEntrance = async () => {
       // Perform actions when the user enters the website
       console.log('User entered the website');

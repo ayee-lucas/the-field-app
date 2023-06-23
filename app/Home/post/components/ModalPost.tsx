@@ -45,6 +45,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        if (!id) return;
         const user = await fetchUserById(session?.user?.id);
         setUserData(user);
         setLoading(false);
@@ -55,7 +56,7 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
     };
 
     fetchData();
-  }, [isOpen]);
+  }, [isOpen, session?.user?.id]);
 
   useEffect(() => {
     if (isOpen) {
@@ -84,8 +85,6 @@ const ModalPost: FC<Props> = ({ isOpen, setOpen }) => {
   if (loading) {
     <div className="fixed inset-0 bg-white">loading</div>;
   }
-
-  console.log({ POST_TEXT: postText });
 
   return (
     <div
