@@ -61,21 +61,22 @@ const FeedPostsClient: FC<Props> = ({ initialPosts, sessionId }) => {
           if (index === posts.length - 1) {
             return (
               <li
-                // @ts-expect-error
-                key={post?.id}
                 ref={ref}
               >
 
                 <PostHomeCard
                   post={post as IPost}
                   sessionId={sessionId}
-                // @ts-expect-error
-                  key={post?.id}
                 />
               </li>
             );
           }
-          return <PostHomeCard post={post as IPost} sessionId={sessionId} />;
+          return (
+            <PostHomeCard
+              post={post as IPost}
+              sessionId={sessionId}
+            />
+          );
         })}
       </ul>
       {isFetchingNextPage && (

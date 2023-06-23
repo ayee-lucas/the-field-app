@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  FC, ReactNode, useEffect,
+  FC, ReactNode, useEffect, useState,
 } from 'react';
 import { useSession } from 'next-auth/react';
 import { userEntered, userExit } from '../tools/onlineStatus';
@@ -13,12 +13,13 @@ interface Props {
 const CheckUserOnline: FC<Props> = ({ children }) => {
   const { data: session } = useSession();
   const id = session?.user?.id.toString();
+  const [isPageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {
     const handleUserEntrance = async () => {
       // Perform actions when the user enters the website
       console.log('User entered the website');
-      if (id) {
+      if (id && isPageVisible) {
         const response = await userEntered(id);
         console.log(response);
       } else {
@@ -28,22 +29,37 @@ const CheckUserOnline: FC<Props> = ({ children }) => {
 
     const handleUserExit = async () => {
       // Perform actions when the user leaves the website
-      console.log('User left the website');
-      if (id) {
+      if (id && isPageVisible) {
+        console.log('User left the website');
         const response = await userExit(id);
         console.log(response);
-      } else {
-        console.log('User id is undefined');
       }
     };
-    window.addEventListener('load', handleUserEntrance);
-    window.addEventListener('beforeunload', handleUserExit);
+
+    const handleVisibilityChange = () => {
+      // Update page visibility state when visibility changes
+      setPageVisible(!document.hidden);
+    };
+
+    const handleBeforeUnload = async () => {
+      // Call the user exit action when the page is being unloaded
+      await handleUserExit();
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Perform user entrance action when the component mounts
+    handleUserEntrance();
 
     return () => {
-      window.removeEventListener('load', handleUserEntrance);
-      window.removeEventListener('beforeunload', handleUserExit);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+
+      // Call the user exit action when the component unmounts
+      handleUserExit();
     };
-  }, [id]);
+  }, [id, isPageVisible]);
 
   return <div>{children}</div>;
 };
