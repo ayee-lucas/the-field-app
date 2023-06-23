@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  FC, ReactNode, useEffect, useState,
+  FC, ReactNode, useEffect,
 } from 'react';
 import { useSession } from 'next-auth/react';
-import { userEntered } from '../tools/onlineStatus';
+import { userEntered, userExit } from '../tools/onlineStatus';
 
 interface Props {
   children: ReactNode;
@@ -12,34 +12,32 @@ interface Props {
 
 const CheckUserOnline: FC<Props> = ({ children }) => {
   const { data: session } = useSession();
-  const [id, setId] = useState<string | undefined>(session?.user?.id.toString());
+  // const [id, setId] = useState<string | undefined>(session?.user?.id.toString());
+  const id = session?.user?.id.toString();
 
   useEffect(() => {
     const handleUserEntrance = async () => {
       console.log(id);
       // Perform actions when the user enters the website
       console.log('User entered the website');
-      const response = await userEntered(id);
-      console.log(response);
+      if (id) {
+        const response = await userEntered(id);
+        console.log(response);
+      } else {
+        console.log('User id is undefined');
+      }
     };
 
-    const handleUserExit = () => {
+    const handleUserExit = async () => {
       // Perform actions when the user leaves the website
       console.log('User left the website');
+      if (id) {
+        const response = await userExit(id);
+        console.log(response);
+      } else {
+        console.log('User id is undefined');
+      }
     };
-
-    if (id) {
-      handleUserEntrance();
-    } else {
-      const timer = setInterval(() => {
-        const updatedId = session?.user?.id.toString();
-        if (updatedId) {
-          setId(updatedId);
-          clearInterval(timer);
-        }
-      }, 1000);
-    }
-
     window.addEventListener('load', handleUserEntrance);
     window.addEventListener('beforeunload', handleUserExit);
 
@@ -47,7 +45,7 @@ const CheckUserOnline: FC<Props> = ({ children }) => {
       window.removeEventListener('load', handleUserEntrance);
       window.removeEventListener('beforeunload', handleUserExit);
     };
-  }, [id, session]);
+  }, [id]);
 
   return <div>{children}</div>;
 };
