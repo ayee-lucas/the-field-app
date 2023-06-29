@@ -1,29 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-html body {
-  scroll-behavior: smooth;
-  min-height: 100svh;
-  width: 100%;
-}
-
-
-
-.img-toggle {
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  width: 40px;
-  height: 40px;
-  
-  position: relative;
-  background: url("../public/images/Logos/Logo.png") center / cover;
-}
-
-@media (prefers-color-scheme: dark){
-  .img-toggle {
-     background: url("../public/images/Logos/LogoDark.png") center/ cover;
-  }
-}
