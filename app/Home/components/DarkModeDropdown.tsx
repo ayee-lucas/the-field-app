@@ -14,7 +14,7 @@ export default function DarkModeDropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="absolute bottom-5 right-3">
+      <DropdownMenuTrigger asChild className="absolute bottom-16 right-3">
         <Button size="icon">
           <MdLightbulbOutline size={20} />
         </Button>
