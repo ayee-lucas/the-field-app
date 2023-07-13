@@ -49,7 +49,7 @@ export default function SignUpForm() {
         setError('Something went wrong');
       }
     } else {
-      router.push('/account/signin');
+      router.push('/auth/signin');
     }
   }
 
