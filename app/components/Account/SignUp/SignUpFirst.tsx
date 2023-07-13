@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { montserrat, roboto } from '@/app/fonts';
 import { AiTwotoneLock } from 'react-icons/ai';
-import { signUp } from '@/app/account/signup/actions';
+import { signUp } from '@/app/deprecated-account/signup/actions';
 import { useRouter } from 'next/navigation';
 import FormInput from './FormInput';
 

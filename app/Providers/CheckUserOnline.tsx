@@ -3,16 +3,16 @@
 import {
   FC, ReactNode, useEffect, useState,
 } from 'react';
-import { useSession } from 'next-auth/react';
 import { userEntered, userExit } from '../tools/onlineStatus';
+import { Session } from '../types/sessionType';
 
 interface Props {
   children: ReactNode;
+  session: Session
 }
 
-const CheckUserOnline: FC<Props> = ({ children }) => {
-  const { data: session } = useSession();
-  const id = session?.user?.id.toString();
+const CheckUserOnline: FC<Props> = ({ children, session }) => {
+  const id = session?.user?.sub.toString();
   const [isPageVisible, setPageVisible] = useState(true);
 
   useEffect(() => {

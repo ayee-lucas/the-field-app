@@ -1,15 +1,18 @@
-import { getServerSession } from 'next-auth';
+import { Suspense } from 'react';
 import FeedBar from './components/FeedBar';
 import ClientNewPost from './components/ClientNewPost';
-import { fetchAllPosts } from './actions/FetchPost';
-import { IPost } from '../models/Post';
-import { authOptions } from '../api/auth/[...nextauth]/route';
-import FeedPostsClient from './components/FeedPostsClient';
+import { GetInitialPosts } from './actions/actions';
+import { getGoSession } from '../tools/getGoServerSession';
+import { Session } from '../types/sessionType';
+import { FeedHandlerClient } from './components/FeedHandlerCLient';
 
 export default async function Page() {
-  const postsData: IPost[] = await fetchAllPosts();
-  const session = await getServerSession(authOptions);
-  const idUser = session?.user?.id.toString() ?? '';
+  const postsData = await GetInitialPosts();
+
+  console.log({ MESSAGE: postsData });
+
+  const session = await getGoSession();
+  const idUser = session?.user?.sub.toString() ?? '';
 
   return (
     <div className="w-full min-h-screen h-full dark:bg-black  dark:text-white py-10 px-[5rem] max-sm:px-3 max-xl:px-5">
@@ -17,8 +20,16 @@ export default async function Page() {
         Feed
       </h1>
       <FeedBar />
-      <ClientNewPost />
-      <FeedPostsClient sessionId={idUser} initialPosts={postsData} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ClientNewPost session={session as Session} />
+      </Suspense>
+      {postsData.data?.length === 0 ? (
+
+        <div className="w-full flex justify-center items-center">There are no posts to show</div>
+      ) : (
+
+        <FeedHandlerClient initialPosts={postsData.data ?? []} sessionId={idUser} />
+      )}
     </div>
   );
 }

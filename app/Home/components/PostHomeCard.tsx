@@ -5,16 +5,16 @@ import {
   FC, useRef, useEffect, useState,
 } from 'react';
 import { useRouter } from 'next/navigation';
-import { IPost } from '@/app/models/Post';
 import PostFormatted from '@/app/tools/postFormatter';
 import Link from 'next/link';
 import { formatDate } from '@/app/tools/datesFormatter';
+import { PostType } from '@/app/types/postType';
 import imagePost from '../../../public/images/Background/card_example.jpg';
 import defaultImage from '../../../public/images/default_user.png';
 import PostFooterActions from '../post/components/PostFooterActions';
 
 interface Props {
-  post: IPost;
+  post: PostType;
   sessionId: string;
 }
 

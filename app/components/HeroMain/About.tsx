@@ -8,10 +8,10 @@ import image_2 from '../../../public/images/About/image_about_2.jpeg';
 
 const About = () => (
   <section
-    className={`min-h-screen py-3 px-2 mt-7 bg-white w-full z-20 ${poppins.className} ${playfair.variable}`}
+    className={`min-h-screen py-3 px-2 mt-7 bg-white dark:bg-black w-full z-20 ${poppins.className} ${playfair.variable}`}
   >
     <div className="w-full h-full flex flex-col justify-center items-start px-4">
-      <h1 className="text-6xl max-sm:text-3xl font-bold text-center text-gray-800">
+      <h1 className="text-6xl max-sm:text-3xl font-bold text-center text-gray-800 dark:text-white">
         ABOUT
         {' '}
         <span className="text-fieldGreen">US</span>

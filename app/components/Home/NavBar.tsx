@@ -1,12 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import Link from 'next/link';
+import { Session } from '@/app/types/sessionType';
 import UserMenu from './UserMenu';
 
-export const NavBar = () => {
+type Props = {
+  session: Session | null
+};
+
+export default function NavBar({ session }: Props) {
   const [open, setOpen] = useState(true);
   const [shadow, setShadow] = useState<string>('');
+  const SessionContext = createContext(session);
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,8 +26,7 @@ export const NavBar = () => {
   }, []);
 
   return (
-    <div>
-
+    <SessionContext.Provider value={session}>
       <div className="fixed w-full z-50">
         <nav className={`bg-white dark:bg-black border-b transition-all border-gray-200 dark:border-zinc-800 ${shadow}`}>
           <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
@@ -123,6 +128,6 @@ export const NavBar = () => {
         </nav>
 
       </div>
-    </div>
+    </SessionContext.Provider>
   );
-};
+}

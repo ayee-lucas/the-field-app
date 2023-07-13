@@ -1,10 +1,5 @@
 'use client';
 
-import React, { useState, FC, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/react';
-import { BsMoon, BsSun } from 'react-icons/bs';
 import {
   AiOutlineClose,
   AiOutlineUser,
@@ -13,14 +8,22 @@ import {
   AiOutlineComment,
 } from 'react-icons/ai';
 
-interface Props {
-  handler: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import React, { useContext, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export const SideBar: FC<Props> = ({ handler }) => {
-  const [a, setA] = useState(true);
+import { useClickOutside } from '@/app/hooks/clickOutside';
+import { OuterLClientContext } from './OuterLayoutClient';
+import DarkModeDropdown from './DarkModeDropdown';
 
-  const { data: session, status } = useSession();
+export default function SideBar() {
+  const context = useContext(OuterLClientContext);
+
+  if (!context) {
+    throw new Error('OuterLClientContext must be used within <OuterLClientContext.Provider>');
+  }
+
+  const { session, open, setOpen } = context;
 
   useEffect(() => {
     let prevScrollPos = window.scrollY;
@@ -28,7 +31,7 @@ export const SideBar: FC<Props> = ({ handler }) => {
       const currentScrollPos = window.scrollY;
       const scrollingDown = prevScrollPos > currentScrollPos
       || prevScrollPos < currentScrollPos;
-      handler(!scrollingDown);
+      setOpen(!scrollingDown);
       prevScrollPos = currentScrollPos;
     };
 
@@ -37,11 +40,16 @@ export const SideBar: FC<Props> = ({ handler }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [setOpen]);
+
+  const domNode = useClickOutside(() => setOpen(false));
 
   return (
     <div
-      className="h-full px-1 pt-5 bg-white/60 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200 max-sm:backdrop-blur-3xl"
+      className={`fixed h-screen w-[80%] px-1 pt-5 transition-all
+    bg-white/80 dark:bg-black dark:max-sm:bg-black/60 max-sm:backdrop-saturate-200
+      max-sm:backdrop-blur-3xl ${open ? 'translate-x-0' : '-translate-x-full'} z-[999]`}
+      ref={domNode}
 
     >
       <div className="flex justify-between lg:hidden p-2 dark:text-white">
@@ -50,20 +58,25 @@ export const SideBar: FC<Props> = ({ handler }) => {
             type="button"
             className=" rounded-full lg:mr-0 pl-4"
           >
-            <Image
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-              className="w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full"
-              width={56}
-              height={56}
-              alt="user photo"
-            />
+            {!session?.user
+              ? (
+                null
+              )
+              : (
+                <Image
+                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+                  className="w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full"
+                  width={56}
+                  height={56}
+                  alt="user photo"
+                />
+              )}
+
           </button>
 
-          { status === 'unauthenticated'
+          { !session?.user
             ? (
-              <div className="grid place-items-center ml-5 text-xl">
-                Guest
-              </div>
+              null
             )
             : (
               <div className="ml-3 text-left text-md">
@@ -74,7 +87,7 @@ export const SideBar: FC<Props> = ({ handler }) => {
 
         </div>
         <button type="button" className="p-2 text-2xl px-4">
-          <AiOutlineClose onClick={() => handler(false)} />
+          <AiOutlineClose onClick={() => setOpen(false)} />
         </button>
       </div>
 
@@ -82,22 +95,13 @@ export const SideBar: FC<Props> = ({ handler }) => {
         <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
 
-      { status === 'unauthenticated'
+      { session?.user
         ? (
-          <div className="w-full h-full grid place-items-center">
-            <button type="button" className="dark:bg-white rounded-xl py-1 px-5" onClick={() => signIn()}>
-              Sign in
-            </button>
-          </div>
-
-        )
-
-        : (
           <ul className="space-y-2 mx-5 font-medium">
             <li>
               <Link
                 href={`/Home/profile/${session?.user?.username}`}
-                onClick={() => handler(false)}
+                onClick={() => setOpen(false)}
                 className="flex p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-700"
               >
                 <AiOutlineUser className="w-6 h-6" />
@@ -174,38 +178,27 @@ export const SideBar: FC<Props> = ({ handler }) => {
               </ul>
             </li>
           </ul>
+
+        )
+
+        : (
+
+          <div className="w-full h-full grid place-items-center">
+            <Link
+              type="button"
+              className="dark:bg-white rounded-xl py-1 px-5"
+              href="/test/account/signin"
+            >
+              Sign in
+            </Link>
+          </div>
+
         )}
       <div className="flex justify-center">
         <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
       </div>
 
-      <div className="absolute bottom-0 p-6">
-        <div className="flex justify-center">
-          <div className="my-4 w-[90%] border-t border-gray-200 dark:border-zinc-700 lg:hidden" />
-        </div>
-
-        {a ? (
-          <button
-            type="button"
-            onClick={() => setA(false)}
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <BsMoon className="w-5 h-5" />
-            <span className="flex-1 ml-3 whitespace-nowrap">Dark Theme</span>
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setA(true)}
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-          >
-            <BsSun className="w-5 h-5" />
-            <span className="flex-1 ml-3 whitespace-nowrap">Light Theme</span>
-          </button>
-        )}
-      </div>
+      <DarkModeDropdown />
     </div>
   );
-};
-
-export default SideBar;
+}

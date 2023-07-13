@@ -1,18 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { IoIosArrowDown } from 'react-icons/io';
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import Navbar from './components/navbar';
 import About from './components/HeroMain/About';
 import bg from '../public/images/Background/main-bg.jpeg';
 import { poppins } from './fonts';
-import { authOptions } from './api/auth/[...nextauth]/route';
+import { getGoSession } from './tools/getGoServerSession';
 
 export default async function Home() {
-  const session = await getServerSession(authOptions);
+  const session = await getGoSession();
 
-  if (session?.user) redirect('/Home');
+  if (session?.status === 'authenticated') {
+    redirect('/Home');
+  }
 
   return (
     <>

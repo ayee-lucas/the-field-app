@@ -3,9 +3,11 @@
 import dbConnect from '@/app/db/Connection';
 import Post from '@/app/models/Post';
 import User, { IUser } from '@/app/models/User';
-import { revalidatePath } from 'next/cache';
+import { PostType } from '@/app/types/postType';
+import { cookies } from 'next/headers';
 
-const url = process.env.NEXTAUTH_URL as string;
+const nextUrl = process.env.NEXTAUTH_URL as string;
+const goUrl = process.env.GO_BACKEND as string;
 
 export async function findPost(id: string) {
   dbConnect();
@@ -25,7 +27,7 @@ export async function findPost(id: string) {
 
 export async function fetchPostById(id: any) {
   try {
-    const res = await fetch(`${url}/api/Posts/post/${id}`, {
+    const res = await fetch(`${nextUrl}/api/Posts/post/${id}`, {
       method: 'GET',
       next: { revalidate: 100 },
     });
@@ -43,36 +45,56 @@ export async function fetchPostById(id: any) {
   }
 }
 
-// eslint-disable-next-line consistent-return
-export async function createPost(data: any, id : any) {
-  dbConnect();
-  try {
-    const author = id;
+type CreatePostType = {
+  error: unknown,
+  message: string,
+  result?: {
+    id: string
+    message: string,
+    post: PostType
+  }
+};
 
-    const body = {
+export async function createPostGo(author:string, text?:string, media?:string)
+  :
+  Promise<CreatePostType> {
+  try {
+    const sessionId = cookies().get('session');
+
+    const noMedia: string[] = [];
+
+    const data = {
       author,
       content: {
-        text: data,
+        text,
+        media: media ?? noMedia,
       },
     };
 
-    const post = await new Post(body);
+    console.log(data);
 
-    const user = await User.findById(author);
+    const res = await fetch(`${goUrl}/api/posts/upload`, {
 
-    if (!user) {
-      return new Error('User not found');
-    }
-    user.posts.push(post);
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${sessionId?.value}`,
+        'Content-Type': 'application/json',
+      },
 
-    await post.save();
+      body: JSON.stringify(data),
+    });
 
-    await user.save();
+    const json = await res.json();
 
-    revalidatePath('/Home');
+    return json;
   } catch (err) {
     console.log(err);
-    return err;
+    const res = {
+      error: err,
+      message: 'Error creating post',
+
+    };
+    return res;
   }
 }
 
@@ -130,5 +152,55 @@ export async function dislikePost(postId: any, userId: any) {
     console.error(err);
     // eslint-disable-next-line consistent-return
     return err;
+  }
+}
+
+export async function fetchUserById(id: any) {
+  const res = await fetch(`/api/User/user/${id}`, {
+    method: 'GET',
+    next: { revalidate: 100 },
+  });
+
+  const user = await res.json();
+
+  console.log(user);
+
+  return user;
+}
+
+type FetchPostsType = {
+  error?: string,
+  message?: 'No Posts to show',
+  posts?: PostType
+};
+
+export async function fetchPostsOnScroll(query: string):Promise<FetchPostsType> {
+  try {
+    const res = await fetch(nextUrl + query, {
+      method: 'GET',
+      next: { revalidate: 10 },
+    });
+
+    if (res.status === 404) {
+      const data = {
+        message: 'No Posts to show',
+      };
+      return data as FetchPostsType;
+    }
+
+    const json = await res.json();
+
+    const data = {
+      error: '',
+      posts: json,
+    };
+
+    return data;
+  } catch (err) {
+    console.log(err);
+    const res = {
+      error: 'Error fetching posts',
+    };
+    return res;
   }
 }

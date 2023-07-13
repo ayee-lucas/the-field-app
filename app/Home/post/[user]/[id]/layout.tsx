@@ -7,7 +7,7 @@ import { formatDate } from '@/app/tools/datesFormatter';
 import Link from 'next/link';
 import defaultImage from '../../../../../public/images/default_user.png';
 import AddComment from '../../components/AddComment';
-import { fetchPostById } from '../../actions/Actions';
+import { fetchPostById } from '../../actions';
 import PostBody from '../../components/PostBody';
 import MobileComents from '../../components/MobileComents';
 
@@ -26,7 +26,7 @@ export default async function Post({
 
   return (
     <div
-      className="w-full min-w-full h-full px-[5rem] max-sm:px-3 flex flex-col text-black dark:text-white pt-5 max-sm:pt-0 justify-start items-center dark:bg-black"
+      className="w-full min-w-full h-full px-[5rem] max-sm:px-3 flex flex-col text-black dark:text-white pt-5 max-sm:pt-12 justify-start items-center dark:bg-black"
       aria-hidden
     >
       <div className="py-2 w-full">

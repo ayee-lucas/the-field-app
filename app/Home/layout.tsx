@@ -1,19 +1,19 @@
 import React from 'react';
-import { NavBar } from '../components/Home/NavBar';
-import NavDown from '../components/Home/NavDown';
-import RightBar from './components/RightBar';
+import { getGoSession } from '../tools/getGoServerSession';
+import OuterLayoutClient from './components/OuterLayoutClient';
+import { Session } from '../types/sessionType';
 
-export default function HomeLayout({
+export default async function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getGoSession();
+
   return (
     <section>
-      <NavDown />
-      <NavBar />
-      <RightBar />
-      <div className="pt-[60px] pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0">{children}</div>
+      <OuterLayoutClient session={session as Session} />
+      <div className="pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0 max-sm:pt-3">{children}</div>
     </section>
   );
 }

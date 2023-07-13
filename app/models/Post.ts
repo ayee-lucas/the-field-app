@@ -11,6 +11,8 @@ export interface IPost extends Document {
     text: string;
     media: string[];
   };
+  repost: IUser['_id'][];
+  starred: IUser['_id'][];
   createdAt: Date;
   comments: IComment['_id'][];
   likes: IUser['_id'][];
@@ -35,6 +37,18 @@ const PostSchema = new Schema<IPost>(
         },
       ],
     },
+    repost: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    starred: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
     comments: [
       {
         type: Schema.Types.ObjectId,

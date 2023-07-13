@@ -1,6 +1,5 @@
 'use client';
 
-import { IPost } from '@/app/models/Post';
 import {
   FC, useTransition, useState,
 } from 'react';
@@ -9,13 +8,14 @@ import { BiRepost } from 'react-icons/bi';
 import { FaRegComment } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
-import { dislikePost, likePost } from '../actions/Actions';
+import { PostType } from '@/app/types/postType';
+import { dislikePost, likePost } from '../actions';
 
 interface Props {
   // eslint-disable-next-line react/require-default-props
   onClick: () => void;
   // eslint-disable-next-line react/require-default-props
-  Post: IPost;
+  Post: PostType;
   // eslint-disable-next-line react/require-default-props
   sessionId: string;
 }
@@ -26,15 +26,15 @@ const PostFooterActions:FC<Props> = ({ onClick, Post, sessionId }) => {
 
   const [likes, setLikes] = useState<number>(Post.likes.length);
 
-  const [isLiked, setIsLiked] = useState<boolean>(Post.likes.find(
-    (like) => like._id === sessionId,
-  ));
+  const [isLiked, setIsLiked] = useState<boolean>(
+    Boolean(Post.likes.find((like) => like._id === sessionId)),
+  );
 
   const router = useRouter();
 
   const handleLiked = () => {
     if (!sessionId) {
-      router.push('/account/signin');
+      router.push('/auth/signin');
     } else {
       setLikes(likes + 1);
       setIsLiked(true);
@@ -46,7 +46,7 @@ const PostFooterActions:FC<Props> = ({ onClick, Post, sessionId }) => {
 
   const handleDislike = () => {
     if (!sessionId) {
-      router.push('/account/sigin');
+      router.push('/auth/sigin');
     } else {
       setLikes(likes - 1);
       setIsLiked(false);
@@ -71,17 +71,17 @@ const PostFooterActions:FC<Props> = ({ onClick, Post, sessionId }) => {
 
         <div className="flex items-center gap-1">
           <BiRepost className="cursor-pointer" />
-          <span className="text-sm">2</span>
+          <span className="text-sm">{Post.repost.length}</span>
         </div>
 
         <div className="flex items-center gap-1">
           <AiOutlineStar className="cursor-pointer" />
-          <span className="text-sm">3</span>
+          <span className="text-sm">{Post.starred.length}</span>
         </div>
 
         <div className="flex items-center gap-1">
           <FaRegComment onClick={onClick} className="cursor-pointer" size={16} />
-          <span className="text-sm">3 </span>
+          <span className="text-sm">{Post.comments.length}</span>
         </div>
       </div>
       <div className="flex items-center gap-3 mt-3 max-sm:mt-0 cursor-pointer text-sm text-white dark:text-fieldGreen bg-fieldGreen dark:bg-black border dark:border-fieldGreen px-5 py-1 rounded-full">

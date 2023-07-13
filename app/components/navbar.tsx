@@ -60,7 +60,7 @@ const Navbar = () => {
             <Link href="/">About</Link>
           </li>
           <li className="">
-            <Link href="/account/signup">Get Started</Link>
+            <Link href="/auth/signup">Get Started</Link>
           </li>
         </ul>
       </nav>
@@ -91,7 +91,7 @@ const Navbar = () => {
             <Link href="/">About</Link>
           </li>
           <li className="w-full">
-            <Link href="/account/signup">Get Started</Link>
+            <Link href="/auth/signup">Get Started</Link>
           </li>
         </ul>
       </nav>

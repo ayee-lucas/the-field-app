@@ -3,6 +3,8 @@ import { IUser } from '@/app/models/User';
 import { RxDotFilled } from 'react-icons/rx';
 import Image from 'next/image';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getGoSession } from '@/app/tools/getGoServerSession';
+import { Session } from '@/app/types/sessionType';
 import defaultImage from '../../../../public/images/default_user.png';
 import Followbtn from './components/Followbtn';
 import { getProfile } from './actions/actions';
@@ -20,6 +22,8 @@ export default async function ProfileLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+
+  const goSession = await getGoSession();
 
   //  const id = session?.user?.sub;
 
@@ -120,7 +124,7 @@ export default async function ProfileLayout({
         <NavProfile />
         { session?.user?.username !== user.username ? null
 
-          : <ClientNewPost />}
+          : <ClientNewPost session={goSession as Session} />}
         <div className="px-2">{children}</div>
       </div>
     </section>

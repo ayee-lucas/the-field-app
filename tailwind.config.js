@@ -29,6 +29,17 @@ module.exports = {
           to: { height: 0 },
         },
       },
+      fontFamily: {
+        montserrat: ['var(--font-montserrat)'],
+        inter: ['var(--font-inter)'],
+        poppins: ['var(--font-poppins)'],
+        roboto: ['var(--font-roboto)'],
+        openSans: ['var(--font-open-sans)'],
+        playfair: ['var(--font-playfair)'],
+        flowCircular: ['var(--font-flow-circular)'],
+        quicksand: ['var(--font-quicksand)'],
+        ubuntu: ['var(--font-ubuntu)'],
+      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",

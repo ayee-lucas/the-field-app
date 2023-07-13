@@ -29,7 +29,7 @@ export async function GET(req: Request) {
       .skip((parseInt(page as string) - 1) * parseInt(limit as string));
 
     if (posts.length === 0) {
-      return new NextResponse(JSON.stringify({ message: 'No Posts to show' }), {
+      return new NextResponse('No posts found', {
         status: 404,
       });
     }
@@ -37,7 +37,7 @@ export async function GET(req: Request) {
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (err) {
     console.error(err);
-    return new NextResponse(JSON.stringify(err), { status: 500 });
+    return new NextResponse(JSON.stringify({ error: err }), { status: 500 });
   }
 }
 
