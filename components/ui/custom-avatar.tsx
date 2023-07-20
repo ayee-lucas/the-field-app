@@ -24,21 +24,24 @@ const CustomAvatar: FC<CustomAvatarProps> = (props) => {
     const { onClick, size, imgUrl } = props;
     return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-      <Avatar onClick={onClick} className={size ? `w-${size} h-${size}` : ''}>
+      <Avatar onClick={onClick} className={size ? ` w-${size} h-${size} overflow-hidden` : ''}>
         {imgUrl ? (
-          <Image
-            src={imgUrl}
-            alt="pfp"
-            className="object-cover"
-            {...(size ? { width: size, height: size } : { fill: true })}
-          />
+          <div className={`relative w-${size} h-${size} min-h-[${size}px] min-w-[${size}px] `}>
+            <Image
+              src={imgUrl}
+              alt="pfp"
+              className="object-cover"
+              fill
+            />
+          </div>
+
         ) : (
           <AvatarFallback>
             <Image
               src={defaultImage}
               alt="pfp"
               className="object-cover"
-              {...(size ? { width: size, height: size } : { fill: true })}
+              fill
             />
           </AvatarFallback>
         )}
@@ -49,13 +52,14 @@ const CustomAvatar: FC<CustomAvatarProps> = (props) => {
   const { onClick, size, sessionImage } = props;
   return (
   // eslint-disable-next-line react/jsx-props-no-spreading
-    <Avatar onClick={onClick} className={size ? `w-${size} h-${size}` : ''}>
+
+    <Avatar onClick={onClick} className={size ? `w-${size} max-w-[${size}px] h-${size} max-h-[${size}px] overflow-hidden` : ''}>
       {sessionImage?.user?.picture.pictureURL ? (
         <Image
           src={sessionImage?.user?.picture.pictureURL}
           alt="pfp"
           className="object-cover"
-          {...(size ? { width: size, height: size } : { fill: true })}
+          fill
         />
       ) : (
         <AvatarFallback>
@@ -63,7 +67,7 @@ const CustomAvatar: FC<CustomAvatarProps> = (props) => {
             src={defaultImage}
             alt="pfp"
             className="object-cover"
-            {...(size ? { width: size, height: size } : { fill: true })}
+            fill
           />
         </AvatarFallback>
       )}
