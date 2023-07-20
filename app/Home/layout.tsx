@@ -1,7 +1,9 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
 import { getGoSession } from '../tools/getGoServerSession';
 import OuterLayoutClient from './components/OuterLayoutClient';
 import { Session } from '../types/sessionType';
+import { goGetUserById } from '../auth/signin/actions';
 
 export default async function HomeLayout({
   children,
@@ -9,6 +11,19 @@ export default async function HomeLayout({
   children: React.ReactNode;
 }) {
   const session = await getGoSession();
+
+  if (session?.user) {
+    const getUser = await goGetUserById(session?.user?.sub);
+
+    console.log({ USER: getUser });
+
+    if (!getUser.user?.finished) {
+      return redirect('/account/finish');
+    }
+    if (!getUser.user?.picture.pictureKey) {
+      return redirect('/account/picture');
+    }
+  }
 
   return (
     <section>

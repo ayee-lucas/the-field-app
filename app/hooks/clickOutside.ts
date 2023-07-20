@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import React from 'react';
 
 export const useClickOutside = (handler: () => void) => {
-  const domNode = useRef<HTMLDivElement>(null);
+  const domNode = React.useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (domNode.current && !domNode.current.contains(event.target as Node)) {
         handler();

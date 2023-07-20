@@ -12,6 +12,8 @@ export default function TopBar() {
     throw new Error('OuterLClientContext must be used within <OuterLClientContext.Provider>');
   }
 
+  const { session } = context;
+
   const setOpen = context?.setOpen;
 
   const [shadow, setShadow] = useState('');
@@ -44,7 +46,7 @@ export default function TopBar() {
       </h1>
       <FiSearch className="sm:hidden" size={25} />
       <Avatar onClick={() => setOpen(true)}>
-        <AvatarImage src="https://images.unsplash.com/photo-1636622433525-127afdf3662d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="user Image" />
+        <AvatarImage src={session?.user?.picture.pictureURL} alt="user Image" />
         <AvatarFallback>PFP</AvatarFallback>
       </Avatar>
     </div>

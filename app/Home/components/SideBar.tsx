@@ -187,7 +187,7 @@ export default function SideBar() {
             <Link
               type="button"
               className="dark:bg-white rounded-xl py-1 px-5"
-              href="/test/account/signin"
+              href="/auth/signin"
             >
               Sign in
             </Link>

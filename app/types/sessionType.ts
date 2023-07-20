@@ -8,7 +8,10 @@ export type Session = {
     email: string;
     role: string;
     Image: string;
-    Picture: string;
+    picture: {
+      pictureKey: string,
+      pictureURL: string,
+    };
     expireOn: number;
     createdAt: string;
   }

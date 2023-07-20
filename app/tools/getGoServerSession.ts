@@ -13,6 +13,7 @@ export async function getGoSession() {
       headers: {
         Authorization: `Bearer ${sessionId?.value}`,
       },
+      cache: 'no-store',
     });
 
     const json = await res.json();

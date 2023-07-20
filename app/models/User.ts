@@ -9,8 +9,9 @@ export interface IUser extends Document {
   email: string;
   password: string;
   username: string;
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
+  finished: boolean;
   role: String;
   online: boolean;
   profilePicture?: string;
@@ -51,6 +52,10 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
+    finished: {
+      type: Boolean,
+      default: false,
+    },
     role: {
       type: String,
       required: true,
@@ -82,11 +87,11 @@ const userSchema = new Schema<IUser>(
         ref: 'Post',
       },
     ],
-    createdAt: {
+    created_at: {
       type: Date,
       default: Date.now,
     },
-    updatedAt: {
+    updated_at: {
       type: Date,
       default: Date.now,
     },

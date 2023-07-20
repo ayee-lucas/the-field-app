@@ -1,19 +1,51 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'animate.css';
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/jsx-props-no-spreading */
 
-export default function PlayGround() {
+'use client';
+
+import { useCallback, useState } from 'react';
+import { FileWithPath, useDropzone } from 'react-dropzone';
+import { generateClientDropzoneAccept } from 'uploadthing/client';
+import { useUploadThing } from '../tools/uploadthing';
+
+export default function MultiUploader() {
+  const [file, setFile] = useState<File | null>(null);
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    setFile(acceptedFiles[0]);
+  }, []);
+
+  const fileTypes = ['image/*'];
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: fileTypes ? generateClientDropzoneAccept(fileTypes) : undefined,
+  });
+
+  const { startUpload } = useUploadThing('imageUploader', {
+    onClientUploadComplete: () => {
+      alert('uploaded successfully!');
+    },
+    onUploadError: () => {
+      alert('error occurred while uploading');
+    },
+  });
+
   return (
-    <div className="bg-white dark:bg-black grid place-content-center w-full min-h-screen">
-      <div className="flex items-center justify-center gap-2 w-full">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white animate__animated animate__slideInUp animate__faster">
-          THE
-        </h1>
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-white animate__animated animate__slideInUp">
-          FIELD
-        </h1>
-      </div>
+    <div className="min-h-screen w-full p-2">
+      <div {...getRootProps()} className="w-full h-56 p-5 border border-gray-300">
+        <input {...getInputProps()} className="w-full h-full" />
 
-      <div className="absolute bottom-1/3 left-1/2 rounded-full w-2 h-2 bg-gray-800 dark:bg-white animate-bounce" />
+        Drop file
+      </div>
+      {file && ( // change to single file
+        <button
+          type="button"
+          onClick={() => startUpload([file])}
+        >
+          Upload file
+        </button>
+      )}
     </div>
+
   );
 }
