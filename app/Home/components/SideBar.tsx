@@ -9,10 +9,9 @@ import {
 } from 'react-icons/ai';
 
 import React, { useContext, useEffect } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-
 import { useClickOutside } from '@/app/hooks/clickOutside';
+import CustomAvatar from '@/components/ui/custom-avatar';
 import { OuterLClientContext } from './OuterLayoutClient';
 import DarkModeDropdown from './DarkModeDropdown';
 
@@ -63,13 +62,7 @@ export default function SideBar() {
                 null
               )
               : (
-                <Image
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-                  className="w-11 h-11 max-sm:w-9 max-sm:h-9 rounded-full"
-                  width={56}
-                  height={56}
-                  alt="user photo"
-                />
+                <CustomAvatar sessionImage={session} />
               )}
 
           </button>
@@ -80,7 +73,7 @@ export default function SideBar() {
             )
             : (
               <div className="ml-3 text-left text-md">
-                <p>{session?.user?.username}</p>
+                <p className="text-lg font-semibold">{session?.user?.username}</p>
                 <p>{session?.user?.email}</p>
               </div>
             )}

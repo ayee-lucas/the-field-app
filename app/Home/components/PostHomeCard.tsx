@@ -9,8 +9,8 @@ import PostFormatted from '@/app/tools/postFormatter';
 import Link from 'next/link';
 import { formatDate } from '@/app/tools/datesFormatter';
 import { PostType } from '@/app/types/postType';
-import imagePost from '../../../public/images/Background/card_example.jpg';
-import defaultImage from '../../../public/images/default_user.png';
+import imagePost from '@/public/images/Background/card_example.jpg';
+import CustomAvatar from '@/components/ui/custom-avatar';
 import PostFooterActions from '../post/components/PostFooterActions';
 
 interface Props {
@@ -23,6 +23,8 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
   const postContentRef = useRef<HTMLParagraphElement>(null);
 
   const [isTruncated, setIsTruncated] = useState(false);
+
+  console.log(post.author.picture.pictureURL);
 
   const resizeContent = () => {
     const element = postContentRef.current;
@@ -56,20 +58,15 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
 
   return (
     <div
-      className="w-full min-h-[500px] bg-gray-100 dark:bg-black dark:border-zinc-800 border rounded-lg p-5 my-3 grid grid-flow-row gap-2"
+      className="w-full min-h-fit bg-gray-100 dark:bg-black dark:border-zinc-800 border rounded-lg p-5 my-3 grid grid-flow-row gap-2"
       aria-hidden
     >
       <Link
         className="w-full flex items-center gap-2"
         href={`/Home/profile/${post.author.username}`}
       >
-        <Image
-          src={defaultImage}
-          alt="image"
-          width={30}
-          height={30}
-          className="rounded-full"
-        />
+        <CustomAvatar size={32} imgUrl={post.author.picture.pictureURL} />
+
         {post.author.name}
         <span className="text-sm text-gray-700 dark:text-zinc-500">
           @
@@ -94,6 +91,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
 
       </div>
 
+      {post.content.media.length > 0 && (
       <div className="relative w-full h-full min-h-[300px]">
         <Image
           src={imagePost}
@@ -102,6 +100,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
           className="rounded-lg  object-cover"
         />
       </div>
+      )}
 
       <div className="flex items-center text-sm text-gray-700 dark:text-zinc-500 gap-3 w-full">
         <span>

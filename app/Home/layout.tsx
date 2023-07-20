@@ -20,9 +20,6 @@ export default async function HomeLayout({
     if (!getUser.user?.finished) {
       return redirect('/account/finish');
     }
-    if (!getUser.user?.picture.pictureKey) {
-      return redirect('/account/picture');
-    }
   }
 
   return (

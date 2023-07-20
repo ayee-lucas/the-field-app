@@ -21,7 +21,7 @@ export async function GET(req: Request) {
   try {
     // Obtener todas las notificaciones con datos relacionados
     const posts = await Post.find()
-      .populate('author', 'username name')
+      .populate('author', 'username name picture')
       .populate('comments', 'author', Comment)
       .populate('likes', 'username', User)
       .sort({ createdAt: 'desc' })

@@ -1,8 +1,8 @@
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import React, { useContext, useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import CustomAvatar from '@/components/ui/custom-avatar';
 import { OuterLClientContext } from './OuterLayoutClient';
 
 export default function TopBar() {
@@ -45,10 +45,7 @@ export default function TopBar() {
         <span className="text-fieldGreen">D</span>
       </h1>
       <FiSearch className="sm:hidden" size={25} />
-      <Avatar onClick={() => setOpen(true)}>
-        <AvatarImage src={session?.user?.picture.pictureURL} alt="user Image" />
-        <AvatarFallback>PFP</AvatarFallback>
-      </Avatar>
+      <CustomAvatar sessionImage={session} onClick={() => setOpen(true)} />
     </div>
   );
 }

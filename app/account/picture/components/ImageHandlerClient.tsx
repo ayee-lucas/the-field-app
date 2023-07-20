@@ -84,6 +84,10 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
     }),
   });
 
+  const handleSkip = () => {
+    localStorage.setItem('imageskip', 'true');
+  };
+
   return (
     <div
       className="flex flex-col items-center justify-center gap-2"
@@ -121,7 +125,7 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
       ) : (
         <span className="absolute bottom-32 text-zinc-400">Click or drop to upload an image</span>
       )}
-      <Link href="/Home" className="absolute bottom-4 underline">I'll do it later</Link>
+      <Link href="/Home" onClick={() => handleSkip()} className="absolute bottom-4 underline">I'll do it later</Link>
       {loading && (
       <div className="absolute grid place-items-center inset-0 bg-black/40 z-50">
         <ReactLoading type="bars" color="#fff" height={50} width={50} />

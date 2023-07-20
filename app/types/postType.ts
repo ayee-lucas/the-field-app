@@ -4,6 +4,10 @@ export type PostType = {
     _id: string;
     username: string;
     name: string;
+    picture: {
+      pictureKey: string;
+      pictureURL: string
+    }
   }
   content: {
     text: string;

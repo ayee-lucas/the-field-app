@@ -9,7 +9,7 @@ export async function GET() {
   try {
     await dbConnect();
     const posts = await Post.find()
-      .populate('author', 'username name')
+      .populate('author', 'username name picture')
       .populate('comments', 'author', Comment)
       .populate('likes', 'username', User)
       .sort({ createdAt: 'desc' })
