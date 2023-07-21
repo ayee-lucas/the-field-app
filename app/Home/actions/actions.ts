@@ -14,6 +14,7 @@ export async function GetInitialPosts(): Promise<GetPostsType> {
   try {
     const res = await fetch(`${url}/api/Posts/initial`, {
       method: 'GET',
+      cache: 'no-store',
       headers: { 'Content-Type': 'application/json' },
     });
     const posts = await res.json();
