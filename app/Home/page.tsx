@@ -6,6 +6,8 @@ import { getGoSession } from '../tools/getGoServerSession';
 import { Session } from '../types/sessionType';
 import { FeedHandlerClient } from './components/FeedHandlerCLient';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const postsData = await GetInitialPosts();
 
