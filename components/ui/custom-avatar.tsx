@@ -24,9 +24,9 @@ const CustomAvatar: FC<CustomAvatarProps> = (props) => {
     const { onClick, size, imgUrl } = props;
     return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-      <Avatar onClick={onClick} className={size ? ` w-${size} h-${size} overflow-hidden` : ''}>
+      <Avatar onClick={onClick} className={size ? ` w-${size} h-${size}` : ''}>
         {imgUrl ? (
-          <div className={`relative w-${size} h-${size} min-h-[${size}px] min-w-[${size}px] `}>
+          <div>
             <Image
               src={imgUrl}
               alt="pfp"

@@ -65,7 +65,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
         className="w-full flex items-center gap-2"
         href={`/Home/profile/${post.author.username}`}
       >
-        <CustomAvatar size={32} imgUrl={post.author.picture.pictureURL} />
+        <CustomAvatar imgUrl={post.author.picture.pictureURL} />
 
         {post.author.name}
         <span className="text-sm text-gray-700 dark:text-zinc-500">
