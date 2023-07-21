@@ -29,7 +29,7 @@ export async function fetchPostById(id: any) {
   try {
     const res = await fetch(`${nextUrl}/api/Posts/post/${id}`, {
       method: 'GET',
-      next: { revalidate: 100 },
+      cache: 'no-store',
     });
 
     if (!res.ok) {
@@ -158,7 +158,7 @@ export async function dislikePost(postId: any, userId: any) {
 export async function fetchUserById(id: any) {
   const res = await fetch(`/api/User/user/${id}`, {
     method: 'GET',
-    next: { revalidate: 100 },
+    cache: 'no-store',
   });
 
   const user = await res.json();
@@ -178,7 +178,7 @@ export async function fetchPostsOnScroll(query: string):Promise<FetchPostsType> 
   try {
     const res = await fetch(nextUrl + query, {
       method: 'GET',
-      next: { revalidate: 10 },
+      cache: 'no-store',
     });
 
     if (res.status === 404) {
