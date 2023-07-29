@@ -36,13 +36,14 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
   const { toast } = useToast();
 
   const { startUpload, permittedFileInfo } = useUploadThing('imageUploader', {
-    onClientUploadComplete: async (res?: { fileUrl: string; fileKey: string; }[] | undefined) => {
+    onClientUploadComplete: async (
+      res?: { fileUrl: string; fileKey: string }[] | undefined
+    ) => {
       if (!res) {
         toast({
           title: 'Image Upload Failed',
           description: 'No response',
           variant: 'destructive',
-
         });
         throw new Error('No response at ImageHandlerCLient');
       }
@@ -56,7 +57,11 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
         throw new Error('No session Found');
       }
 
-      const updateRes = await updatePicture(session?.user?.sub, res[0].fileKey, res[0].fileUrl);
+      const updateRes = await updatePicture(
+        session?.user?.sub,
+        res[0].fileKey,
+        res[0].fileUrl
+      );
 
       if (updateRes.message !== 'success') {
         await utapi.deleteFiles(res[0].fileKey);
@@ -77,11 +82,12 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
       router.refresh();
     },
 
-    onUploadError: () => toast({
-      title: 'Image Upload Failed',
-      description: 'Your image upload failed',
-      variant: 'destructive',
-    }),
+    onUploadError: () =>
+      toast({
+        title: 'Image Upload Failed',
+        description: 'Your image upload failed',
+        variant: 'destructive',
+      }),
   });
 
   const handleSkip = () => {
@@ -89,9 +95,7 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
   };
 
   return (
-    <div
-      className="flex flex-col items-center justify-center gap-2"
-    >
+    <div className="flex flex-col items-center justify-center gap-2">
       <div className="flex items-center gap-2 text-zinc-400 text-sm">
         <span>Max File Size:</span>
         <span>{permittedFileInfo?.config.image?.maxFileSize}</span>
@@ -108,7 +112,6 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
           className="object-cover"
           fill
         />
-
       </div>
       {file ? (
         <Button
@@ -121,17 +124,23 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
           Upload
           <PlusCircle size={20} />
         </Button>
-
       ) : (
-        <span className="absolute bottom-32 text-zinc-400">Click or drop to upload an image</span>
+        <span className="absolute bottom-32 text-zinc-400">
+          Click or drop to upload an image
+        </span>
       )}
-      <Link href="/Home" onClick={() => handleSkip()} className="absolute bottom-4 underline">I'll do it later</Link>
+      <Link
+        href="/Home"
+        onClick={() => handleSkip()}
+        className="absolute bottom-4 underline"
+      >
+        I'll do it later
+      </Link>
       {loading && (
-      <div className="absolute grid place-items-center inset-0 bg-black/40 z-50">
-        <ReactLoading type="bars" color="#fff" height={50} width={50} />
-      </div>
+        <div className="absolute grid place-items-center inset-0 bg-black/40 z-50">
+          <ReactLoading type="bars" color="#fff" height={50} width={50} />
+        </div>
       )}
     </div>
-
   );
 }

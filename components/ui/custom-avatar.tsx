@@ -6,54 +6,48 @@ import { Session } from '@/app/types/sessionType';
 import defaultImage from '@/public/images/default_user.png';
 import { Avatar, AvatarFallback } from './avatar';
 
-type CustomAvatarProps = (
-{
-  sessionImage: Session
-  onClick?: () => void;
-  size?: number
-} | {
-
-  imgUrl: string
-  onClick?: () => void;
-  size?: number
-}
-);
+type CustomAvatarProps =
+  | {
+      sessionImage: Session;
+      onClick?: () => void;
+      size?: number;
+    }
+  | {
+      imgUrl: string;
+      onClick?: () => void;
+      size?: number;
+    };
 
 const CustomAvatar: FC<CustomAvatarProps> = (props) => {
   if ('imgUrl' in props) {
     const { onClick, size, imgUrl } = props;
     return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
+      // eslint-disable-next-line react/jsx-props-no-spreading
       <Avatar onClick={onClick} className={size ? ` w-${size} h-${size}` : ''}>
         {imgUrl ? (
           <div>
-            <Image
-              src={imgUrl}
-              alt="pfp"
-              className="object-cover"
-              fill
-            />
+            <Image src={imgUrl} alt="pfp" className="object-cover" fill />
           </div>
-
         ) : (
           <AvatarFallback>
-            <Image
-              src={defaultImage}
-              alt="pfp"
-              className="object-cover"
-              fill
-            />
+            <Image src={defaultImage} alt="pfp" className="object-cover" fill />
           </AvatarFallback>
         )}
-
       </Avatar>
     );
   }
   const { onClick, size, sessionImage } = props;
   return (
-  // eslint-disable-next-line react/jsx-props-no-spreading
+    // eslint-disable-next-line react/jsx-props-no-spreading
 
-    <Avatar onClick={onClick} className={size ? `w-${size} max-w-[${size}px] h-${size} max-h-[${size}px] overflow-hidden` : ''}>
+    <Avatar
+      onClick={onClick}
+      className={
+        size
+          ? `w-${size} max-w-[${size}px] h-${size} max-h-[${size}px] overflow-hidden`
+          : ''
+      }
+    >
       {sessionImage?.user?.picture.pictureURL ? (
         <Image
           src={sessionImage?.user?.picture.pictureURL}
@@ -63,15 +57,9 @@ const CustomAvatar: FC<CustomAvatarProps> = (props) => {
         />
       ) : (
         <AvatarFallback>
-          <Image
-            src={defaultImage}
-            alt="pfp"
-            className="object-cover"
-            fill
-          />
+          <Image src={defaultImage} alt="pfp" className="object-cover" fill />
         </AvatarFallback>
       )}
-
     </Avatar>
   );
 };

@@ -2,13 +2,12 @@
 
 import { createContext, useMemo, useState } from 'react';
 import { Session } from '@/app/types/sessionType';
-import { redirect } from 'next/navigation';
 import TopBar from './TopBar';
 import NavDown from './NavDown';
 import SideBar from './SideBar';
 
 type Props = {
-  session: Session ;
+  session: Session;
 };
 
 type ContextType = {
@@ -22,15 +21,10 @@ export const OuterLClientContext = createContext<ContextType | null>(null);
 export default function OuterLayoutClient({ session }: Props) {
   const [open, setOpen] = useState(false);
 
-  const value = useMemo(() => ({ session, open, setOpen }), [session, open, setOpen]);
-
-  if (!session.user?.picture.pictureURL) {
-    const imageskip = localStorage.getItem('imageskip');
-
-    if (imageskip !== 'true') {
-      redirect('/account/picture');
-    }
-  }
+  const value = useMemo(
+    () => ({ session, open, setOpen }),
+    [session, open, setOpen]
+  );
 
   return (
     <OuterLClientContext.Provider value={value}>

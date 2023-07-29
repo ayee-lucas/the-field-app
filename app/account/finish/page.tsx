@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   const session = await getGoSession();
+
   if (!session?.user?.username) {
     return redirect('/auth/signin');
   }
@@ -16,7 +17,5 @@ export default async function Page() {
     return redirect('/Home');
   }
 
-  return (
-    <AccountFinish session={session} />
-  );
+  return <AccountFinish session={session} />;
 }

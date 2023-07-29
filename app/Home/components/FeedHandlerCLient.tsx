@@ -30,9 +30,7 @@ export function FeedHandlerClient({ initialPosts, sessionId }: Props) {
     root: lastPostRef.current,
     threshold: 1,
   });
-  const {
-    data, fetchNextPage, isFetchingNextPage, status,
-  } = useInfiniteQuery({
+  const { data, fetchNextPage, isFetchingNextPage, status } = useInfiniteQuery({
     queryKey: ['posts'],
     queryFn: async ({ pageParam = 1 }) => fetchPosts(pageParam),
     getNextPageParam: (_, pages) => pages.length + 1,
@@ -40,8 +38,6 @@ export function FeedHandlerClient({ initialPosts, sessionId }: Props) {
   });
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
-
-  console.log(posts);
 
   useEffect(() => {
     if (entry?.isIntersecting) {
@@ -51,30 +47,34 @@ export function FeedHandlerClient({ initialPosts, sessionId }: Props) {
 
   return (
     <div>
-
       <ul className="flex flex-col">
         {posts.map((post, index) => {
           if (index === posts.length - 1) {
             return (
               <li key={post._id} ref={ref}>
-                <PostHomeCard post={post} sessionId={sessionId} />
+                <PostHomeCard
+                  key={post._id}
+                  post={post}
+                  sessionId={sessionId}
+                />
               </li>
-
             );
           }
-          return <PostHomeCard post={post} sessionId={sessionId} />;
+          return (
+            <PostHomeCard key={post._id} post={post} sessionId={sessionId} />
+          );
         })}
       </ul>
 
       {isFetchingNextPage && (
-      <div className="text-white text-3xl w-full flex items-center justify-center animate-pulse">
-        ...
-      </div>
+        <div className="text-white text-3xl w-full flex items-center justify-center animate-pulse">
+          ...
+        </div>
       )}
       {status === 'error' && (
-      <div className="text-white text-sm w-full flex items-center justify-center animate-pulse">
-        Already up to date.
-      </div>
+        <div className="text-white text-sm w-full flex items-center justify-center animate-pulse">
+          Already up to date.
+        </div>
       )}
     </div>
   );
