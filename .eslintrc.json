@@ -1,23 +1,30 @@
 {
+  "plugins": [
+    "prettier"
+  ],
   "extends": [
     "next",
     "plugin:react/jsx-runtime",
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "prettier"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
+    "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": "off",
     "react/no-unescaped-entities": "off",
     "react/function-component-definition": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "linebreak-style": ["error", "unix"], 
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "import/no-named-as-default": "off",
     "no-underscore-dangle": "off",
     "import/no-cycle": "off"
-
   }
 }

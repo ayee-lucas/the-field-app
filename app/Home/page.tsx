@@ -10,9 +10,6 @@ export const dynamic = 'force-dynamic';
 
 export default async function Page() {
   const postsData = await GetInitialPosts();
-
-  console.log({ MESSAGE: postsData });
-
   const session = await getGoSession();
   const idUser = session?.user?.sub.toString() ?? '';
 
@@ -26,11 +23,14 @@ export default async function Page() {
         <ClientNewPost session={session as Session} />
       </Suspense>
       {postsData.data?.length === 0 ? (
-
-        <div className="w-full flex justify-center items-center">There are no posts to show</div>
+        <div className="w-full flex justify-center items-center">
+          There are no posts to show
+        </div>
       ) : (
-
-        <FeedHandlerClient initialPosts={postsData.data ?? []} sessionId={idUser} />
+        <FeedHandlerClient
+          initialPosts={postsData.data ?? []}
+          sessionId={idUser}
+        />
       )}
     </div>
   );

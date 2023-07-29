@@ -36,11 +36,7 @@ export default function SignUpForm() {
   });
 
   async function onSubmit(values: SignUpTypeFSchema) {
-    console.log(values);
-
     const res = await goSignUp(values);
-
-    console.log(res);
 
     if (res.error) {
       if (res.message) {

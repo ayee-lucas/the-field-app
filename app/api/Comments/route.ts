@@ -5,9 +5,9 @@ import Post from '@/app/models/Post';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import dbConnect from '@/app/db/Connection';
 
-dbConnect();
 
 export async function GET() {
+  await dbConnect();
   try {
     const comments = await Comment.find()
       .populate({
@@ -34,6 +34,9 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+
+  await dbConnect();
+
   const session = await getServerSession(authOptions);
   try {
     // eslint-disable-next-line @typescript-eslint/no-shadow
