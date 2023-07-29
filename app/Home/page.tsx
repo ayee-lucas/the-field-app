@@ -18,7 +18,7 @@ export default async function Page() {
 
   return (
     <div className="w-full min-h-screen h-full dark:bg-black  dark:text-white py-10 px-[5rem] max-sm:px-3 max-xl:px-5">
-      <h1 className="text-4xl py-3 font-bold dark:text-white">
+      <h1 className="text-4xl pb-3 pt-6 font-bold dark:text-white">
         Feed
       </h1>
       <FeedBar />

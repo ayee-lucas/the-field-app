@@ -25,7 +25,7 @@ export default async function HomeLayout({
   return (
     <section>
       <OuterLayoutClient session={session as Session} />
-      <div className="pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0 max-sm:pt-3">{children}</div>
+      <div className="pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0">{children}</div>
     </section>
   );
 }
