@@ -33,7 +33,7 @@ export const NavDown = () => {
         <Link href="/Home">
           <AiOutlineHome />
         </Link>
-        <Link href="/Home">
+        <Link href="/Home/chats">
           <AiOutlineComment />
         </Link>
         <Link href="/Home">
