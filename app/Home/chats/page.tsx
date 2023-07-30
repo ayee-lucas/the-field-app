@@ -2,35 +2,72 @@ import { FiSearch } from 'react-icons/fi';
 import Conversations from './components/Conversations';
 
 export default async function Page() {
-  const imageLink = 'https://uploadthing.com/f/bb6d41f1-6b8f-4af8-874b-58f7dc28756b_WhatsApp%20Image%202023-07-06%20at%207.56.41%20PM.jpeg';
+  const imageLink =
+    'https://uploadthing.com/f/bb6d41f1-6b8f-4af8-874b-58f7dc28756b_WhatsApp%20Image%202023-07-06%20at%207.56.41%20PM.jpeg';
 
   const conversationsData = [
     {
-      _id: '1', name: 'John Doe', username: 'jdoe', image: imageLink, online: true,
+      _id: '1',
+      name: 'John Doe',
+      username: 'jdoe',
+      image: imageLink,
+      online: true,
     },
     {
-      _id: '2', name: 'Jane Smith', username: 'jsmith', image: imageLink, online: false,
+      _id: '2',
+      name: 'Jane Smith',
+      username: 'jsmith',
+      image: imageLink,
+      online: false,
     },
     {
-      _id: '3', name: 'Mike Johnson', username: 'mjohnson', image: imageLink, online: true,
+      _id: '3',
+      name: 'Mike Johnson',
+      username: 'mjohnson',
+      image: imageLink,
+      online: true,
     },
     {
-      _id: '4', name: 'Emily Brown', username: 'ebrown', image: imageLink, online: false,
+      _id: '4',
+      name: 'Emily Brown',
+      username: 'ebrown',
+      image: imageLink,
+      online: false,
     },
     {
-      _id: '5', name: 'Chris Lee', username: 'clee', image: imageLink, online: true,
+      _id: '5',
+      name: 'Chris Lee',
+      username: 'clee',
+      image: imageLink,
+      online: true,
     },
     {
-      _id: '6', name: 'Alex Martinez', username: 'amartinez', image: imageLink, online: false,
+      _id: '6',
+      name: 'Alex Martinez',
+      username: 'amartinez',
+      image: imageLink,
+      online: false,
     },
     {
-      _id: '7', name: 'Sarah Kim', username: 'skim', image: imageLink, online: true,
+      _id: '7',
+      name: 'Sarah Kim',
+      username: 'skim',
+      image: imageLink,
+      online: true,
     },
     {
-      _id: '8', name: 'Daniel Chen', username: 'dchen', image: imageLink, online: false,
+      _id: '8',
+      name: 'Daniel Chen',
+      username: 'dchen',
+      image: imageLink,
+      online: false,
     },
     {
-      _id: '9', name: 'Laura Wang', username: 'lwang', image: imageLink, online: true,
+      _id: '9',
+      name: 'Laura Wang',
+      username: 'lwang',
+      image: imageLink,
+      online: true,
     },
   ];
 
@@ -61,7 +98,6 @@ export default async function Page() {
             />
           ))}
         </div>
-
       </div>
     </div>
   );

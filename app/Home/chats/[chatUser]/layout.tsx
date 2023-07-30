@@ -7,35 +7,63 @@ export default async function ChatLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const imageLink = 'https://uploadthing.com/f/bb6d41f1-6b8f-4af8-874b-58f7dc28756b_WhatsApp%20Image%202023-07-06%20at%207.56.41%20PM.jpeg';
+  const imageLink =
+    'https://uploadthing.com/f/bb6d41f1-6b8f-4af8-874b-58f7dc28756b_WhatsApp%20Image%202023-07-06%20at%207.56.41%20PM.jpeg';
 
   const conversationsData = [
     {
-      name: 'John Doe', username: 'jdoe', image: imageLink, online: true,
+      name: 'John Doe',
+      username: 'jdoe',
+      image: imageLink,
+      online: true,
     },
     {
-      name: 'Jane Smith', username: 'jsmith', image: imageLink, online: false,
+      name: 'Jane Smith',
+      username: 'jsmith',
+      image: imageLink,
+      online: false,
     },
     {
-      name: 'Mike Johnson', username: 'mjohnson', image: imageLink, online: true,
+      name: 'Mike Johnson',
+      username: 'mjohnson',
+      image: imageLink,
+      online: true,
     },
     {
-      name: 'Emily Brown', username: 'ebrown', image: imageLink, online: false,
+      name: 'Emily Brown',
+      username: 'ebrown',
+      image: imageLink,
+      online: false,
     },
     {
-      name: 'Chris Lee', username: 'clee', image: imageLink, online: true,
+      name: 'Chris Lee',
+      username: 'clee',
+      image: imageLink,
+      online: true,
     },
     {
-      name: 'Alex Martinez', username: 'amartinez', image: imageLink, online: false,
+      name: 'Alex Martinez',
+      username: 'amartinez',
+      image: imageLink,
+      online: false,
     },
     {
-      name: 'Sarah Kim', username: 'skim', image: imageLink, online: true,
+      name: 'Sarah Kim',
+      username: 'skim',
+      image: imageLink,
+      online: true,
     },
     {
-      name: 'Daniel Chen', username: 'dchen', image: imageLink, online: false,
+      name: 'Daniel Chen',
+      username: 'dchen',
+      image: imageLink,
+      online: false,
     },
     {
-      name: 'Laura Wang', username: 'lwang', image: imageLink, online: true,
+      name: 'Laura Wang',
+      username: 'lwang',
+      image: imageLink,
+      online: true,
     },
   ];
 
@@ -67,7 +95,6 @@ export default async function ChatLayout({
               />
             ))}
           </div>
-
         </div>
       </div>
       {children}
