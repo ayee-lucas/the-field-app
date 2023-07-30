@@ -16,7 +16,7 @@ export default function Page() {
           receive a notification when a decision is made.
         </p>
         <Link
-          href="/Home/"
+          href="/account/picture/"
           className="my-2 px-2 py-2 bg-white text-black rounded-lg"
         >
           Go Home

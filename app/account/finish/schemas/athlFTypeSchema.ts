@@ -18,12 +18,39 @@ const athlFinishSchema = z.object({
     .min(1, 'Gender is required')
     .max(10, 'Gender is not valid'),
   sport: z.string().min(1, 'You have to provide at least 1 sport'),
-  current_team: z.string(),
-  height: z.string().min(1, 'You have to provide your height'),
-  weight: z.string().min(1, 'You have to provide your weight'),
-  achievements: z.string().min(1, 'You have to provide your weight'),
-  contact: z.string().min(1, 'Provide at least 1 email'),
-  links: z.optional(z.string()),
+  sponsors: z.optional(z.array(z.string().trim())),
+  current_team: z.optional(z.string().trim()),
+  height: z
+    .string()
+    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
+      message: 'Your height must be a number, and must be in cm',
+    })
+    .refine(
+      (val) => {
+        const heightNum = parseInt(val, 10);
+        return heightNum > 100 && heightNum < 200;
+      },
+      {
+        message: 'Your height must be between 100 and 200 cm',
+      }
+    ),
+
+  weight: z
+    .string()
+    .refine((val) => !Number.isNaN(parseInt(val, 10)), {
+      message: 'Your weight must be a number, and must be in lbs',
+    })
+    .refine(
+      (val) => {
+        const weightNum = parseInt(val, 10);
+        return weightNum > 100 && weightNum < 400;
+      },
+      {
+        message: 'Your weight must be between 100 and 400 lbs',
+      }
+    ),
+  achievements: z.optional(z.string().trim()),
+  contact: z.string().email(),
 });
 
 export const AthlFinishResolver = zodResolver(athlFinishSchema);

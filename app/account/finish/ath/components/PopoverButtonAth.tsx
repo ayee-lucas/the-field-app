@@ -27,10 +27,10 @@ import {
 import { UseFormReturn } from 'react-hook-form';
 import { HiOutlineSelector } from 'react-icons/hi';
 import { CountryResponse, getCountries } from '../../actions';
-import { OrgTypeFSchema } from '../../schemas/orgFinishSchema';
+import { AthlFinishTypeFSchema } from '../../schemas/athlFTypeSchema';
 
 type Props = {
-  form: UseFormReturn<OrgTypeFSchema>;
+  form: UseFormReturn<AthlFinishTypeFSchema>;
 };
 
 export default function PopOverButtonAth({ form }: Props) {
@@ -45,7 +45,6 @@ export default function PopOverButtonAth({ form }: Props) {
       if ('error' in data) {
         setError(data.message);
       } else {
-        console.log(data[1].name);
         setCountries(data);
         setLoading(false);
       }
@@ -57,10 +56,10 @@ export default function PopOverButtonAth({ form }: Props) {
   return (
     <FormField
       control={form.control}
-      name="country"
+      name="nationality"
       render={({ field }) => (
         <FormItem className="w-full">
-          <FormLabel htmlFor="name">Country</FormLabel>
+          <FormLabel htmlFor="name">Where are you from?</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
@@ -77,7 +76,7 @@ export default function PopOverButtonAth({ form }: Props) {
                       {field.value}
                     </span>
                   ) : (
-                    'Select the org country'
+                    'Select your country'
                   )}
                   <HiOutlineSelector />
                 </Button>
@@ -110,7 +109,7 @@ export default function PopOverButtonAth({ form }: Props) {
                               key={country.flag}
                               onSelect={(value) => {
                                 console.log(value);
-                                form.setValue('country', value);
+                                form.setValue('nationality', value);
                               }}
                             >
                               {country.flag} {country.name.common}
