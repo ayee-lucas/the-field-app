@@ -13,6 +13,23 @@ export default async function Page() {
   const session = await getGoSession();
   const idUser = session?.user?.sub.toString() ?? '';
 
+  if ('error' in postsData) {
+    return (
+      <div className="w-full min-h-screen h-full dark:bg-black  dark:text-white py-10 px-[5rem] max-sm:px-3 max-xl:px-5">
+        <h1 className="text-4xl py-3 font-bold dark:text-white">Feed</h1>
+        <FeedBar />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ClientNewPost session={session as Session} />
+        </Suspense>
+        <div className="w-full flex justify-center items-center">
+          There are no posts to show
+        </div>
+      </div>
+    );
+  }
+
+  const parseJSONPosts = JSON.parse(postsData.data);
+
   return (
     <div className="w-full min-h-screen h-full dark:bg-black  dark:text-white py-10 px-[5rem] max-sm:px-3 max-xl:px-5">
       <h1 className="text-4xl py-3 font-bold dark:text-white">Feed</h1>
@@ -25,10 +42,7 @@ export default async function Page() {
           There are no posts to show
         </div>
       ) : (
-        <FeedHandlerClient
-          initialPosts={postsData.data ?? []}
-          sessionId={idUser}
-        />
+        <FeedHandlerClient initialPosts={parseJSONPosts} sessionId={idUser} />
       )}
     </div>
   );
