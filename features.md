@@ -1,3 +1,42 @@
+## **Features V2**
+
+### **Fixed Input Placeholder**
+
+-   Improved the input placeholder for sponsors, ensuring a more professional and polished appearance.
+
+### **Zod Type Schema for Athlete Form**
+
+-   Implemented Zod type schema for the athlete form, enhancing data validation and accuracy, reducing potential form submission errors.
+
+### **Athlete Signup Info Page**
+
+-   Added a dedicated page for athlete signup information, simplifying the signup process and making it more user-friendly.
+
+### **Athlete Information Submission Form**
+
+-   Introduced a user-friendly form for submitting athlete information, streamlining the data collection process and improving user experience.
+
+### **Secure "finishAtl" Data Fetch Function**
+
+-   Developed the "finishAtl" function with a focus on type safety and efficiency, ensuring secure retrieval of athlete data and preventing data inconsistencies.
+
+### **Enhanced Type Safety with Type Conditionals**
+
+-   Implemented type conditionals to improve type safety throughout the application, minimizing type-related issues and enhancing overall application robustness.
+
+  
+
+https://github.com/alopez-2018459/the-field-app/assets/108323739/364c331e-7d56-4a11-b9d0-222cd4597949
+
+
+
+##
+
+##
+
+##
+
+
 ## **FeaturesV1**
 
 ### Code Improvements
