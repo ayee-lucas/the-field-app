@@ -8,6 +8,14 @@
 
 - **Fixed Likes in Initial Posts of Infinite Query Handler**: Resolved a significant issue related to likes in the initial posts of the infinite query handler. Users can now interact smoothly with the initial data received from the server without encountering any bugs. The issue was related to server caching, which has been resolved by changing the initial posts to be a server action instead of a fetch and a route on the server. This ensures that data interactions work as expected and provides a more reliable user experience.
 
+## **ScrennShots**
+
+
+
+https://github.com/alopez-2018459/the-field-app/assets/108323739/14740ac2-f1c9-49e9-b29e-f672f78695c4
+
+
+
 ##
 
 ##
@@ -39,6 +47,9 @@
 ### **Enhanced Type Safety with Type Conditionals**
 
 - Implemented type conditionals to improve type safety throughout the application, minimizing type-related issues and enhancing overall application robustness.
+
+
+## **Scrennshots**
 
 https://github.com/alopez-2018459/the-field-app/assets/108323739/364c331e-7d56-4a11-b9d0-222cd4597949
 
@@ -84,6 +95,6 @@ https://github.com/alopez-2018459/the-field-app/assets/108323739/364c331e-7d56-4
 
 - The athlete form remains unfinished and requires fixing to be ready for production.
 
-## **ScrennShots**
+## **Scrennshots**
 
 https://github.com/alopez-2018459/the-field-app/assets/108323739/9f3b3206-1a89-439f-8daf-8bc7be16a62e
