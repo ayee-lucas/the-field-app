@@ -1,10 +1,11 @@
 import { Document, Schema, model, models } from 'mongoose';
+import { IUser } from './User';
 
 // Interface for Message document
 export interface IMessage extends Document {
   content: string;
   date: Date;
-  type: string;
+  sender: IUser;
 }
 
 // Mongoose schema for Message
@@ -17,9 +18,9 @@ const messageSchema = new Schema<IMessage>(
       type: Date,
       default: Date.now,
     },
-    type: {
-      type: String,
-      enum: ['sent', 'received'],
+    sender: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   {
