@@ -1,11 +1,36 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AiOutlineSend } from 'react-icons/ai';
 import { BsImage } from 'react-icons/bs';
 
-export default function ChatKeyBoard() {
+type Props = {
+  user: string;
+  chatId: string;
+};
+
+export default function ChatKeyBoard({ user, chatId }: Props) {
+  const router = useRouter();
+
   const [text, setText] = useState('');
+
+  async function sendMessage(message: string) {
+    const data = {
+      content: message,
+      username: user,
+      chatId,
+    };
+
+    const res = await fetch('/api/Messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    console.log({ RES: res });
+    router.refresh();
+  }
 
   return (
     <div className="max-md:absolute mb-2 bottom-0 w-full z-50 min-h-[50px] max-h-[50px] bg-white dark:bg-black border-t border-zinc-200 dark:border-zinc-700">
@@ -19,7 +44,14 @@ export default function ChatKeyBoard() {
           />
         </div>
         <div className="flex items-center w-[20%] h-full text-right text-sm">
-          <button type="button" className={`w-full ${text === '' && 'hidden'}`}>
+          <button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+              sendMessage(text);
+            }}
+            className={`w-full ${text === '' && 'hidden'}`}
+          >
             <AiOutlineSend className="w-full h-6 text-zinc-800 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200" />
           </button>
           <button type="button" className={`w-full ${text !== '' && 'hidden'}`}>

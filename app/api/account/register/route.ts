@@ -15,17 +15,19 @@ export async function POST(req: NextRequest) {
         {
           status: 400,
           headers: { 'Content-Type': 'application/json' },
-        },
+        }
       );
     }
 
     if (json.password.length < 8) {
       return new NextResponse(
-        JSON.stringify({ message: 'Password should be at least 8 characters long' }),
+        JSON.stringify({
+          message: 'Password should be at least 8 characters long',
+        }),
         {
           status: 400,
           headers: { 'Content-Type': 'application/json' },
-        },
+        }
       );
     }
 
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
         {
           status: 400,
           headers: { 'Content-Type': 'application/json' },
-        },
+        }
       );
     }
 
@@ -51,7 +53,7 @@ export async function POST(req: NextRequest) {
         {
           status: 400,
           headers: { 'Content-Type': 'application/json' },
-        },
+        }
       );
     }
 

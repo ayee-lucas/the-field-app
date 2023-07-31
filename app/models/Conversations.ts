@@ -3,13 +3,13 @@ import { IChat } from './Chats';
 
 // Interface for Chat document
 export interface IConversation extends Document {
-  messages: IChat['_id'];
+  chats: IChat['_id'];
 }
 
 // Mongoose schema for Chat
 const conversationSchema = new Schema<IConversation>(
   {
-    messages: [
+    chats: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Chat',

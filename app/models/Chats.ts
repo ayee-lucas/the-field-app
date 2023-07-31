@@ -5,7 +5,7 @@ import { IMessage } from './Messages';
 export interface IChat extends Document {
   username: string;
   name: string;
-  online: boolean;
+  image: string;
   messages: IMessage['_id'];
 }
 
@@ -21,14 +21,14 @@ const chatSchema = new Schema<IChat>(
     name: {
       type: String,
     },
-    online: {
-      type: Boolean,
-      default: false,
+    image: {
+      type: String,
     },
     messages: [
       {
         type: Schema.Types.ObjectId,
         ref: 'Message',
+        required: false,
       },
     ],
   },

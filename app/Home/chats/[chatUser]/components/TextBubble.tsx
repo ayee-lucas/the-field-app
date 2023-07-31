@@ -4,10 +4,11 @@ import CustomAvatar from '@/components/ui/custom-avatar';
 
 type Props = {
   content: string;
-  date: string;
+  date: Date;
   type: string;
   nextType: string;
   myImage: string;
+  userImage: string;
 };
 
 export default function TextBubble({
@@ -16,10 +17,8 @@ export default function TextBubble({
   type,
   nextType,
   myImage,
+  userImage,
 }: Props) {
-  const imageLink =
-    'https://uploadthing.com/f/bb6d41f1-6b8f-4af8-874b-58f7dc28756b_WhatsApp%20Image%202023-07-06%20at%207.56.41%20PM.jpeg';
-
   if (type === 'sent') {
     return (
       <div className="flex w-full mt-2 space-x-3 justify-end">
@@ -32,7 +31,7 @@ export default function TextBubble({
               nextType === 'sent' && 'hidden'
             }`}
           >
-            {date}
+            {date.toDateString()}
           </span>
         </div>
         <div className={`h-10 w-10  ${nextType === 'sent' && 'dark:bg-black'}`}>
@@ -48,7 +47,7 @@ export default function TextBubble({
       >
         <CustomAvatar
           size={nextType === 'received' ? 15 : 10}
-          imgUrl={imageLink}
+          imgUrl={userImage}
         />
       </div>
       <div>
@@ -60,7 +59,7 @@ export default function TextBubble({
             nextType === 'received' && 'hidden'
           }`}
         >
-          {date}
+          {date.toDateString()}
         </span>
       </div>
     </div>

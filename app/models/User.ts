@@ -18,7 +18,7 @@ export interface IUser extends Document {
   bio?: string;
   followers: IUser['_id'][];
   posts: IPost['_id'][];
-  conversations: IConversation;
+  conversations: IConversation['_id'][];
 }
 
 // Mongoose schema for User
@@ -86,6 +86,12 @@ const userSchema = new Schema<IUser>(
         ref: 'Post',
       },
     ],
+    conversations: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Chats',
+      },
+    ],
     created_at: {
       type: Date,
       default: Date.now,
@@ -93,10 +99,6 @@ const userSchema = new Schema<IUser>(
     updated_at: {
       type: Date,
       default: Date.now,
-    },
-    conversations: {
-      type: Schema.Types.ObjectId,
-      ref: 'Conversation',
     },
   },
   {
