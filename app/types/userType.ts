@@ -7,6 +7,7 @@ export type UserType = {
   finished: boolean;
   role: 'user' | 'admin';
   online: boolean;
+  conversations: string;
   picture: {
     pictureKey: string;
     pictureURL: string;

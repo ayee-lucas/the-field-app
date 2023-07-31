@@ -91,7 +91,6 @@ export default async function ChatLayout({
                 name={conversation.name}
                 username={conversation.username}
                 image={conversation.image}
-                online={conversation.online}
               />
             ))}
           </div>

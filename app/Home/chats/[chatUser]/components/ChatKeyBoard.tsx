@@ -22,13 +22,12 @@ export default function ChatKeyBoard({ user, chatId }: Props) {
       chatId,
     };
 
-    const res = await fetch('/api/Messages', {
+    await fetch('/api/Messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
-    console.log({ RES: res });
     setText('');
     router.refresh();
   }

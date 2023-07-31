@@ -15,7 +15,7 @@ export default async function Page({
   const session = await getGoSession();
   const idUser = session?.user?.sub || '';
   const getUser = (await goGetUserById(idUser)) || '';
-  const userConversation = getUser.user?.conversations;
+  const userConversation = getUser.user?.conversations || '';
 
   const chatData = await GetChats(userConversation);
 

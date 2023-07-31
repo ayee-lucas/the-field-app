@@ -35,6 +35,15 @@ type GetUserTypeErr = {
   message: 'User not found';
 };
 
+type GetChatsType = {
+  data: string[];
+};
+
+type GetChatsTypeErr = {
+  error: string;
+  message: 'Chat not found';
+};
+
 // TODO: DELETE THIS CODE
 
 // export async function GetInitialPosts(): Promise<GetPostsType> {
@@ -123,7 +132,6 @@ export async function GetMessages(
       data: chat.messages,
     };
   } catch (err) {
-    console.log(err);
     return {
       error: JSON.stringify(err),
       message: 'No Conversations',
@@ -133,7 +141,7 @@ export async function GetMessages(
 
 export async function GetChats(
   _id: string
-): Promise<GetConversationsType | GetConversationsTypeErr> {
+): Promise<GetChatsType | GetChatsTypeErr> {
   try {
     dbConnect();
 
@@ -147,10 +155,9 @@ export async function GetChats(
       data: conversations.chats,
     };
   } catch (err) {
-    console.log(err);
     return {
       error: JSON.stringify(err),
-      message: 'No Conversations',
+      message: 'Chat not found',
     };
   }
 }
