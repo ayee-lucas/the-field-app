@@ -1,7 +1,6 @@
-import {
-  Document, Schema, model, models,
-} from 'mongoose';
+import { Document, Schema, model, models } from 'mongoose';
 import { IPost } from './Post';
+import { IConversation } from './Conversations';
 
 // Interface for User document
 export interface IUser extends Document {
@@ -19,6 +18,7 @@ export interface IUser extends Document {
   bio?: string;
   followers: IUser['_id'][];
   posts: IPost['_id'][];
+  conversations: IConversation;
 }
 
 // Mongoose schema for User
@@ -69,7 +69,6 @@ const userSchema = new Schema<IUser>(
         type: Schema.Types.ObjectId,
         ref: 'Post',
       },
-
     ],
     bio: {
       type: String,
@@ -95,11 +94,15 @@ const userSchema = new Schema<IUser>(
       type: Date,
       default: Date.now,
     },
+    conversations: {
+      type: Schema.Types.ObjectId,
+      ref: 'Conversation',
+    },
   },
   {
     timestamps: true,
     versionKey: false,
-  },
+  }
 );
 
 // Create and export the User model
