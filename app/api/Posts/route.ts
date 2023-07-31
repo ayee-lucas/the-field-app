@@ -8,7 +8,7 @@ import Post from '@/app/models/Post';
 import Comment from '@/app/models/Comment';
 
 export async function GET(req: Request) {
-// Conectar a la base de datos
+  // Conectar a la base de datos
   dbConnect();
 
   const url = new URL(req.url);

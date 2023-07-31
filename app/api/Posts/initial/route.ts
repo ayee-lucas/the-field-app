@@ -15,13 +15,16 @@ export async function GET() {
       .sort({ createdAt: 'desc' })
       .limit(SCROLLING_PAGINATION_NUMBER);
 
-    if (posts.length === 0) return new NextResponse(JSON.stringify({ message: 'No Posts to show' }), { status: 404 });
+    if (posts.length === 0)
+      return new NextResponse(JSON.stringify({ message: 'No Posts to show' }), {
+        status: 404,
+      });
 
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (err) {
     return new NextResponse(
       JSON.stringify({ message: 'Error getting posts' }),
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

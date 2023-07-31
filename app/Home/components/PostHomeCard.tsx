@@ -1,9 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import {
-  FC, useRef, useEffect, useState,
-} from 'react';
+import { FC, useRef, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PostFormatted from '@/app/tools/postFormatter';
 import Link from 'next/link';
@@ -69,8 +67,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
 
         {post.author.name}
         <span className="text-sm text-gray-700 dark:text-zinc-500">
-          @
-          {post.author.username}
+          @{post.author.username}
         </span>
       </Link>
       <div className="relative">
@@ -79,36 +76,34 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
           ref={postContentRef}
           className="pt-4 text-gray-700 dark:text-gray-300 max-xl:max-h-[200px] overflow-hidden "
         >
-          { body }
-
+          {body}
         </p>
 
         {isTruncated && (
-          <button type="button" onClick={redirect} className="absolute w-full text-center dark:text-zinc-500 z-40 -bottom-1 rounded-t-lg dark:bg-black/70 backdrop-blur-sm shadow-[0px_-10px_30px_10px] dark:shadow-black shadow-white bg-white/70">
+          <button
+            type="button"
+            onClick={redirect}
+            className="absolute w-full text-center dark:text-zinc-500 z-40 -bottom-1 rounded-t-lg dark:bg-black/70 backdrop-blur-sm shadow-[0px_-10px_30px_10px] dark:shadow-black shadow-white bg-white/70"
+          >
             {body ? 'Show More' : 'Show Less'}
           </button>
         )}
-
       </div>
 
       {post.content.media.length > 0 && (
-      <div className="relative w-full h-full min-h-[300px]">
-        <Image
-          src={imagePost}
-          alt="imagePost"
-          fill
-          className="rounded-lg  object-cover"
-        />
-      </div>
+        <div className="relative w-full h-full min-h-[300px]">
+          <Image
+            src={imagePost}
+            alt="imagePost"
+            fill
+            className="rounded-lg  object-cover"
+          />
+        </div>
       )}
 
       <div className="flex items-center text-sm text-gray-700 dark:text-zinc-500 gap-3 w-full">
-        <span>
-          {formatedTime}
-        </span>
-        <span>
-          {formatedDate}
-        </span>
+        <span>{formatedTime}</span>
+        <span>{formatedDate}</span>
       </div>
 
       <PostFooterActions onClick={redirect} Post={post} sessionId={sessionId} />

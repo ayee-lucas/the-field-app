@@ -29,6 +29,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+
+import { Textarea } from '@/components/ui/textarea';
+
 import { Progress } from '@/components/ui/progress';
 
 import { Gauge } from 'lucide-react';
@@ -51,11 +54,11 @@ import { useState } from 'react';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { useRouter } from 'next/navigation';
 import PopOverButtonAth from './PopoverButtonAth';
-import { finishOrg, finishUser } from '../../actions';
 import {
   AthlFinishResolver,
   AthlFinishTypeFSchema,
 } from '../../schemas/athlFTypeSchema';
+import { finishAthl, finishUser } from '../../actions';
 
 export default function AthlFinishForm() {
   const router = useRouter();
@@ -73,16 +76,74 @@ export default function AthlFinishForm() {
       gender: '',
       sport: '',
       current_team: '',
+      sponsors: [],
       height: '',
       weight: '',
       achievements: '',
       contact: '',
-      links: '',
     },
   });
 
   const onSubmit = async (values: AthlFinishTypeFSchema) => {
     console.log(values);
+    setLoading(true);
+
+    const session = await getGoSession();
+
+    if (!session?.user?.sub) {
+      return setError('Error getting session user');
+    }
+
+    const userId = session?.user?.sub;
+
+    setTimeout(() => {
+      setProgress(25);
+    }, 700);
+
+    const dataFinishUser = {
+      name: values.name,
+      bio: values.bio,
+    };
+
+    setTimeout(() => {
+      setProgress(43);
+    }, 800);
+
+    const resUser = await finishUser(userId, dataFinishUser);
+
+    if (resUser.error) return setError(resUser.message);
+
+    setTimeout(() => {
+      setProgress(50);
+    }, 400);
+
+    const dataAthl = {
+      nationality: values.nationality,
+      gender: values.gender,
+      sport: values.sport,
+      sponsors: values.sponsors,
+      current_team: values.current_team,
+      height: Number(values.height),
+      weight: Number(values.weight),
+      achievements: values.achievements,
+      contact: values.contact,
+    };
+
+    setTimeout(() => {
+      setProgress(60);
+    }, 400);
+
+    const resAthl = await finishAthl(dataAthl, userId);
+
+    if ('error' in resAthl) {
+      return setError(resAthl.message);
+    }
+
+    setProgress(80);
+
+    localStorage.setItem('finished', 'trues');
+
+    return router.push('/account/picture/');
   };
 
   return (
@@ -121,10 +182,10 @@ export default function AthlFinishForm() {
           />
           <FormField
             control={form.control}
-            name="email"
+            name="contact"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormLabel htmlFor="contact">Contact</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter an email" {...field} />
                 </FormControl>
@@ -136,36 +197,80 @@ export default function AthlFinishForm() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>What's your gender</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your gender" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
           <PopOverButtonAth form={form} />
           <FormField
             control={form.control}
-            name="city"
+            name="current_team"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel htmlFor="city">City</FormLabel>
+                <FormLabel htmlFor="city">Current Team</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter the city your org is working"
-                    {...field}
-                  />
+                  <Input placeholder="Enter your current team" {...field} />
                 </FormControl>
                 <FormMessage className="text-xs" />
+                <FormDescription>
+                  If you are not in a team, leave it blank
+                </FormDescription>
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="website"
+            name="height"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel htmlFor="website">Website</FormLabel>
+              <FormItem className="w-full ">
+                <FormLabel htmlFor="website">What's your height?</FormLabel>
+
                 <FormControl>
                   <Input
-                    placeholder="You can add your website here"
+                    type="number"
+                    placeholder='Enter your height here in "cm" '
                     {...field}
                   />
                 </FormControl>
                 <FormMessage className="text-xs" />
+                <FormDescription>Enter your height in cm</FormDescription>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="weight"
+            render={({ field }) => (
+              <FormItem className="w-full relative">
+                <FormLabel htmlFor="website">What's your weight?</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder='Enter your weight here in "lbs"'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs" />
+                <FormDescription>Enter your height in cm</FormDescription>
               </FormItem>
             )}
           />
@@ -174,7 +279,7 @@ export default function AthlFinishForm() {
             name="sport"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Main sport</FormLabel>
+                <FormLabel>Sport</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -217,9 +322,6 @@ export default function AthlFinishForm() {
                     </SelectItem>
                   </SelectContent>
                 </Select>
-                <FormDescription>
-                  You can add more than 1 sport later
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -231,12 +333,12 @@ export default function AthlFinishForm() {
               <FormItem>
                 <FormLabel>Main sponsor</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  onValueChange={(value) => field.onChange([value])}
+                  defaultValue={field.value ? field.value[0] : undefined}
                 >
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a sport" />
+                    <SelectTrigger value="">
+                      <SelectValue placeholder="Select a sponsor" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="z-50">
@@ -290,10 +392,27 @@ export default function AthlFinishForm() {
                   </SelectContent>
                 </Select>
                 <FormDescription>
-                  If you don't see your sponsor, leave it blank you can add more
-                  later
+                  If you don't see your sponsor or don't have one, leave it
+                  blank. You can add more later.
                 </FormDescription>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="achievements"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel htmlFor="achievements">Achievements</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Tell us your achievements"
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-xs" />
               </FormItem>
             )}
           />

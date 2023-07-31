@@ -1,3 +1,1 @@
-export default function SuspenseCard() {
-
-}
+export default function SuspenseCard() {}

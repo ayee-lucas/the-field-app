@@ -70,8 +70,8 @@ export default function OrgFinishForm() {
       country: '',
       city: '',
       website: '',
-      sport: '',
-      sponsors: '',
+      sport: [],
+      sponsors: [],
     },
   });
 
@@ -81,7 +81,7 @@ export default function OrgFinishForm() {
     const session = await getGoSession();
 
     if (!session?.user?.sub) {
-      return setError('Error gettinng session user');
+      return setError('Error getting session user');
     }
 
     const userId = session?.user?.sub;
@@ -112,8 +112,8 @@ export default function OrgFinishForm() {
       email: values.email,
       city: values.city,
       website: values.website,
-      sport: [values.sport],
-      sponsor: [values.sport],
+      sport: values.sport,
+      sponsor: values.sponsors,
     };
 
     setTimeout(() => {
@@ -230,8 +230,8 @@ export default function OrgFinishForm() {
               <FormItem>
                 <FormLabel>Main sport</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  onValueChange={(value) => field.onChange([value])}
+                  defaultValue={field.value ? field.value[0] : undefined}
                 >
                   <FormControl>
                     <SelectTrigger>
@@ -285,12 +285,12 @@ export default function OrgFinishForm() {
               <FormItem>
                 <FormLabel>Main sponsor</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  onValueChange={(value) => field.onChange([value])}
+                  defaultValue={field.value ? field.value[0] : undefined}
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select a sport" />
+                      <SelectValue placeholder="Select a Sponsor" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="z-50">

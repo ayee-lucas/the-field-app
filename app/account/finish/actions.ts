@@ -2,6 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { OrgType } from '@/app/types/OrgType';
+import { AthleteType } from '@/app/types/Athlete';
 
 const goUrl = process.env.GO_BACKEND as string;
 
@@ -146,6 +147,68 @@ export async function finishOrg(
     });
 
     const json = await res.json();
+
+    if (!res.ok) {
+      return {
+        error: json.error,
+        message: json.message,
+      };
+    }
+
+    return json;
+  } catch (err) {
+    console.log(err);
+    return {
+      error: 'Fetch Error',
+      message: 'Something went wrong',
+    };
+  }
+}
+
+type AthlRes = {
+  result: {
+    id: string;
+    messsage: string;
+    athlete: AthleteType;
+  };
+};
+
+type AthlResError = {
+  message: string;
+  error: string;
+};
+
+type BodyAthlReq = {
+  nationality: string;
+  gender: string;
+  sport: string;
+  sponsors?: string[];
+  current_team?: string;
+  height: number;
+  weight: number;
+  achievements?: string;
+  contact: string;
+};
+
+export async function finishAthl(
+  values: BodyAthlReq,
+  id: string
+): Promise<AthlRes | AthlResError> {
+  try {
+    const sessionId = cookies().get('session');
+
+    const res = await fetch(`${goUrl}/api/users/request/athl/${id}`, {
+      method: 'POST',
+      body: JSON.stringify(values),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionId?.value}`,
+      },
+      cache: 'no-store',
+    });
+
+    const json = await res.json();
+
     console.log(json);
 
     if (!res.ok) {
