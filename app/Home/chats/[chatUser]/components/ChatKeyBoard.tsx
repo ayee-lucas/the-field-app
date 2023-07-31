@@ -29,6 +29,7 @@ export default function ChatKeyBoard({ user, chatId }: Props) {
     });
 
     console.log({ RES: res });
+    setText('');
     router.refresh();
   }
 

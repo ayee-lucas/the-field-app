@@ -33,9 +33,18 @@ export async function POST(request: NextRequest) {
 
     const user = await User.findOne({ username: json.sessionUser });
     console.log({ USER: user });
-    console.log({ USER_CONVERSATION: user.conversations[0] });
+    console.log({ USER_CONVERSATION: user.conversations });
     if (user) {
-      const conversation = await Conversation.findById(user.conversations[0]);
+      const conversation = await Conversation.findById(user.conversations);
+      conversation.chats.push(savedChat._id);
+      await conversation.save();
+    }
+
+    const secondUser = await User.findOne({ username: chat.username });
+    if (secondUser) {
+      const conversation = await Conversation.findById(
+        secondUser.conversations
+      );
       conversation.chats.push(savedChat._id);
       await conversation.save();
     }

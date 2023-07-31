@@ -143,13 +143,6 @@ export async function GetChats(
       'username name messages image'
     );
 
-    if (conversations.length === 0) {
-      return {
-        error: 'Conversations arr lenght 0',
-        message: 'No Conversations',
-      };
-    }
-
     return {
       data: conversations.chats,
     };

@@ -17,7 +17,7 @@ export default async function Page({
   const getUser = (await goGetUserById(idUser)) || '';
   const userConversation = getUser.user?.conversations;
 
-  const chatData = await GetChats(userConversation[0]);
+  const chatData = await GetChats(userConversation);
 
   console.log({ CHATDATA: chatData.data });
   const chat = await GetChatData(username);
