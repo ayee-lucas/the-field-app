@@ -10,8 +10,6 @@ import { redirect } from 'next/navigation';
 export default async function Page() {
   const session = await getServerSession(authOptions);
 
-  console.log(session?.user);
-
   if (session?.user) {
     redirect('/Home');
   }
@@ -41,36 +39,18 @@ export default async function Page() {
 
             <div className="absolute top-0 left-0 w-full h-full  text-white z-[2]">
               <h1 className="text-8xl font-bold px-2">
-                R
-                {' '}
-                <br />
-                {' '}
-                E
-                {' '}
-                <br />
-                {' '}
-                A
-                {' '}
-                <br />
-                {' '}
-                D
-                {' '}
-                <br />
+                R <br /> E <br /> A <br /> D <br />
                 <span className="text-fieldGreen"> Y?</span>
               </h1>
             </div>
           </div>
           <div className="w-full h-full p-4">
             <h1 className="text-4xl font-bold">
-              SIGN
-              {' '}
-              <span className="text-fieldGreen">UP</span>
+              SIGN <span className="text-fieldGreen">UP</span>
             </h1>
             <SignUpForm />
             <h1 className="text-sm py-4 ">
-              Already have an account?
-              {' '}
-              <LoginBtn />
+              Already have an account? <LoginBtn />
             </h1>
           </div>
         </div>

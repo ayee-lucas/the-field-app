@@ -46,18 +46,20 @@ export async function fetchPostById(id: any) {
 }
 
 type CreatePostType = {
-  error: unknown,
-  message: string,
+  error: unknown;
+  message: string;
   result?: {
-    id: string
-    message: string,
-    post: PostType
-  }
+    id: string;
+    message: string;
+    post: PostType;
+  };
 };
 
-export async function createPostGo(author:string, text?:string, media?:string)
-  :
-  Promise<CreatePostType> {
+export async function createPostGo(
+  author: string,
+  text?: string,
+  media?: string
+): Promise<CreatePostType> {
   try {
     const sessionId = cookies().get('session');
 
@@ -74,7 +76,6 @@ export async function createPostGo(author:string, text?:string, media?:string)
     console.log(data);
 
     const res = await fetch(`${goUrl}/api/posts/upload`, {
-
       method: 'POST',
       headers: {
         Authorization: `Bearer ${sessionId?.value}`,
@@ -92,7 +93,6 @@ export async function createPostGo(author:string, text?:string, media?:string)
     const res = {
       error: err,
       message: 'Error creating post',
-
     };
     return res;
   }
@@ -103,7 +103,6 @@ export async function createPostGo(author:string, text?:string, media?:string)
 export async function likePost(postId: any, userId: any) {
   try {
     dbConnect();
-    console.log({ postId, userId });
 
     const post = await Post.findById(postId).exec();
     if (!post) {
@@ -116,12 +115,9 @@ export async function likePost(postId: any, userId: any) {
     user?.likes?.push(postId);
     const userUpdated = await user?.save();
 
-    console.log({ USER_UPDATED: userUpdated });
-
     post.likes.push(userId);
     const updatedPost = await post.save();
 
-    console.log({ POST_UPDATED: updatedPost });
     return;
   } catch (err) {
     console.error(err);
@@ -135,7 +131,6 @@ export async function likePost(postId: any, userId: any) {
 export async function dislikePost(postId: any, userId: any) {
   try {
     dbConnect();
-    console.log({ postId, userId });
 
     const post = await Post.findById(postId).exec();
     if (!post) {
@@ -146,7 +141,6 @@ export async function dislikePost(postId: any, userId: any) {
     post.likes.pull(userId);
     const updatedPost = await post.save();
 
-    console.log({ POST_UPDATED: updatedPost });
     return;
   } catch (err) {
     console.error(err);
@@ -169,12 +163,14 @@ export async function fetchUserById(id: any) {
 }
 
 type FetchPostsType = {
-  error?: string,
-  message?: 'No Posts to show',
-  posts?: PostType
+  error?: string;
+  message?: 'No Posts to show';
+  posts?: PostType;
 };
 
-export async function fetchPostsOnScroll(query: string):Promise<FetchPostsType> {
+export async function fetchPostsOnScroll(
+  query: string
+): Promise<FetchPostsType> {
   try {
     const res = await fetch(nextUrl + query, {
       method: 'GET',

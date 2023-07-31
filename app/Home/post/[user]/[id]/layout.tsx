@@ -12,15 +12,19 @@ import PostBody from '../../components/PostBody';
 import MobileComents from '../../components/MobileComents';
 
 export default async function Post({
-  params, children,
+  params,
+  children,
 }: {
-  params: { id: string }, children: React.ReactNode
+  params: { id: string; user: string };
+  children: React.ReactNode;
 }) {
-  const post:IPost = await fetchPostById(params.id);
+  const post: IPost = await fetchPostById(params.id);
 
   const { title, body } = PostFormatted(post.content.text);
 
   const { formatedDate, formatedTime } = formatDate(post.createdAt);
+
+  console.log({ Params: params });
 
   // Delete this code
 
@@ -44,14 +48,11 @@ export default async function Post({
             />
             {post.author.name}
             <span className="text-sm text-gray-600 dark:text-zinc-500">
-              @
-              {post.author.username}
+              @{post.author.username}
             </span>
-
           </Link>
 
           <BsFillBookmarkDashFill className="text-gray-500" size={20} />
-
         </div>
         <PostBody title={title} body={body} />
 
@@ -65,17 +66,12 @@ export default async function Post({
         </div>
       </div>
       <div className="flex items-center gap-3 w-full text-sm pl-2 pb-3 text-gray-500">
-        <span>
-          {formatedTime}
-        </span>
-        <span>
-          {formatedDate}
-        </span>
+        <span>{formatedTime}</span>
+        <span>{formatedDate}</span>
       </div>
       <AddComment postAuthor={post.author.username} />
       <MobileComents />
       {children}
-
     </div>
   );
 }

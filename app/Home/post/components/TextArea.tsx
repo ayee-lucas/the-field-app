@@ -8,7 +8,6 @@ type Props = {
 
 export default function TextArea({ setText }: Props) {
   return (
-
     <div className="p-3">
       <textarea
         name=""

@@ -45,7 +45,6 @@ export default function PopOverButton({ form }: Props) {
       if ('error' in data) {
         setError(data.message);
       } else {
-        console.log(data[1].name);
         setCountries(data);
         setLoading(false);
       }
@@ -109,7 +108,6 @@ export default function PopOverButton({ form }: Props) {
                               value={`${country.name.common}`}
                               key={country.flag}
                               onSelect={(value) => {
-                                console.log(value);
                                 form.setValue('country', value);
                               }}
                             >

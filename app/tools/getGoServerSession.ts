@@ -18,7 +18,6 @@ export async function getGoSession() {
 
     const json = await res.json();
 
-    console.log(json);
 
     return json as Session;
   } catch (err) {

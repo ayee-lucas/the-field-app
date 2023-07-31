@@ -28,7 +28,6 @@ export async function POST(request: NextRequest) {
   try {
     // Parse the request body as JSON
     const json = await request.json();
-    console.log({ DataRequest: json });
 
     // Validate the required fields in the request body
     if (!json.recipient || !json.sender || !json.type) {
@@ -36,13 +35,12 @@ export async function POST(request: NextRequest) {
         JSON.stringify({
           message: 'Missing required fields in the request body.',
         }),
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     // Create a new notification object with the parsed data
     const data = new Notification(json);
-    console.log({ NotificationCreated: data });
 
     // Save the notification object to the database
     const notification = await data.save();

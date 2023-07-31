@@ -31,6 +31,5 @@ export default function DarkModeDropdown() {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-
   );
 }

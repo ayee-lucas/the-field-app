@@ -34,8 +34,6 @@ export async function finishUser(
 
     const json = await res.json();
 
-    console.log(json);
-
     if (!res.ok) {
       return {
         message: json.message,
@@ -208,8 +206,6 @@ export async function finishAthl(
     });
 
     const json = await res.json();
-
-    console.log(json);
 
     if (!res.ok) {
       return {

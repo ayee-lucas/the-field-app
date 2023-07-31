@@ -15,8 +15,6 @@ export default async function HomeLayout({
   if (session?.user) {
     const getUser = await goGetUserById(session?.user?.sub);
 
-    console.log({ USER: getUser });
-
     if (!getUser.user?.finished) {
       return redirect('/account/finish');
     }
@@ -25,7 +23,9 @@ export default async function HomeLayout({
   return (
     <section>
       <OuterLayoutClient session={session as Session} />
-      <div className="pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0 max-sm:pt-3">{children}</div>
+      <div className="pl-[240px] pr-[20rem] max-lg:pl-0 max-lg:pr-0 max-sm:pt-3">
+        {children}
+      </div>
     </section>
   );
 }

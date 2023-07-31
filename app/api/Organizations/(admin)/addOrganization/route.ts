@@ -10,11 +10,9 @@ export async function POST(request: NextRequest) {
   try {
     // Parse the request body as JSON
     const json = await request.json();
-    console.log({ DataRequest: json });
 
     // Create a new notification object with the parsed data
     const data = new Organization(json);
-    console.log({ OrganizationCreated: data });
 
     // Save the notification object to the database
     const organization = await data.save();
