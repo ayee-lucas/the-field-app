@@ -10,8 +10,6 @@ export async function POST(req: NextRequest) {
   try {
     const json: IUser = await req.json();
 
-    console.log(json);
-
     const credentials = {
       username: json.username,
       password: json.password,
@@ -20,14 +18,14 @@ export async function POST(req: NextRequest) {
     if (credentials.username.length < 3) {
       return new NextResponse(
         JSON.stringify({ message: 'Username too short' }),
-        { status: 400 },
+        { status: 400 }
       );
     }
 
     if (credentials.password.length < 8) {
       return new NextResponse(
         JSON.stringify({ message: 'Password too short' }),
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -41,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     const isPasswordValid = await comparePassword(
       credentials.password,
-      user.password,
+      user.password
     );
 
     if (!isPasswordValid) {
@@ -67,7 +65,6 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.log(err);
     const json = await req.json();
-    console.log(json);
     return new NextResponse(JSON.stringify({ err, json }), { status: 500 });
   }
 }

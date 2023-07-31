@@ -85,7 +85,6 @@ export default function AthlFinishForm() {
   });
 
   const onSubmit = async (values: AthlFinishTypeFSchema) => {
-    console.log(values);
     setLoading(true);
 
     const session = await getGoSession();

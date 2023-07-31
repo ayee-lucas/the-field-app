@@ -21,7 +21,6 @@ export default function CountryList({ form }: Props) {
       if ('error' in data) {
         setError(data.message);
       } else {
-        console.log(data[1].name);
         setCountries(data);
         setLoading(false);
       }

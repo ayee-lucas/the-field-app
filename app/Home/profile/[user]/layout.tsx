@@ -1,11 +1,10 @@
-import { getServerSession } from 'next-auth';
-import { IUser } from '@/app/models/User';
+/* eslint-disable no-nested-ternary */
 import { RxDotFilled } from 'react-icons/rx';
 import Image from 'next/image';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { Session } from '@/app/types/sessionType';
-import defaultImage from '../../../../public/images/default_user.png';
+import defaultImage from '@/public/images/default_user.png';
+import { UserType } from '@/app/types/userType';
 import Followbtn from './components/Followbtn';
 import { getProfile } from './actions/actions';
 import Messagebtn from './components/Messagebtn';
@@ -21,13 +20,11 @@ export default async function ProfileLayout({
   params: { user: string };
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-
   const goSession = await getGoSession();
 
-  //  const id = session?.user?.sub;
+  const userget: string = await getProfile(params.user);
 
-  const user: IUser = await getProfile(params.user);
+  const user: UserType = JSON.parse(userget);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -44,25 +41,25 @@ export default async function ProfileLayout({
             className="absolute rounded-lg w-full h-full object-cover"
           />
 
-          {session?.user?.username !== user.username ? null : (
+          {goSession?.user?.username !== user.username ? null : (
             <div className="opacity-0 text-sm hover:opacity-100 absolute bottom-0 left-0 w-full h-1/4 transition-all z-[1] cursor-pointer bg-black/70 text-white flex justify-center items-center">
               Edit cover
             </div>
           )}
 
           <div className="absolute mt-28 ml-7 max-sm:ml-3 max-sm:mt-32">
-            <div className="relative z-[2] rounded-full h-full w-[180px] min-h-[180px] max-sm:w-[120px] max-sm:min-h-[120px] bg-white">
+            <div className="relative z-[2] rounded-full h-full w-[180px] min-h-[180px] max-sm:w-[120px] max-sm:min-h-[120px] dark:bg-zinc-900 bg-gray-100">
               <Image
                 src={
-                  session?.user?.image
-                    ? `${session?.user?.image}`
+                  user.picture.pictureURL
+                    ? user.picture.pictureURL
                     : defaultImage
                 }
                 alt="user image"
                 fill
                 className="absolute w-full h-full z-[2] object-cover rounded-full border-[3px] border-gray-700"
               />
-              {session?.user?.username !== user.username ? null : (
+              {goSession?.user?.username !== user.username ? null : (
                 <div className="opacity-0 text-sm hover:opacity-100 absolute bottom-0 left-0 w-full h-1/2 transition-all z-[3] rounded-b-full cursor-pointer bg-black/70 text-white flex justify-center items-center">
                   Edit picture
                 </div>
@@ -72,42 +69,45 @@ export default async function ProfileLayout({
         </div>
       </div>
       <div className="w-full h-full flex flex-col px-3 pt-24 max-sm:pt-14 text-black">
-        <div className="flex w-full h-full justify-start items-center gap-5">
-          <h1 className="text-6xl max-sm:text-3xl dark:text-white">{user.name}</h1>
-          {user.online ? (
+        <div className="flex w-full h-full justify-between items-center gap-5">
+          <h1 className="text-6xl max-sm:text-3xl dark:text-white">
+            {user.name}
+          </h1>
+          {goSession?.user?.username !== user.username ? (
+            user.online ? (
+              <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
+                <RxDotFilled className="text-green-500" />
+                ONLINE
+              </div>
+            ) : (
+              <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
+                <RxDotFilled className="text-red-500" />
+                OFFLINE
+              </div>
+            )
+          ) : (
             <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
               <RxDotFilled className="text-green-500" />
               ONLINE
-            </div>
-          ) : (
-            <div className="text-lg max-sm:text-sm text-gray-500 flex items-center gap-1">
-              <RxDotFilled className="text-red-500" />
-              OFFLINE
             </div>
           )}
         </div>
         <div className="flex w-full h-full justify-start items-center gap-5 select-none max-sm:text-sm">
           <h1 className="px-2 text-xl max-sm:text-sm text-gray-500 max-sm:px-0">
-            @
-            {user.username}
+            @{user.username}
           </h1>
           <h1 className=" text-gray-800 max-sm:text-gray-500 cursor-pointer">
-            {user.followers.length}
-            {' '}
-            followers
+            {user.followers.length} followers
           </h1>
 
           <h1 className=" text-gray-800 max-sm:text-gray-500 cursor-pointer">
-            {user.followers.length}
-            {' '}
-            following
+            {user.followers.length} following
           </h1>
         </div>
-        {session?.user?.username !== user.username ? (
+        {goSession?.user?.username !== user.username ? (
           <div className="flex w-full h-full justify-start items-center gap-5">
             <Followbtn />
-            <Messagebtn />
-            {' '}
+            <Messagebtn />{' '}
           </div>
         ) : (
           <div className="flex w-full h-full justify-start max-sm:items-center items-center gap-5">
@@ -117,14 +117,16 @@ export default async function ProfileLayout({
         )}
 
         <div className="w-full h-full flex flex-col justify-center items-start p-4 gap-5 rounded-lg border border-gray-300">
-          <h1 className="text-lg text-black font-semibold dark:text-white">BIO</h1>
+          <h1 className="text-lg text-black font-semibold dark:text-white">
+            BIO
+          </h1>
           <p className="text-gray-600 dark:text-zinc-400">{user.bio}</p>
         </div>
 
         <NavProfile />
-        { session?.user?.username !== user.username ? null
-
-          : <ClientNewPost session={goSession as Session} />}
+        {goSession?.user?.username !== user.username ? null : (
+          <ClientNewPost session={goSession as Session} />
+        )}
         <div className="px-2">{children}</div>
       </div>
     </section>

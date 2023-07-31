@@ -8,5 +8,5 @@ export async function getProfile(username: any) {
 
   const userFind = await User.findOne({ username });
 
-  return userFind;
+  return JSON.stringify(userFind);
 }

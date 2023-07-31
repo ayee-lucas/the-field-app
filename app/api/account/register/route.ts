@@ -65,8 +65,6 @@ export async function POST(req: NextRequest) {
 
     await user.save();
 
-    console.log({ userSaved: user });
-
     return new NextResponse(JSON.stringify({ message: 'success', user }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },

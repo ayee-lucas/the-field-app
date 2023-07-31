@@ -108,7 +108,6 @@ export default function PopOverButtonAth({ form }: Props) {
                               value={`${country.name.common}`}
                               key={country.flag}
                               onSelect={(value) => {
-                                console.log(value);
                                 form.setValue('nationality', value);
                               }}
                             >

@@ -31,8 +31,9 @@ export default function Comment() {
 
           <p className="text-gray-300">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Perferendis natus debitis ex unde, modi magni iusto labore perspiciatis
-            fuga tenetur vel totam harum eum quisquam, officia esse earum ullam consequuntur.
+            Perferendis natus debitis ex unde, modi magni iusto labore
+            perspiciatis fuga tenetur vel totam harum eum quisquam, officia esse
+            earum ullam consequuntur.
           </p>
         </div>
       </div>
@@ -54,29 +55,34 @@ export default function Comment() {
           <div className="w-full flex gap-2 items-center">
             <BsArrowReturnRight />
             <p className="text-gray-300">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Optio autem commodi,
-              neque nobis laborum ea sunt magni, eius alias aspernatur dolores a
-              at id eveniet voluptatibus...
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+              autem commodi, neque nobis laborum ea sunt magni, eius alias
+              aspernatur dolores a at id eveniet voluptatibus...
             </p>
           </div>
-
         </div>
 
         <div />
       </div>
 
-      <span className="text-sm text-gray-600 w-full h-full text-center py-1 bg-gray-200 dark:bg-zinc-900 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-zinc-800 cursor-pointer" role="button">Show 23 replies</span>
+      <span
+        className="text-sm text-gray-600 w-full h-full text-center py-1 bg-gray-200 dark:bg-zinc-900 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-zinc-800 cursor-pointer"
+        role="button"
+      >
+        Show 23 replies
+      </span>
 
       <div className="flex items-center justify-between w-full h-full px-4 pt-2">
         <div className="flex items-center gap-1">
           <AiOutlineHeart className="cursor-pointer" />
           <span className="text-sm">31</span>
         </div>
-        <button type="button" className="bg-gray-200 text-sm hover:text-fieldGreen py-1 px-4 rounded-xl flex gap-1 items-center">
+        <button
+          type="button"
+          className="bg-gray-200 text-sm hover:text-fieldGreen py-1 px-4 rounded-xl flex gap-1 items-center"
+        >
           Reply
           <HiReply />
-
         </button>
       </div>
     </div>

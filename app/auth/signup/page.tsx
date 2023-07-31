@@ -10,14 +10,14 @@ import SignUpForm from './components/SignUpForm';
 export default async function Page() {
   const session = await getGoSession();
 
-  console.log(session);
-
   if (session?.status === 'authenticated') {
     redirect('/Home');
   }
 
   return (
-    <main className={`relative min-h-screen w-full flex flex-col max-sm:px-2 max-lg:px-5 justify-center items-center bg-black ${montserrat.variable}`}>
+    <main
+      className={`relative min-h-screen w-full flex flex-col max-sm:px-2 max-lg:px-5 justify-center items-center bg-black ${montserrat.variable}`}
+    >
       <Image
         src={bg}
         fill
@@ -44,43 +44,21 @@ export default async function Page() {
 
             <div className="absolute top-0 left-0 w-full h-full  text-white z-[2]">
               <h1 className="text-8xl font-bold px-2">
-                R
-                {' '}
-                <br />
-                {' '}
-                E
-                {' '}
-                <br />
-                {' '}
-                A
-                {' '}
-                <br />
-                {' '}
-                D
-                {' '}
-                <br />
+                R <br /> E <br /> A <br /> D <br />
                 <span className="text-fieldGreen"> Y?</span>
               </h1>
             </div>
           </div>
           <div className="w-full h-full p-4 max-sm:p-1">
             <h1 className="text-4xl font-bold pb-5 max-sm:pb-2">
-              SIGN
-              {' '}
-              <span className="text-fieldGreen">UP</span>
+              SIGN <span className="text-fieldGreen">UP</span>
             </h1>
             <h1 className="text-xl py-6 max-sm:py-2 max-sm:text-lg font-medium font-montserrat">
-              CREATE
-              {' '}
-              <span className="text-fieldGreen">AN</span>
-              {' '}
-              ACCOUNT
+              CREATE <span className="text-fieldGreen">AN</span> ACCOUNT
             </h1>
             <SignUpForm />
             <h1 className="text-sm py-4 max-sm:py-0">
-              Already have an account?
-              {' '}
-              <LoginBtn />
+              Already have an account? <LoginBtn />
             </h1>
           </div>
         </div>

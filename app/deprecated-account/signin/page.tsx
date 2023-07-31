@@ -11,9 +11,7 @@ export default async function Page() {
     redirect('/Home/');
   }
 
-  console.log({
-    session: session?.user,
-  });
+
 
   return <LoginClient />;
 }
