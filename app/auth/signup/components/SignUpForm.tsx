@@ -17,8 +17,8 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { SignUpFResolver, SignUpTypeFSchema } from './signupTypeFSchema';
-import { goSignUp } from '../actions';
+import { goSignUp } from '@/app/server-actions/signup/actions';
+import { SignUpFResolver, SignUpTypeFSchema } from '@/resolvers/signupResolver';
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -52,7 +52,7 @@ export default function SignUpForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
-        {error !== '' && (<FormMessage className="text-xs">{error}</FormMessage>)}
+        {error !== '' && <FormMessage className="text-xs">{error}</FormMessage>}
 
         {/** Username Form Field */}
         <FormField
@@ -60,13 +60,13 @@ export default function SignUpForm() {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="username" className="text-xs font-normal">Username</FormLabel>
+              <FormLabel htmlFor="username" className="text-xs font-normal">
+                Username
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Enter an username" {...field} />
               </FormControl>
-              <FormDescription>
-                Create an unique username
-              </FormDescription>
+              <FormDescription>Create an unique username</FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
@@ -77,13 +77,13 @@ export default function SignUpForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="email" className="text-xs font-normal">Email</FormLabel>
+              <FormLabel htmlFor="email" className="text-xs font-normal">
+                Email
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Enter an email" {...field} />
               </FormControl>
-              <FormDescription>
-                Your email
-              </FormDescription>
+              <FormDescription>Your email</FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
@@ -94,13 +94,17 @@ export default function SignUpForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="password" className="text-xs font-normal">Password</FormLabel>
+              <FormLabel htmlFor="password" className="text-xs font-normal">
+                Password
+              </FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Enter a password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Enter a password"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>
-                Create a strong password
-              </FormDescription>
+              <FormDescription>Create a strong password</FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
@@ -111,13 +115,20 @@ export default function SignUpForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="confirm-password" className="text-xs font-normal">Confirm Password</FormLabel>
+              <FormLabel
+                htmlFor="confirm-password"
+                className="text-xs font-normal"
+              >
+                Confirm Password
+              </FormLabel>
               <FormControl>
-                <Input type="password" placeholder="Enter your password" {...field} />
+                <Input
+                  type="password"
+                  placeholder="Enter your password"
+                  {...field}
+                />
               </FormControl>
-              <FormDescription>
-                Confirm your password
-              </FormDescription>
+              <FormDescription>Confirm your password</FormDescription>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
@@ -128,10 +139,7 @@ export default function SignUpForm() {
         >
           Sign Up
         </Button>
-
       </form>
-
     </Form>
-
   );
 }

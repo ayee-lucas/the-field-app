@@ -16,8 +16,8 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
-import { SignInFResolver, SignInTypeFSchema } from './signInTypeFSchema';
-import goSignIn from '../actions';
+import goSignIn from '@/app/server-actions/signin/actions';
+import { SignInTypeFSchema, SignInFResolver } from '@/resolvers/signinResolver';
 
 export default function SignInForm() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function SignInForm() {
         setLoading(false);
       }
     } else {
-      router.push('/Home');
+      router.push('/feed');
       router.refresh();
     }
   }
@@ -57,9 +57,18 @@ export default function SignInForm() {
           name="username"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="username" className={`text-xs font-normal ${error ? 'text-red-500' : ''}`}>Username</FormLabel>
+              <FormLabel
+                htmlFor="username"
+                className={`text-xs font-normal ${error ? 'text-red-500' : ''}`}
+              >
+                Username
+              </FormLabel>
               <FormControl>
-                <Input disabled={loading} placeholder="Enter your username" {...field} />
+                <Input
+                  disabled={loading}
+                  placeholder="Enter your username"
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="text-xs" />
             </FormItem>
@@ -71,19 +80,36 @@ export default function SignInForm() {
           name="password"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel htmlFor="password" className={`text-xs font-normal ${error ? 'text-red-500' : ''}`}>Password</FormLabel>
+              <FormLabel
+                htmlFor="password"
+                className={`text-xs font-normal ${error ? 'text-red-500' : ''}`}
+              >
+                Password
+              </FormLabel>
               <FormControl>
-                <Input disabled={loading} type="password" placeholder="Enter your password" className={`${error ? 'border-red-500 focus:outline-none focus:ring-red-500' : ''}`} {...field} />
+                <Input
+                  disabled={loading}
+                  type="password"
+                  placeholder="Enter your password"
+                  className={`${error
+                      ? 'border-red-500 focus:outline-none focus:ring-red-500'
+                      : ''
+                    }`}
+                  {...field}
+                />
               </FormControl>
               <FormMessage className="text-xs" />
             </FormItem>
           )}
         />
 
-        {error !== '' && (<FormMessage className="text-xs">{error === 'Server Error' ? 'Something went wrong' : error }</FormMessage>)}
+        {error !== '' && (
+          <FormMessage className="text-xs">
+            {error === 'Server Error' ? 'Something went wrong' : error}
+          </FormMessage>
+        )}
 
         {loading ? (
-
           <Button
             type="submit"
             disabled={loading}
@@ -102,7 +128,6 @@ export default function SignInForm() {
             Sign in
           </Button>
         )}
-
       </form>
     </Form>
   );
