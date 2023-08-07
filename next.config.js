@@ -16,7 +16,6 @@ const nextConfig = {
     ],
   },
   experimental: {
-    serverComponentsExternalPackages: ['mongoose'],
     serverActions: true,
   },
   eslint: {
