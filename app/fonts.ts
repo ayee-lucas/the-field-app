@@ -65,5 +65,13 @@ const ubuntu = Ubuntu({
 });
 
 export {
-  montserrat, inter, poppins, openSans, roboto, playfair, flowCircular, quicksand, ubuntu,
+  montserrat,
+  inter,
+  poppins,
+  openSans,
+  roboto,
+  playfair,
+  flowCircular,
+  quicksand,
+  ubuntu,
 };
