@@ -1,0 +1,204 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_URI")
+}
+
+type PrictureType {
+  pictureKey String
+  pictureURL String
+}
+
+type MediaType {
+  MediaKey String
+  MediaURL String
+}
+
+type ContentType {
+  text  String
+  media MediaType
+}
+
+model User {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  username       String       @unique(map: "username_1")
+  email          String       @unique(map: "email_1")
+  email_verified Boolean
+  password       String
+  role           String
+  verified       Boolean
+  picture        PrictureType
+  profile_id     String       @db.ObjectId
+  created_at     DateTime     @default(now()) @db.Date
+  updated_at     DateTime     @updatedAt @db.Date
+
+  Profile           Profile             @relation(fields: [profile_id], references: [id])
+  Starred           Starred[]
+  Posts             Post[]
+  Following         Follow[]            @relation("Following")
+  Follower          Follow[]            @relation("Follower")
+  Like              Like[]
+  Comments          Comments[]
+  MessageThread     MessageThread[]
+  ThreadParticipant ThreadParticipant[]
+  Message           Message[]
+}
+
+model Profile {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  bio             String
+  type_id         String   @db.ObjectId
+  prefered_sports String[]
+  online          Boolean
+  finished        Boolean
+  created_at      DateTime @default(now()) @db.Date
+  updated_at      DateTime @updatedAt @db.Date
+
+  User    User[]
+  Athlete Athlete? @relation(fields: [type_id], references: [id])
+  Team    Team?    @relation(fields: [type_id], references: [id])
+}
+
+model Session {
+  id         String       @id @map("_id")
+  sub        String       @db.ObjectId
+  username   String
+  email      String
+  role       String
+  picture    PrictureType
+  expire_on  BigInt
+  created_at DateTime     @default(now()) @db.Date
+
+  @@index([created_at], map: "created_at_1")
+}
+
+model Athlete {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  nationality  String
+  gender       String
+  sport        String
+  sponsors     String[]
+  current_team String
+  height       Int
+  weight       Int
+  achievements String
+  contact      String
+  created_at   DateTime @default(now()) @db.Date
+  updated_at   DateTime @updatedAt @db.Date
+
+  Profile Profile[]
+}
+
+model Team {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  official   Boolean
+  country    String
+  email      String
+  city       String
+  links      String[]
+  sport      String
+  sponsor    String[]
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  Profiles Profile[]
+}
+
+model Follow {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  follower_id  String   @db.ObjectId
+  following_id String   @db.ObjectId
+  created_at   DateTime @default(now()) @db.Date
+  updated_at   DateTime @updatedAt @db.Date
+
+  Follower  User @relation("Follower", fields: [follower_id], references: [id])
+  Following User @relation("Following", fields: [following_id], references: [id])
+}
+
+model Post {
+  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  author_id     String      @db.ObjectId
+  content       ContentType
+  original_post String      @db.ObjectId
+  created_at    DateTime    @default(now()) @db.Date
+  updated_at    DateTime    @updatedAt @db.Date
+
+  Starred  Starred[]
+  Author   User       @relation(fields: [author_id], references: [id])
+  Like     Like[]
+  Comments Comments[]
+}
+
+model Starred {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String   @db.ObjectId
+  post_id    String   @db.ObjectId
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  User User @relation(fields: [user_id], references: [id])
+  Post Post @relation(fields: [post_id], references: [id])
+}
+
+model Like {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String   @db.ObjectId
+  post_id    String   @db.ObjectId
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  User User @relation(fields: [user_id], references: [id])
+  Post Post @relation(fields: [post_id], references: [id])
+}
+
+model Comments {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  author_id  String      @db.ObjectId
+  post_id    String      @db.ObjectId
+  content    ContentType
+  created_at DateTime    @default(now()) @db.Date
+  updated_at DateTime    @updatedAt @db.Date
+
+  User User @relation(fields: [author_id], references: [id])
+  Post Post @relation(fields: [post_id], references: [id])
+}
+
+model MessageThread {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String   @db.ObjectId
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  User         User                @relation(fields: [user_id], references: [id])
+  Participants ThreadParticipant[]
+  Message      Message[]
+}
+
+model ThreadParticipant {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  user_id    String   @db.ObjectId
+  thread_id  String   @db.ObjectId
+  created_at DateTime @default(now()) @db.Date
+  updated_at DateTime @updatedAt @db.Date
+
+  User   User          @relation(fields: [user_id], references: [id])
+  Thread MessageThread @relation(fields: [thread_id], references: [id])
+
+  @@unique([user_id, thread_id])
+}
+
+model Message {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  thread_id  String      @db.ObjectId
+  user_id    String      @db.ObjectId
+  content    ContentType
+  created_at DateTime    @default(now()) @db.Date
+  updated_at DateTime    @updatedAt @db.Date
+
+  User   User          @relation(fields: [user_id], references: [id])
+  Thread MessageThread @relation(fields: [thread_id], references: [id])
+}

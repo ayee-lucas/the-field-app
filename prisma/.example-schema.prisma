@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type PostsContent {
+  media String[]
+  text  String
+}
+
+type SessionPicture {
+  pictureKey String
+  pictureURL String
+}
+
+type UsersPicture {
+  pictureKey String
+  pictureURL String
+}
+
+model athlete {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  achievements String
+  contact      String
+  current_team String
+  gender       String
+  height       Int
+  nationality  String
+  sponsors     String[]
+  sport        String
+  weight       Int
+}
+
+model chats {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @db.Date
+  image     String
+  messages  String[]
+  name      String
+  updatedAt DateTime @db.Date
+  username  String   @unique(map: "username_1")
+}
+
+model comments {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model conversations {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  chats     String[]
+  createdAt DateTime @db.Date
+  updatedAt DateTime @db.Date
+}
+
+model messages {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  createdAt DateTime @db.Date
+  date      DateTime @db.Date
+  updatedAt DateTime @db.Date
+  username  String
+}
+
+model notifications {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model org {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  city     String
+  country  String
+  email    String
+  official Boolean
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  sponsor  Json?
+  sport    String[]
+  website  String
+}
+
+model organizations {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model posts {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int?         @map("__v")
+  author    String       @db.ObjectId
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  comments  Json?
+  content   PostsContent
+  createdAt DateTime     @db.Date
+  likes     String[]
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  repost    Json?
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  starred   Json?
+  updatedAt DateTime     @db.Date
+}
+
+model session {
+  id         String         @id @map("_id")
+  created_at DateTime       @db.Date
+  email      String
+  expire_on  BigInt
+  image      String
+  picture    SessionPicture
+  role       String
+  sub        String         @db.ObjectId
+  username   String
+
+  @@index([created_at], map: "created_at_1")
+}
+
+model users {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  /// Multiple data types found: String: 11.1%, String (ObjectId): 88.9% out of 9 sampled entries
+  athlete       Json
+  bio           String
+  conversations String       @db.ObjectId
+  created_at    DateTime     @db.Date
+  email         String       @unique(map: "email_1")
+  finished      Boolean
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  followers     Json?
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  following     Json?
+  likes         String[]
+  name          String
+  online        Boolean
+  /// Multiple data types found: String: 11.1%, String (ObjectId): 88.9% out of 9 sampled entries
+  org           Json
+  password      String
+  picture       UsersPicture
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  posts         Json?
+  role          String
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  sport         Json?
+  updatedAt     DateTime     @db.Date
+  updated_at    DateTime     @db.Date
+  username      String       @unique(map: "username_1")
+  verified      Boolean
+}
