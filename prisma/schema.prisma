@@ -123,7 +123,7 @@ model Post {
   id            String      @id @default(auto()) @map("_id") @db.ObjectId
   author_id     String      @db.ObjectId
   content       ContentType
-  original_post String      @db.ObjectId
+  original_post String?     @db.ObjectId
   created_at    DateTime    @default(now()) @db.Date
   updated_at    DateTime    @updatedAt @db.Date
 
