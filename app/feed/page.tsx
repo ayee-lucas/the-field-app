@@ -6,6 +6,7 @@ import { getGoSession } from '../tools/getGoServerSession';
 import { Session } from '../types/sessionType';
 import { FeedHandlerClient } from './components/FeedHandlerCLient';
 import NewPostHandler from './components/NewPostHandler';
+import NoPostsFound from './components/NoPostsFound';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,9 +23,7 @@ export default async function Page() {
         <Suspense fallback={<div>Loading...</div>}>
           <NewPostHandler />
         </Suspense>
-        <div className="w-full flex justify-center items-center">
-          There are no posts to show
-        </div>
+        <NoPostsFound />
       </div>
     );
   }
