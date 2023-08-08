@@ -32,7 +32,9 @@ export default function FeedBar() {
     <div
       className={`w-full flex flex-col gap-2 items-start justify-center py-5 bg-transparent ${montserrat.variable}`}
     >
-      <h1 className="text-xl font-bold font-montserrat">TRENDING 📈 </h1>
+      <h1 className="text-xl font-bold font-montserrat">
+        <span className="text-fieldGreen">T</span>RENDING 📈{' '}
+      </h1>
       <div className="w-full flex items-center justify-between gap-2 overflow-x-auto">
         {cardData.map((data) => (
           <PostBarCard title={data.title} desc={data.desc} img={data.img} />
