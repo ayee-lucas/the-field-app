@@ -1,6 +1,6 @@
 'use client';
 
-import { inter } from '@/app/fonts';
+import { inter, quicksand } from '@/app/fonts';
 import { PenSquare, Upload } from 'lucide-react';
 import { useContext } from 'react';
 import { NEWPOST_CONTEXT_ERROR } from '@/app/config';
@@ -13,7 +13,7 @@ export default function NewPostButton() {
     throw new Error(NEWPOST_CONTEXT_ERROR);
   }
 
-  const { loading } = context;
+  const { loading, setToggleEditor } = context;
 
   if (loading) {
     return (
@@ -35,10 +35,11 @@ export default function NewPostButton() {
   return (
     <button
       type="button"
-      className={`w-full py-5 px-3 border border-fieldGreen rounded-md flex items-center justify-between ${inter.variable}`}
+      onClick={() => setToggleEditor(true)}
+      className={`w-full py-5 px-3 border border-zinc-500 rounded-md flex items-center justify-between bg-zinc-950 ${quicksand.className}`}
     >
-      <h1 className="font-inter font-semibold">
-        What's on your <span className="text-fieldGreen">mind</span>
+      <h1 className="font-quicksand text-lg font-semibold">
+        <span className="text-fieldGreen"> What's </span> on your mind
       </h1>
       <PenSquare size={20} />
     </button>
