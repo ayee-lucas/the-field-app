@@ -1,13 +1,18 @@
 'use client';
 
+import { FEED_ROUTE } from '@/app/config';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import {
-  AiOutlineHome, AiOutlineBell, AiOutlineComment, AiOutlineStar,
+  AiOutlineHome,
+  AiOutlineBell,
+  AiOutlineComment,
+  AiOutlineStar,
 } from 'react-icons/ai';
 
 export const NavDown = () => {
   const [visible, setVisible] = useState(false);
+  const [index, setIndex] = useState(1);
 
   useEffect(() => {
     let prevScrollPos = window.pageYOffset;
@@ -28,18 +33,41 @@ export const NavDown = () => {
   }, []);
 
   return (
-    <div className={`fixed ${visible ? 'translate-y-full' : 'translate-y-0'} bottom-0 w-full h-[50px] text-lg z-50 lg:translate-y-full transition-all`}>
-      <div className="border-t border-gray-200 dark:border-zinc-700 flex justify-evenly text-center h-full px-3 py-4 bg-gray-50 dark:bg-black/40 backdrop-blur-xl backdrop-saturate-200  dark:text-white">
-        <Link href="/Home">
+    <div
+      className={`fixed ${visible ? 'translate-y-[100%] opacity-0' : 'translate-y-0'
+        } bottom-5 w-full px-9 h-[50px] text-lg z-50 lg:translate-y-full transition-all`}
+    >
+      <div className="flex w-full py-1 rounded-xl items-center justify-evenly bg-zinc-800/40 backdrop-blur backdrop-saturate-150">
+        <Link
+          onClick={() => setIndex(1)}
+          className={`transition-all ${index === 1 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+            }`}
+          href={FEED_ROUTE}
+        >
           <AiOutlineHome />
         </Link>
-        <Link href="/Home">
+        <Link
+          onClick={() => setIndex(2)}
+          className={`transition-all ${index === 2 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+            }`}
+          href={FEED_ROUTE}
+        >
           <AiOutlineComment />
         </Link>
-        <Link href="/Home">
+        <Link
+          onClick={() => setIndex(3)}
+          className={`transition-all ${index === 3 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+            }`}
+          href={FEED_ROUTE}
+        >
           <AiOutlineBell />
         </Link>
-        <Link href="/Home">
+        <Link
+          onClick={() => setIndex(4)}
+          className={`transition-all ${index === 4 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+            }`}
+          href={FEED_ROUTE}
+        >
           <AiOutlineStar />
         </Link>
       </div>
