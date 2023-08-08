@@ -22,7 +22,7 @@ export async function userEntered(
 ): Promise<OnlineStatusRes | StatusResError> {
   try {
     const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/user/status/online/${id}`,
+      `${process.env.NEXT_URL}/api/user/status/online/${id}`,
       {
         method: 'PUT',
         cache: 'no-store',
@@ -56,7 +56,7 @@ export async function userExit(
 ): Promise<OfflineStatusRes | StatusResError> {
   try {
     const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/user/status/offline/${id}`,
+      `${process.env.NEXT_URL}/api/user/status/offline/${id}`,
       {
         method: 'PUT',
         cache: 'no-store',
