@@ -1,9 +1,7 @@
 import { Suspense } from 'react';
 import { GetInitialPosts } from '@/app/server-actions/feed/actions';
 import FeedBar from './components/FeedBar';
-import ClientNewPost from './components/ClientNewPost';
 import { getGoSession } from '../tools/getGoServerSession';
-import { Session } from '../types/sessionType';
 import { FeedHandlerClient } from './components/FeedHandlerCLient';
 import NewPostHandler from './components/NewPostHandler';
 import NoPostsFound from './components/NoPostsFound';
@@ -33,17 +31,15 @@ export default async function Page() {
       <h1 className="text-4xl py-3 font-bold dark:text-white">Feed</h1>
       <FeedBar />
       <Suspense fallback={<div>Loading...</div>}>
-        {/* <ClientNewPost session={session as Session} /> */}
+        <NewPostHandler />
       </Suspense>
-      {/* {postsData.data?.length === 0 ? ( */}
-      {/*   <div className="w-full flex justify-center items-center"> */}
-      {/*     There are no posts to show */}
-      {/*   </div> */}
-      {/* ) : ( */}
-      {/*   { */}
-      {/*     <FeedHandlerClient initialPosts={parseJSONPosts} sessionId={idUser} /> */}
-      {/*   } */}
-      {/* )} */}
+      {postsData.data?.length === 0 ? (
+        <div className="w-full flex justify-center items-center">
+          There are no posts to show
+        </div>
+      ) : (
+        <FeedHandlerClient initialPosts={postsData.data} sessionId={idUser} />
+      )}
     </div>
   );
 }
