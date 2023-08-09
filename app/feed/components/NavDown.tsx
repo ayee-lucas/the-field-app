@@ -1,6 +1,6 @@
 'use client';
 
-import { FEED_ROUTE } from '@/app/config';
+import { ROUTES } from '@/app/config';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import {
@@ -40,33 +40,33 @@ export const NavDown = () => {
       <div className="flex w-full py-1 rounded-xl items-center justify-evenly bg-zinc-800/40 backdrop-blur backdrop-saturate-150">
         <Link
           onClick={() => setIndex(1)}
-          className={`transition-all ${index === 1 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+          className={`transition-all ${index === 1 ? 'bg-green-800 rounded-lg py-3 px-4' : 'bg-none'
             }`}
-          href={FEED_ROUTE}
+          href={ROUTES.feed}
         >
           <AiOutlineHome />
         </Link>
         <Link
           onClick={() => setIndex(2)}
-          className={`transition-all ${index === 2 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+          className={`transition-all ${index === 2 ? 'bg-green-800 rounded-lg py-3 px-4' : 'bg-none'
             }`}
-          href={FEED_ROUTE}
+          href={ROUTES.feed}
         >
           <AiOutlineComment />
         </Link>
         <Link
           onClick={() => setIndex(3)}
-          className={`transition-all ${index === 3 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+          className={`transition-all ${index === 3 ? 'bg-green-800 rounded-lg py-3 px-4' : 'bg-none'
             }`}
-          href={FEED_ROUTE}
+          href={ROUTES.feed}
         >
           <AiOutlineBell />
         </Link>
         <Link
           onClick={() => setIndex(4)}
-          className={`transition-all ${index === 4 ? 'bg-zinc-800 rounded-lg py-3 px-4' : 'bg-none'
+          className={`transition-all ${index === 4 ? 'bg-green-800 rounded-lg py-3 px-4' : 'bg-none'
             }`}
-          href={FEED_ROUTE}
+          href={ROUTES.feed}
         >
           <AiOutlineStar />
         </Link>
