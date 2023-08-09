@@ -19,11 +19,11 @@ import React, { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { finishUser } from '@/app/server-actions/finish-profile/actions';
 import {
   AccFinishTypeFSchema,
   AccFinishResolver,
-} from '../schemas/accFTypeSchema';
-import { finishUser } from '../actions';
+} from '@/resolvers/finishProfileResolver';
 
 export default function AccountFinishForm({ userId }: { userId: string }) {
   const router = useRouter();
@@ -48,7 +48,7 @@ export default function AccountFinishForm({ userId }: { userId: string }) {
 
     localStorage.setItem('finished', 'true');
 
-    return router.replace('/Home');
+    return router.replace('/feed');
   };
 
   return (

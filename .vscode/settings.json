@@ -1,6 +1,9 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.fixAll": true
-    },
-    "eslint.validate": ["javascript, typescript"]
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+  "eslint.validate": ["javascript, typescript"]
 }

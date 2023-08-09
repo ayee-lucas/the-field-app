@@ -1,18 +1,13 @@
-'use server';
-
-import { cookies } from 'next/headers';
-import { Session } from '../types/sessionType';
-import { ROUTES_API } from '../config';
+import { ROUTES_API } from '@/app/config';
+import { Session } from '@/app/types/sessionType';
 
 const goURL = process.env.GO_BACKEND;
 
-export async function getGoSession() {
+export async function ServerSessionRoutes(sessionId: string) {
   try {
-    const sessionId = cookies().get('session');
-
     const res = await fetch(`${goURL}${ROUTES_API.getSession}`, {
       headers: {
-        Authorization: `Bearer ${sessionId?.value}`,
+        Authorization: `Bearer ${sessionId}`,
       },
       cache: 'no-store',
     });

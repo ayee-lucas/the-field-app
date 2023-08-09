@@ -39,10 +39,7 @@ export default function GoogleLogin() {
 
       <h1 className="py-3">
         Don't have an account yet?
-        <Link
-          href="/auth/signup"
-          className="px-3 underline text-fieldGreen"
-        >
+        <Link href="/auth/signup" className="px-3 underline text-fieldGreen">
           Register
         </Link>
       </h1>

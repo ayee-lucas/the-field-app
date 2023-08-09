@@ -1,14 +1,15 @@
 'use client';
 
+import { FC, ReactNode, useEffect, useState } from 'react';
 import {
-  FC, ReactNode, useEffect, useState,
-} from 'react';
-import { userEntered, userExit } from '../tools/onlineStatus';
+  userEntered,
+  userExit,
+} from '@/app/server-actions/user-status/actions';
 import { Session } from '../types/sessionType';
 
 interface Props {
   children: ReactNode;
-  session: Session
+  session: Session;
 }
 
 const CheckUserOnline: FC<Props> = ({ children, session }) => {
