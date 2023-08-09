@@ -1,18 +1,19 @@
 'use client';
 
 import { SCROLLING_PAGINATION_NUMBER } from '@/app/config';
-import { PostType } from '@/app/types/postType';
 import { useIntersection } from '@mantine/hooks';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
+import { Post } from '@prisma/client';
+import { ExtendedPost } from '@/app/types/postType';
 import PostHomeCard from './PostHomeCard';
 
 type Props = {
-  initialPosts: PostType[];
+  initialPosts: ExtendedPost[];
   sessionId: string;
 };
 
-const fetchPosts = async (pageParam: number): Promise<PostType[]> => {
+const fetchPosts = async (pageParam: number): Promise<Post[]> => {
   const query = `/api/Posts?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
   const res = await fetch(query, {
     method: 'GET',
@@ -51,17 +52,13 @@ export function FeedHandlerClient({ initialPosts, sessionId }: Props) {
         {posts.map((post, index) => {
           if (index === posts.length - 1) {
             return (
-              <li key={post._id} ref={ref}>
-                <PostHomeCard
-                  key={post._id}
-                  post={post}
-                  sessionId={sessionId}
-                />
+              <li key={post.id} ref={ref}>
+                <PostHomeCard key={post.id} post={post} sessionId={sessionId} />
               </li>
             );
           }
           return (
-            <PostHomeCard key={post._id} post={post} sessionId={sessionId} />
+            <PostHomeCard key={post.id} post={post} sessionId={sessionId} />
           );
         })}
       </ul>
