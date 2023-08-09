@@ -3,11 +3,20 @@ export const NEWPOST_CONTEXT_ERROR =
   'Unable to retrieve data from NewPostContext. Please check if the context is properly set up and provided.';
 
 /* ROUTES */
-export const FEED_ROUTE = '/feed/';
+export const ROUTES = {
+  feed: '/feed/',
+} as const;
 
 /* API ROUTES */
-export const NEWPOST_ROUTE = '/api/post/newpost';
-export const GET_SESSION = '/api/account/me';
+
+export const ROUTES_API = {
+  newPost: '/api/post/newpost',
+  getSession: '/api/account/me',
+} as const;
+
+/* GLOBAL ERRORS */
+export const REQUIREMENT_NOTFOUND =
+  'Requirement Not Found: The requested resource or requirement could not be located. Double-check your input and try again.';
 
 /* ROUTE ERRORS */
 export const REQUEST_BODY_ERROR = 'Error getting request body';
@@ -24,7 +33,6 @@ export const UNAUTHORIZED_ERROR_MESSAGE =
   'Unauthorized: You do not have permission to access this resource. Please make sure you are authenticated and have the necessary credentials to proceed.';
 
 /* FETCH ERRORS */
-
 export const FETCH_ERROR =
   'Request Error: Unable to retrieve data at the moment. Please try again later.';
 
