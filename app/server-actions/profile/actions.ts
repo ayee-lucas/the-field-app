@@ -1,5 +1,6 @@
 'use server';
 
+import { FETCH_ERROR, REQUIREMENT_NOTFOUND, SERVER_ERROR } from '@/app/config';
 import prisma from '@/lib/prisma';
 import { Profile } from '@prisma/client';
 
@@ -13,12 +14,17 @@ type GetProfileResError = {
   error: string;
 };
 
-const serverError = 'Server Error Getting Profile';
-
 export async function getProfile(
   profileId: string
 ): Promise<GetProfileRes | GetProfileResError> {
   try {
+    if (!profileId) {
+      return {
+        message: `${REQUIREMENT_NOTFOUND} [PROFILE ID]`,
+        error: `${SERVER_ERROR} [GET PROFILE]`,
+      };
+    }
+
     const profile = await prisma.profile.findFirst({
       where: {
         id: profileId,
@@ -27,8 +33,8 @@ export async function getProfile(
 
     if (!profile) {
       return {
-        message: 'Error getting profile',
-        error: serverError,
+        message: `${FETCH_ERROR} [GET PROFILE]`,
+        error: `${SERVER_ERROR} [GET PROFILE]`,
       };
     }
 
@@ -39,8 +45,8 @@ export async function getProfile(
   } catch (err) {
     console.log(err);
     return {
-      message: 'Something went wrong',
-      error: serverError,
+      message: FETCH_ERROR,
+      error: SERVER_ERROR,
     };
   }
 }

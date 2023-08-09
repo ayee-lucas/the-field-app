@@ -1,6 +1,6 @@
 'use server';
 
-import { FETCH_ERROR, FETCH_ERROR_MESSAGE, NEWPOST_ROUTE } from '@/app/config';
+import { FETCH_ERROR, FETCH_ERROR_MESSAGE, ROUTES_API } from '@/app/config';
 import { NewPostFormSChema } from '@/resolvers/newPostResolver';
 import { cookies } from 'next/headers';
 
@@ -19,7 +19,7 @@ export async function createNewPost(
   try {
     const sessionId = cookies().get('session');
 
-    const res = await fetch(`${process.env.NEXT_URL}${NEWPOST_ROUTE}`, {
+    const res = await fetch(`${process.env.NEXT_URL}${ROUTES_API.newPost}`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

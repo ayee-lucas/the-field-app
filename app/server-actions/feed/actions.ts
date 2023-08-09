@@ -1,10 +1,10 @@
 'use server';
 
 import prisma from '@/lib/prisma';
-import { Post } from '@prisma/client';
+import { ExtendedPost } from '@/app/types/postType';
 
 type GetPostsType = {
-  data: Post[];
+  data: ExtendedPost[];
 };
 
 type GetPostsTypeErr = {
@@ -19,6 +19,10 @@ export async function GetInitialPosts(): Promise<
     const posts = await prisma.post.findMany({
       orderBy: {
         created_at: 'desc',
+      },
+      include: {
+        Author: true,
+        Like: true,
       },
       take: 4,
     });

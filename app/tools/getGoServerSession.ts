@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { Session } from '../types/sessionType';
-import { GET_SESSION } from '../config';
+import { ROUTES_API } from '../config';
 
 const goURL = process.env.GO_BACKEND;
 
@@ -10,7 +10,7 @@ export async function getGoSession() {
   try {
     const sessionId = cookies().get('session');
 
-    const res = await fetch(`${goURL}${GET_SESSION}`, {
+    const res = await fetch(`${goURL}${ROUTES_API.getSession}`, {
       headers: {
         Authorization: `Bearer ${sessionId?.value}`,
       },
