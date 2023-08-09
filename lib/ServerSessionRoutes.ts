@@ -1,11 +1,11 @@
-import { GET_SESSION } from '@/app/config';
+import { ROUTES_API } from '@/app/config';
 import { Session } from '@/app/types/sessionType';
 
 const goURL = process.env.GO_BACKEND;
 
 export async function ServerSessionRoutes(sessionId: string) {
   try {
-    const res = await fetch(`${goURL}${GET_SESSION}`, {
+    const res = await fetch(`${goURL}${ROUTES_API.getSession}`, {
       headers: {
         Authorization: `Bearer ${sessionId}`,
       },
