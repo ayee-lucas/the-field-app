@@ -1,14 +1,21 @@
 'use server';
 
-import { FETCH_ERROR, FETCH_ERROR_MESSAGE, ROUTES_API } from '@/app/config';
+import {
+  FETCH_ERROR,
+  FETCH_ERROR_MESSAGE,
+  ROUTES_API,
+  ROUTES,
+} from '@/app/config';
 import { NewPostFormSChema } from '@/resolvers/newPostResolver';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { isRedirectError } from 'next/dist/client/components/redirect';
 
-type ResNewPost = {
+export type ResNewPost = {
   message: 'success';
 };
 
-type ResNewPostError = {
+export type ResNewPostError = {
   message: string;
   error: string;
 };
@@ -30,6 +37,10 @@ export async function createNewPost(
 
     const json = await res.json();
 
+    if (res.status === 401) {
+      redirect(ROUTES.signin);
+    }
+
     if (!res.ok) {
       return {
         message: json.message,
@@ -41,7 +52,10 @@ export async function createNewPost(
       message: 'success',
     };
   } catch (err) {
+    if (isRedirectError(err)) throw err;
+
     console.log(err);
+
     return {
       message: FETCH_ERROR_MESSAGE,
       error: `${FETCH_ERROR} [NEW POST]`,
