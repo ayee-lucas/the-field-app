@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { GetInitialPosts } from '@/app/server-actions/feed/actions';
-import FeedBar from './components/FeedBar';
-import { getGoSession } from '../tools/getGoServerSession';
 import { FeedHandlerClient } from './components/FeedHandlerCLient';
+import { getGoSession } from '../tools/getGoServerSession';
+import FeedBar from './components/FeedBar';
 import NewPostHandler from './components/NewPostHandler';
 import NoPostsFound from './components/NoPostsFound';
 
