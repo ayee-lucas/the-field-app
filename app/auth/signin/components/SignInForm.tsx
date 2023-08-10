@@ -91,10 +91,11 @@ export default function SignInForm() {
                   disabled={loading}
                   type="password"
                   placeholder="Enter your password"
-                  className={`${error
+                  className={`${
+                    error
                       ? 'border-red-500 focus:outline-none focus:ring-red-500'
                       : ''
-                    }`}
+                  }`}
                   {...field}
                 />
               </FormControl>
