@@ -24,6 +24,7 @@ import {
   AccFinishTypeFSchema,
   AccFinishResolver,
 } from '@/resolvers/finishProfileResolver';
+import { ROUTES } from '@/app/config';
 
 export default function AccountFinishForm({ userId }: { userId: string }) {
   const router = useRouter();
@@ -48,7 +49,7 @@ export default function AccountFinishForm({ userId }: { userId: string }) {
 
     localStorage.setItem('finished', 'true');
 
-    return router.replace('/feed');
+    return router.replace(ROUTES.pictureAcc);
   };
 
   return (
