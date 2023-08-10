@@ -63,7 +63,8 @@ const CheckUserOnline: FC<Props> = ({ children, session }) => {
     };
   }, [id, isPageVisible]);
 
-  return <div>{children}</div>;
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{children}</>;
 };
 
 export default CheckUserOnline;
