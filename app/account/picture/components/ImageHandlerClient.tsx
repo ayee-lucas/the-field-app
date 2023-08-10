@@ -17,7 +17,8 @@ import ReactLoading from 'react-loading';
 import { utapi } from 'uploadthing/server';
 import { useRouter } from 'next/navigation';
 import { Session } from '@/app/types/sessionType';
-import { updatePicture } from '../action';
+import { ROUTES } from '@/app/config';
+import { updatePicture } from '@/app/server-actions/account-picture/action';
 
 export default function ImageHandlerCient({ session }: { session: Session }) {
   const [file, setFile] = useState<File | null>(null);
@@ -78,7 +79,7 @@ export default function ImageHandlerCient({ session }: { session: Session }) {
         description: 'Your image has been uploaded',
       });
 
-      router.push('/Home');
+      router.push(ROUTES.feed);
       router.refresh();
     },
 
