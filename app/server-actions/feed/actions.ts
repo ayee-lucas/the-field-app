@@ -27,8 +27,6 @@ export async function GetInitialPosts(): Promise<
       take: 4,
     });
 
-    console.log(posts);
-
     if (posts.length <= 0) {
       return {
         error: 'Posts not found',
