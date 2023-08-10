@@ -4,7 +4,10 @@ export const NEWPOST_CONTEXT_ERROR =
 
 /* ROUTES */
 export const ROUTES = {
-  feed: '/feed/',
+  feed: '/feed',
+  signin: '/auth/signin',
+  finishAcc: '/account/finish',
+  pictureAcc: '/account/picture',
 } as const;
 
 /* API ROUTES */
