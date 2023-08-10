@@ -5,6 +5,7 @@ import { getGoSession } from '../tools/getGoServerSession';
 import OuterLayoutClient from './components/OuterLayoutClient';
 import { Session } from '../types/sessionType';
 import { getProfile } from '../server-actions/profile/actions';
+import { ROUTES } from '../config';
 
 export default async function HomeLayout({
   children,
@@ -17,17 +18,17 @@ export default async function HomeLayout({
     const getUser = await goGetUserById(session?.user?.sub);
 
     if (!getUser.user?.profile_id) {
-      return redirect('/auth/signin');
+      return redirect(ROUTES.feed);
     }
 
     const profile = await getProfile(getUser.user.profile_id);
 
     if ('error' in profile) {
-      return redirect('/auth/signin');
+      return redirect(ROUTES.feed);
     }
 
     if (!profile.data.finished) {
-      return redirect('/account/finish');
+      return redirect(ROUTES.finishAcc);
     }
   }
 
