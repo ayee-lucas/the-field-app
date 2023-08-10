@@ -2,9 +2,11 @@
 
 import { inter, quicksand } from '@/app/fonts';
 import { PenSquare, Upload } from 'lucide-react';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { NEWPOST_CONTEXT_ERROR } from '@/app/config';
+import { Progress } from '@/components/ui/progress';
 import { NewPostContext } from './NewPostHandler';
+import 'animate.css';
 
 export default function NewPostButton() {
   const context = useContext(NewPostContext);
@@ -13,35 +15,44 @@ export default function NewPostButton() {
     throw new Error(NEWPOST_CONTEXT_ERROR);
   }
 
-  const { loading, setToggleEditor } = context;
+  const { loading, setToggleEditor, progress } = context;
 
-  if (loading) {
-    return (
-      <button
-        type="button"
-        className={`w-full py-5 px-3 border border-fieldGreen animate-pulse rounded-md flex items-center justify-between ${inter.variable}`}
-      >
-        <h1 className="font-inter font-semibold">Uploading...</h1>
-        <span className="animate-bounce">.</span>
-        <span className="animate-bounce delay-75">.</span>
-        <span className="animate-bounce delay-100">.</span>
-        <span className="animate-bounce delay-150">.</span>
+  const [animationClass, setAnimatonClass] = useState<string>(
+    'animate__animated animate__fadeInDown'
+  );
 
-        <Upload size={20} />
-      </button>
-    );
-  }
+  useEffect(() => {
+    if (progress === 100) {
+      setAnimatonClass('animate__animated animate__fadeOutUp');
+    }
+  }, [progress]);
 
   return (
-    <button
-      type="button"
-      onClick={() => setToggleEditor(true)}
-      className={`w-full py-5 px-3 border border-zinc-500 rounded-md flex items-center justify-between bg-zinc-950 ${quicksand.className}`}
-    >
-      <h1 className="font-quicksand text-lg font-semibold">
-        <span className="text-fieldGreen"> What's </span> on your mind
-      </h1>
-      <PenSquare size={20} />
-    </button>
+    <>
+      {loading && (
+        <div
+          className={`fixed left-2 right-2 top-7 h-14 z-[999] bg-black/80 backdrop-blur-sm py-2 px-2 border border-fieldGreen rounded-md flex items-center gap-3 ${animationClass}  ${inter.variable}`}
+        >
+          <h1 className="font-inter font-semibold text-xs animate-pulse">
+            Uploading
+          </h1>
+
+          <Progress className="animate-pulse" value={progress} />
+
+          <Upload className="animate-pulse" size={20} />
+        </div>
+      )}
+      <button
+        type="button"
+        disabled={loading}
+        onClick={() => setToggleEditor(true)}
+        className={`w-full py-5 px-3 border border-zinc-700 rounded-md flex items-center justify-between bg-zinc-950 ${quicksand.className}`}
+      >
+        <h1 className="font-quicksand text-lg font-semibold">
+          <span className="text-fieldGreen"> What's </span> on your mind
+        </h1>
+        <PenSquare size={20} />
+      </button>
+    </>
   );
 }
