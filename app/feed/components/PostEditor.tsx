@@ -3,7 +3,7 @@ import { montserrat, inter } from '@/app/fonts';
 import { useClickOutside } from '@/app/hooks/clickOutside';
 import { Button } from '@/components/ui/button';
 import { useLockBodyScroll } from '@uidotdev/usehooks';
-import { useContext } from 'react';
+import { useContext, useTransition } from 'react';
 import { NEWPOST_CONTEXT_ERROR } from '@/app/config';
 import { Textarea } from '@/components/ui/textarea';
 import { useForm } from 'react-hook-form';
@@ -22,7 +22,10 @@ import {
 } from '@/components/ui/form';
 
 import { Label } from '@/components/ui/label';
+
 import { createNewPost } from '@/app/server-actions/posts/actions';
+
+import { useToast } from '@/components/ui/use-toast';
 import { NewPostContext } from './NewPostHandler';
 
 import 'animate.css';
@@ -34,24 +37,50 @@ export default function PostEditor() {
     throw new Error(NEWPOST_CONTEXT_ERROR);
   }
 
-  const { setToggleEditor } = context;
+  const { setToggleEditor, setLoading, setProgress } = context;
 
   useLockBodyScroll();
 
   const node = useClickOutside(() => setToggleEditor(false));
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isPending, startTransition] = useTransition();
+
+  const { toast } = useToast();
 
   const form = useForm<NewPostFormSChema>({
     resolver: NewPostResolver,
   });
 
   const onSubmit = async (data: NewPostFormSChema) => {
-    const res = await createNewPost(data);
+    setToggleEditor(false);
+    setLoading(true);
+    setProgress(50);
 
-    if ('error' in res) {
-      throw new Error(res.error);
-    }
+    startTransition(async () => {
+      const res = await createNewPost(data);
 
-    console.log(res);
+      if ('error' in res) {
+        toast({
+          title: 'Error',
+          description: res.message,
+          variant: 'destructive',
+        });
+        setProgress(0);
+        setLoading(false);
+      }
+
+      setProgress(100);
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+
+      toast({
+        title: 'Post Uploaded',
+        description: 'Your Post have been uploaded',
+      });
+    });
   };
 
   return (
@@ -60,7 +89,7 @@ export default function PostEditor() {
     >
       <div
         ref={node}
-        className="bg-black/80 h-[90%] flex flex-col gap-4 px-2 backdrop-blur backdrop-saturate-150 w-full animate__animated animate__fadeIn animate__faster"
+        className="bg-black/80 h-[90%] flex flex-col gap-4 p-4 backdrop-blur backdrop-saturate-150 w-full animate__animated animate__fadeIn animate__faster"
       >
         <header
           className={`w-full p-3 text-xl font-semibold flex justify-between items-center ${montserrat.className}`}
@@ -92,7 +121,7 @@ export default function PostEditor() {
             <Button
               type="submit"
               variant="outline"
-              className="absolute top-0 right-2"
+              className="absolute top-2 right-2"
             >
               POST
             </Button>
