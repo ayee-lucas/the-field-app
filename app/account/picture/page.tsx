@@ -1,24 +1,22 @@
 import { montserrat } from '@/app/fonts';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { redirect } from 'next/navigation';
-import { goGetUserById } from '@/app/auth/signin/actions';
+import { ROUTES } from '@/app/config';
 import ImageHandlerCient from './components/ImageHandlerClient';
 
 export default async function Page() {
   const session = await getGoSession();
 
-  if (!session?.user) {
-    redirect('/auth/signin');
+  if (!session) {
+    redirect(ROUTES.signin);
   }
 
-  if (session?.user?.picture.pictureKey) {
-    redirect('/Home');
+  if (session.status === 'unauthenticated') {
+    redirect(ROUTES.signin);
   }
 
-  const getUser = await goGetUserById(session.user.sub);
-
-  if (!getUser.user?.finished) {
-    redirect('/account/finish');
+  if (session.user?.picture.pictureKey) {
+    redirect(ROUTES.feed);
   }
 
   return (
