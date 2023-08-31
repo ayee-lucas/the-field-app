@@ -14,7 +14,7 @@ type Props = {
 };
 
 const fetchPosts = async (pageParam: number): Promise<Post[]> => {
-  const query = `/api/Posts?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
+  const query = `/api/posts?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
   const res = await fetch(query, {
     method: 'GET',
     cache: 'no-store',
