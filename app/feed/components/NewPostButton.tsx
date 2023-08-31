@@ -36,7 +36,7 @@ export default function NewPostButton() {
     <button
       type="button"
       onClick={() => setToggleEditor(true)}
-      className={`w-full py-5 px-3 border border-zinc-500 rounded-md flex items-center justify-between bg-zinc-950 ${quicksand.className}`}
+      className={`w-full py-5 px-3 border border-zinc-700 rounded-md flex items-center justify-between bg-zinc-950 ${quicksand.className}`}
     >
       <h1 className="font-quicksand text-lg font-semibold">
         <span className="text-fieldGreen"> What's </span> on your mind

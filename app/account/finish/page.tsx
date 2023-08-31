@@ -1,8 +1,8 @@
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { redirect } from 'next/navigation';
 import { goGetUserById } from '@/app/server-actions/signin/actions';
-import AccountFinish from './components/AccountFinish';
 import { getProfile } from '@/app/server-actions/profile/actions';
+import AccountFinish from './components/AccountFinish';
 
 export const dynamic = 'force-dynamic';
 
