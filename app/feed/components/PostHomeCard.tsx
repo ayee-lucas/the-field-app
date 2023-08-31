@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { FC, useRef, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import PostFormatted from '@/app/tools/postFormatter';
 import Link from 'next/link';
@@ -9,11 +9,8 @@ import { formatDate } from '@/app/tools/datesFormatter';
 import imagePost from '@/public/images/Background/card_example.jpg';
 import CustomAvatar from '@/components/ui/custom-avatar';
 import { ExtendedPost } from '@/app/types/postType';
-import { getProfile } from '@/app/server-actions/profile/actions';
 import { REQUIREMENT_NOTFOUND } from '@/app/config';
-import { Profile } from '@prisma/client';
 import PostFooterActions from '../post/components/PostFooterActions';
-import PostLoading from './PostLoading';
 
 type Props = {
   post: ExtendedPost;
@@ -29,16 +26,9 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [userProfile, setUserProfile] = useState<Profile | undefined>(
-    undefined
-  );
-
   if (!post.Author) {
     throw new Error(`${REQUIREMENT_NOTFOUND} [POST AUTHOR]`);
   }
-
-  const profileId = post.Author.profile_id;
-
   const resizeContent = () => {
     const element = postContentRef.current;
     if (element && element.scrollHeight > element.clientHeight) {
@@ -61,22 +51,6 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
     };
   }, []);
 
-  useEffect(() => {
-    const getData = async () => {
-      const profile = await getProfile(profileId);
-
-      if ('error' in profile) {
-        throw new Error(`${REQUIREMENT_NOTFOUND} [PROFILE]`);
-      }
-
-      setUserProfile(profile.data);
-
-      return setLoading(false);
-    };
-
-    getData();
-  }, [profileId]);
-
   const { title, body } = PostFormatted(post.content.text);
 
   const { formatedDate, formatedTime } = formatDate(post.created_at);
@@ -84,10 +58,6 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
   const redirect = () => {
     router.push(`/Home/post/${post.author_id}/${post.id}/`);
   };
-
-  if (loading) {
-    return <PostLoading />;
-  }
 
   return (
     <div
@@ -99,8 +69,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
         href={`/Home/profile/${post.author_id}`}
       >
         <CustomAvatar imgUrl={post.Author.picture.pictureURL} />
-
-        {userProfile?.name}
+        {post.Author.Profile.name}
         <span className="text-sm text-gray-700 dark:text-zinc-500">
           @{post.Author.username}
         </span>

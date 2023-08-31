@@ -13,6 +13,8 @@ export default async function Page() {
   const session = await getGoSession();
   const idUser = session?.user?.sub.toString() ?? '';
 
+  console.log(postsData);
+
   if ('error' in postsData) {
     return (
       <div className="w-full min-h-screen h-full dark:bg-black  dark:text-white py-10 px-[5rem] max-sm:px-3 max-xl:px-5">

@@ -26,7 +26,18 @@ export async function GetInitialPosts(): Promise<
         created_at: 'desc',
       },
       include: {
-        Author: true,
+        Author: {
+          select: {
+            username: true,
+            picture: true,
+            profile_id: true,
+            Profile: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
         Like: true,
       },
       take: SCROLLING_PAGINATION_NUMBER,
