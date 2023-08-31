@@ -20,12 +20,17 @@ export const ROUTES_API = {
 /* GLOBAL ERRORS */
 export const REQUIREMENT_NOTFOUND =
   'Requirement Not Found: The requested resource or requirement could not be located. Double-check your input and try again.';
+export const QUERY_ERROR =
+  'Query Error: An error occurred while processing your query. Please verify the query syntax and parameters.';
 
 /* ROUTE ERRORS */
 export const REQUEST_BODY_ERROR = 'Error getting request body';
 export const SERVER_ERROR = 'Internal Server Error Occurred';
 export const UNAUTHORIZED_ERROR =
   'Access Denied. Please authenticate to proceed.';
+
+export const POSTS_NOTFOUND =
+  'Posts Not Found: No posts matching your criteria were located. Please refine your search or create new posts.';
 
 /* ROUTE ERROR MESSAGES */
 export const REQUEST_BODY_ERROR_MESSAGE =

@@ -6,28 +6,28 @@ import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription,
 } from '@/components/ui/form';
 
 import {
   Select,
-  SelectTrigger,
   SelectContent,
-  SelectValue,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 
 import { Textarea } from '@/components/ui/textarea';
@@ -35,15 +35,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
 
 import { Gauge } from 'lucide-react';
-import { GiSoccerBall, GiBasketballBall } from 'react-icons/gi';
-import { FaTableTennis, FaFootballBall } from 'react-icons/fa';
+import { GiBasketballBall, GiSoccerBall } from 'react-icons/gi';
+import { FaFootballBall, FaTableTennis } from 'react-icons/fa';
 import { CgAdidas } from 'react-icons/cg';
 import {
-  SiNike,
-  SiCocacola,
-  SiPepsi,
-  SiEmirates,
   SiChevrolet,
+  SiCocacola,
+  SiEmirates,
+  SiNike,
+  SiPepsi,
   SiSamsung,
 } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
@@ -53,12 +53,15 @@ import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { useRouter } from 'next/navigation';
+import {
+  finishAthl,
+  finishUser,
+} from '@/app/server-actions/finish-profile/actions';
 import PopOverButtonAth from './PopoverButtonAth';
 import {
   AthlFinishResolver,
   AthlFinishTypeFSchema,
 } from '../../schemas/athlFTypeSchema';
-import { finishAthl, finishUser } from '../../actions';
 
 export default function AthlFinishForm() {
   const router = useRouter();

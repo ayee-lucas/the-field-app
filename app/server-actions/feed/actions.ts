@@ -2,14 +2,19 @@
 
 import prisma from '@/lib/prisma';
 import { ExtendedPost } from '@/app/types/postType';
+import {
+  FETCH_ERROR,
+  POSTS_NOTFOUND,
+  SCROLLING_PAGINATION_NUMBER,
+} from '@/app/config';
 
-type GetPostsType = {
+export type GetPostsType = {
   data: ExtendedPost[];
 };
 
-type GetPostsTypeErr = {
+export type GetPostsTypeErr = {
   error: string;
-  message: 'No Posts to show';
+  message: typeof FETCH_ERROR;
 };
 
 export async function GetInitialPosts(): Promise<
@@ -24,13 +29,13 @@ export async function GetInitialPosts(): Promise<
         Author: true,
         Like: true,
       },
-      take: 4,
+      take: SCROLLING_PAGINATION_NUMBER,
     });
 
     if (posts.length <= 0) {
       return {
-        error: 'Posts not found',
-        message: 'No Posts to show',
+        error: POSTS_NOTFOUND,
+        message: FETCH_ERROR,
       };
     }
 
@@ -41,7 +46,7 @@ export async function GetInitialPosts(): Promise<
     console.log(err);
     return {
       error: JSON.stringify(err),
-      message: 'No Posts to show',
+      message: FETCH_ERROR,
     };
   }
 }

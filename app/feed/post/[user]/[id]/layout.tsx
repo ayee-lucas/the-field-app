@@ -7,7 +7,6 @@ import { formatDate } from '@/app/tools/datesFormatter';
 import Link from 'next/link';
 import defaultImage from '../../../../../public/images/default_user.png';
 import AddComment from '../../components/AddComment';
-import { fetchPostById } from '../../actions';
 import PostBody from '../../components/PostBody';
 import MobileComents from '../../components/MobileComents';
 

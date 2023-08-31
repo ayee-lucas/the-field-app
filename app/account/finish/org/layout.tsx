@@ -1,5 +1,5 @@
 import { montserrat } from '@/app/fonts';
-import { goGetUserById } from '@/app/auth/signin/actions';
+import { goGetUserById } from '@/app/server-actions/signin/actions';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { redirect } from 'next/navigation';
 

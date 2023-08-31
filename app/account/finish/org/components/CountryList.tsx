@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { UseFormReturn } from 'react-hook-form';
 import { CommandGroup, CommandItem } from '@/components/ui/command';
-import { CountryResponse, getCountries } from '../../actions';
+import {
+  CountryResponse,
+  getCountries,
+} from '@/app/server-actions/finish-profile/actions';
 import { OrgTypeFSchema } from '../../schemas/orgFinishSchema';
 
 type Props = {
