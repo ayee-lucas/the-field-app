@@ -6,6 +6,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useRef } from 'react';
 import { Post } from '@prisma/client';
 import { ExtendedPost } from '@/app/types/postType';
+import {
+  GetPostsType,
+  GetPostsTypeErr,
+} from '@/app/server-actions/feed/actions';
 import PostHomeCard from './PostHomeCard';
 
 type Props = {
@@ -14,15 +18,19 @@ type Props = {
 };
 
 const fetchPosts = async (pageParam: number): Promise<Post[]> => {
-  const query = `/api/posts?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
+  const query = `/api/post?limit=${SCROLLING_PAGINATION_NUMBER}&page=${pageParam}`;
   const res = await fetch(query, {
     method: 'GET',
     cache: 'no-store',
   });
 
-  const posts = await res.json();
+  const posts: GetPostsType | GetPostsTypeErr = await res.json();
 
-  return posts;
+  if ('error' in posts) {
+    return [];
+  }
+
+  return posts.data;
 };
 
 export function FeedHandlerClient({ initialPosts, sessionId }: Props) {
