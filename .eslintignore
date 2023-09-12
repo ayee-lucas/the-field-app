@@ -1,0 +1,2 @@
+components/ui/**
+lib/prisma.ts
