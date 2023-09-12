@@ -24,8 +24,6 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
 
   const [isTruncated, setIsTruncated] = useState(false);
 
-  const [loading, setLoading] = useState<boolean>(true);
-
   if (!post.Author) {
     throw new Error(`${REQUIREMENT_NOTFOUND} [POST AUTHOR]`);
   }
