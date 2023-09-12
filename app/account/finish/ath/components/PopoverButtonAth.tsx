@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {
   Command,
   CommandEmpty,
-  CommandInput,
   CommandGroup,
+  CommandInput,
   CommandItem,
 } from '@/components/ui/command';
 
@@ -26,7 +26,10 @@ import {
 
 import { UseFormReturn } from 'react-hook-form';
 import { HiOutlineSelector } from 'react-icons/hi';
-import { CountryResponse, getCountries } from '../../actions';
+import {
+  CountryResponse,
+  getCountries,
+} from '@/app/server-actions/finish-profile/actions';
 import { AthlFinishTypeFSchema } from '../../schemas/athlFTypeSchema';
 
 type Props = {
