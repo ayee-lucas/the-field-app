@@ -25,7 +25,9 @@ const Navbar = () => {
 
     const changeColor = () => {
       if (window.scrollY >= 90) {
-        setNavSticky('bg-white/80 py-6 dark:bg-black/80 backdrop-saturate-200 backdrop-blur-2xl');
+        setNavSticky(
+          'bg-white/80 py-6 dark:bg-black/80 backdrop-saturate-200 backdrop-blur-2xl'
+        );
         setTextColor('text-fieldGreen');
       } else {
         setNavSticky('bg-transparent py-10');
@@ -46,9 +48,7 @@ const Navbar = () => {
         <h1
           className={`${roboto.className} ${textColor} text-4xl font-semibold`}
         >
-          THE
-          {' '}
-          <span className="text-fieldGreen">FIELD</span>
+          THE <span className="text-fieldGreen">FIELD</span>
         </h1>
         <ul
           className={`flex items-center gap-10 ${textColor} text-xl max-sm:hidden`}

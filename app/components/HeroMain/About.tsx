@@ -12,9 +12,7 @@ const About = () => (
   >
     <div className="w-full h-full flex flex-col justify-center items-start px-4">
       <h1 className="text-6xl max-sm:text-3xl font-bold text-center text-gray-800 dark:text-white">
-        ABOUT
-        {' '}
-        <span className="text-fieldGreen">US</span>
+        ABOUT <span className="text-fieldGreen">US</span>
       </h1>
       <div className="grid  grid-cols-2 max-sm:grid-flow-row max-sm:grid-cols-1 gap-4 py-5">
         <div className="flex flex-col justify-around items-start text-lg">
@@ -24,8 +22,8 @@ const About = () => (
             that there are many skilled athletes out there who are not getting
             the recognition they deserve, and we want to change that. Our
             mission is to provide a space where all amateur and non-amateur
-            athletes can share and showcase their skills, with the hope of
-            being discovered by organizations looking for talent.
+            athletes can share and showcase their skills, with the hope of being
+            discovered by organizations looking for talent.
           </p>
           <p className="w-full px-4 py-8  first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-fieldGreen text-gray-800 rounded-lg">
             At 'THE FIELD', we are passionate about sports and believe in the
@@ -67,17 +65,17 @@ const About = () => (
             create a profile, showcase their skills, connect with other
             professionals in the industry, and discover new opportunities. For
             sports organizations, we offer a simple and effective way to
-            discover and recruit talented individuals from around the world.
-            Our platform is designed to be a one-stop-shop for all your sports
+            discover and recruit talented individuals from around the world. Our
+            platform is designed to be a one-stop-shop for all your sports
             talent needs. We are a team of passionate professionals with
             experience in both the sports and technology industries.
           </p>
           <p className="w-full px-4 py-8 text-gray-800 first-letter:text-3xl first-letter:font-playfair first-letter:font-semibold my-5 bg-fieldGreen rounded-lg">
             We believe in the power of collaboration and are committed to
-            working with our users to improve our platform and provide the
-            best possible experience for everyone. We are excited to be part
-            of the sports community and to help athletes and organizations
-            alike achieve their goals.
+            working with our users to improve our platform and provide the best
+            possible experience for everyone. We are excited to be part of the
+            sports community and to help athletes and organizations alike
+            achieve their goals.
           </p>
         </div>
       </div>

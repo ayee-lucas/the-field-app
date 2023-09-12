@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import PostFormatted from '@/app/tools/postFormatter';
+import formatPost from '@/app/tools/postFormatter';
 import Link from 'next/link';
 import { formatDate } from '@/app/tools/datesFormatter';
 import imagePost from '@/public/images/Background/card_example.jpg';
@@ -51,7 +51,7 @@ const PostHomeCard: FC<Props> = ({ post, sessionId }) => {
     };
   }, []);
 
-  const { title, body } = PostFormatted(post.content.text);
+  const { title, body } = formatPost(post.content.text);
 
   const { formatedDate, formatedTime } = formatDate(post.created_at);
 

@@ -14,7 +14,7 @@ const PostCard = () => {
       className={` ${ubuntu.variable} ${quicksand.variable} w-full my-2 min-h-[200px] bg-zinc-50 pl-3
       rounded-lg border border-gray-400 relative flex flex-col gap-4 justify-between items-center select-none cursor-pointer hover:bg-gray-100 transition-all 
       `}
-      onClick={() => (router.push('/Home/post/alopez/lebron-james-ja-morant'))}
+      onClick={() => router.push('/Home/post/alopez/lebron-james-ja-morant')}
       aria-hidden="true"
     >
       <div className="flex justify-start w-full h-full  items-center">
@@ -23,8 +23,8 @@ const PostCard = () => {
             LEBRON JAMES JA MORANT
           </h1>
           <p className="text-[17px] font-ubuntu font-light text-gray-600 ">
-            The more I think about this streak, the more I believe it's the
-            most unbeatable of all records. LBJ is on an open streak of 1,151
+            The more I think about this streak, the more I believe it's the most
+            unbeatable of all records. LBJ is on an open streak of 1,151
             consecutive double digit Regular Season games (the streak doesn't
             include Playoffs matches). That's 14 full 82-game seasons. To put
             include Playoffs matches). That's 14 full 82-game seasons. To put
@@ -46,7 +46,6 @@ const PostCard = () => {
           />
         </div>
       </div>
-
     </div>
   );
 };

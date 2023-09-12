@@ -54,7 +54,6 @@ export async function GetInitialPosts(): Promise<
       data: posts,
     };
   } catch (err) {
-    console.log(err);
     return {
       error: JSON.stringify(err),
       message: FETCH_ERROR,

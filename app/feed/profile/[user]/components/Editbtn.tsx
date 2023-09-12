@@ -11,9 +11,7 @@ function Editbtn() {
         dark:bg-zinc-900 dark:text-gray-300 border dark:border-gray-300"
     >
       <AiFillEdit />
-      <span className="max-sm:text-[12px]">
-        Edit Profile
-      </span>
+      <span className="max-sm:text-[12px]">Edit Profile</span>
     </button>
   );
 }

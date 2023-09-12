@@ -20,21 +20,15 @@ const CheckUserOnline: FC<Props> = ({ children, session }) => {
     // eslint-disable-next-line consistent-return
     const handleUserEntrance = async () => {
       // Perform actions when the user enters the website
-      console.log('User entered the website');
       if (id && isPageVisible) {
-        const response = await userEntered(id);
-        console.log(response);
-      } else {
-        console.log('User id is undefined');
+        await userEntered(id);
       }
     };
 
     const handleUserExit = async () => {
       // Perform actions when the user leaves the website
       if (id && isPageVisible) {
-        console.log('User left the website');
-        const response = await userExit(id);
-        console.log(response);
+        await userExit(id);
       }
     };
 

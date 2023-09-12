@@ -3,7 +3,8 @@
 import { FC, useState } from 'react';
 
 interface Props {
-  title:string, body:string
+  title: string;
+  body: string;
 }
 
 const PostBody: FC<Props> = ({ title, body }) => {
@@ -17,10 +18,24 @@ const PostBody: FC<Props> = ({ title, body }) => {
         {showFullBody ? body : bodyFormat}
       </p>
       <div className={body.length < 200 ? 'hidden' : ''}>
-        {showFullBody ? <button type="button" onClick={() => setShowFullBody(false)} className="dark:text-gray-200 text-gray-800">Show less</button>
-          : <button type="button" onClick={() => setShowFullBody(true)} className="dark:text-gray-200 text-gray-800">Show more</button>}
+        {showFullBody ? (
+          <button
+            type="button"
+            onClick={() => setShowFullBody(false)}
+            className="dark:text-gray-200 text-gray-800"
+          >
+            Show less
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setShowFullBody(true)}
+            className="dark:text-gray-200 text-gray-800"
+          >
+            Show more
+          </button>
+        )}
       </div>
-
     </>
   );
 };

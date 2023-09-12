@@ -43,7 +43,6 @@ export async function getProfile(
       data: profile,
     };
   } catch (err) {
-    console.log(err);
     return {
       message: FETCH_ERROR,
       error: SERVER_ERROR,

@@ -6,7 +6,7 @@ import { Session } from '@/app/types/sessionType';
 import UserMenu from './UserMenu';
 
 type Props = {
-  session: Session | null
+  session: Session | null;
 };
 
 export default function NavBar({ session }: Props) {
@@ -28,28 +28,29 @@ export default function NavBar({ session }: Props) {
   return (
     <SessionContext.Provider value={session}>
       <div className="fixed w-full z-50">
-        <nav className={`bg-white dark:bg-black border-b transition-all border-gray-200 dark:border-zinc-800 ${shadow}`}>
+        <nav
+          className={`bg-white dark:bg-black border-b transition-all border-gray-200 dark:border-zinc-800 ${shadow}`}
+        >
           <div className="min-h-[60px] flex flex-wrap items-center justify-between mx-auto p-2 px-6">
-
             <div className="lg:hidden z-50">
               <UserMenu />
             </div>
 
-            <div onClick={() => setOpen(!open)} aria-hidden="true" className="flex items-center">
+            <div
+              onClick={() => setOpen(!open)}
+              aria-hidden="true"
+              className="flex items-center"
+            >
               <Link href="/Home" className="flex items-center">
                 <div className="flex img-toggle" />
 
                 <span className="self-center text-2xl pl-3 font-semibold whitespace-nowrap dark:text-white max-sm:hidden">
-                  THE
-                  {' '}
-                  <span className="text-fieldGreen">FIELD</span>
+                  THE <span className="text-fieldGreen">FIELD</span>
                 </span>
               </Link>
             </div>
 
-            <div
-              className="flex items-center justify-between w-auto max-lg:hidden"
-            >
+            <div className="flex items-center justify-between w-auto max-lg:hidden">
               <form className="flex items-center">
                 <div className="relative w-full">
                   <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -123,10 +124,8 @@ export default function NavBar({ session }: Props) {
             <div className="max-lg:hidden">
               <UserMenu />
             </div>
-
           </div>
         </nav>
-
       </div>
     </SessionContext.Provider>
   );

@@ -1,7 +1,6 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { UserType } from '@/app/types/userType';
 import { SignInTypeFSchema } from '@/resolvers/signinResolver';
 import { User } from '@prisma/client';
 
@@ -35,7 +34,6 @@ export default async function goSignIn(
 
     return json;
   } catch (err) {
-    console.log(err);
     const res = {
       error: 'Fetch failed',
       message: 'Something went wrong',
@@ -67,7 +65,6 @@ export async function goGetUserById(id: string): Promise<GetUserType> {
 
     return json;
   } catch (err) {
-    console.log(err);
     const res = {
       error: 'Fetch failed',
       message: 'Something went wrong',

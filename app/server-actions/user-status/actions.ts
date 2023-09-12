@@ -43,7 +43,6 @@ export async function userEntered(
       action: data.action,
     };
   } catch (err) {
-    console.log(err);
     return {
       message: serverError,
       error: 'Something went wrong',
@@ -76,7 +75,6 @@ export async function userExit(
       action: 'user offline',
     };
   } catch (err) {
-    console.log(err);
     return {
       message: serverError,
       error: 'Something went wrong',

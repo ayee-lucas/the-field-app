@@ -1,6 +1,6 @@
 export type Session = {
-  status: 'unauthenticated' | 'authenticated',
-  error?: string,
+  status: 'unauthenticated' | 'authenticated';
+  error?: string;
   user?: {
     id: string;
     sub: string;
@@ -9,10 +9,10 @@ export type Session = {
     role: string;
     Image: string;
     picture: {
-      pictureKey: string,
-      pictureURL: string,
+      pictureKey: string;
+      pictureURL: string;
     };
     expireOn: number;
     createdAt: string;
-  }
+  };
 };

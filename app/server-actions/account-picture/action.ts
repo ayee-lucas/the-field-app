@@ -37,7 +37,6 @@ export async function updatePicture(
 
     return json;
   } catch (err) {
-    console.log(err);
     return {
       error: 'Server Fetch Error',
       message: 'Fetch Error',

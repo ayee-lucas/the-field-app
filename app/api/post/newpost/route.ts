@@ -109,7 +109,6 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (err) {
-    console.log(err);
     return new Response(
       JSON.stringify({
         message: SERVER_POST_ERROR_MESSAGE,

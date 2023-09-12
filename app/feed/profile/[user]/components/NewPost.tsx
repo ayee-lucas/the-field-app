@@ -17,9 +17,7 @@ const NewPost: FC<Props> = ({ onClick }) => (
     "
   >
     <h1 className="text-xl text-black dark:text-white font-semibold">
-      <span className="text-fieldGreen">What's</span>
-      {' '}
-      on your mind?
+      <span className="text-fieldGreen">What's</span> on your mind?
     </h1>
     <AiFillEdit className="text-black dark:text-white" size={20} />
   </div>

@@ -26,7 +26,6 @@ export const Editor = () => {
     if (zoom >= 2.4) return;
 
     setZoom(zoom + 0.2);
-    console.log(zoom);
   };
 
   const handleZoomOut = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -40,11 +39,7 @@ export const Editor = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-20">
-      <Dropzone
-        onDrop={(dropped) => setImage(dropped[0])}
-        noClick
-        noKeyboard
-      >
+      <Dropzone onDrop={(dropped) => setImage(dropped[0])} noClick noKeyboard>
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps()}>
             <AvatarEditor
@@ -71,7 +66,6 @@ export const Editor = () => {
           <IoIosAdd />
         </Button>
       </div>
-
     </main>
   );
 };

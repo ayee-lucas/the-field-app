@@ -29,7 +29,6 @@ const fetchPosts = async (pageParam: number): Promise<ExtendedPost[]> => {
     return [];
   }
 
-  console.log(posts.data);
   return posts.data;
 };
 

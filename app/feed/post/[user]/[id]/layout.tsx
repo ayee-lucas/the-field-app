@@ -1,11 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { BsFillBookmarkDashFill } from 'react-icons/bs';
-import { IPost } from '@/app/models/Post';
-import PostFormatted from '@/app/tools/postFormatter';
+import formatPost from '@/app/tools/postFormatter';
 import { formatDate } from '@/app/tools/datesFormatter';
 import Link from 'next/link';
-import defaultImage from '../../../../../public/images/default_user.png';
+import defaultImage from '@/public/images/default_user.png';
+import { fetchPostById } from '@/app/server-actions/posts/actions';
+import { notFound } from 'next/navigation';
 import AddComment from '../../components/AddComment';
 import PostBody from '../../components/PostBody';
 import MobileComents from '../../components/MobileComents';
@@ -17,13 +18,17 @@ export default async function Post({
   params: { id: string; user: string };
   children: React.ReactNode;
 }) {
-  const post: IPost = await fetchPostById(params.id);
+  const res = await fetchPostById(params.id);
 
-  const { title, body } = PostFormatted(post.content.text);
+  if ('error' in res) {
+    notFound();
+  }
 
-  const { formatedDate, formatedTime } = formatDate(post.createdAt);
+  const post = res.data;
 
-  console.log({ Params: params });
+  const { title, body } = formatPost(post.content.text);
+
+  const { formatedDate, formatedTime } = formatDate(post.created_at);
 
   // Delete this code
 
@@ -35,7 +40,7 @@ export default async function Post({
       <div className="py-2 w-full">
         <div className="flex items-center justify-between w-full gap-2 my-3">
           <Link
-            href={`/Home/profile/${post.author.username}`}
+            href={`/Home/profile/${post.Author.username}`}
             className="flex items-center gap-2"
           >
             <Image
@@ -45,9 +50,9 @@ export default async function Post({
               width={35}
               height={35}
             />
-            {post.author.name}
+            {post.Author.Profile.name}
             <span className="text-sm text-gray-600 dark:text-zinc-500">
-              @{post.author.username}
+              @{post.Author.username}
             </span>
           </Link>
 
@@ -68,7 +73,7 @@ export default async function Post({
         <span>{formatedTime}</span>
         <span>{formatedDate}</span>
       </div>
-      <AddComment postAuthor={post.author.username} />
+      <AddComment postAuthor={post.Author.username} />
       <MobileComents />
       {children}
     </div>

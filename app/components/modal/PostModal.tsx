@@ -21,9 +21,7 @@ const PostModal = ({ setOpen }: Props) => (
           width={35}
           height={35}
         />
-        <h1>
-          Alan Lopez
-        </h1>
+        <h1>Alan Lopez</h1>
       </div>
       <h1 className="text-2xl font-semibold">LEBRON JAMES JA MORANT</h1>
       <p className="text-justify mt-2">

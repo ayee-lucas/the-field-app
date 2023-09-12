@@ -1,7 +1,7 @@
 'use server';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-interface props { }
+interface props {}
 
 const url = process.env.NEXTAUTH_URL as string;
 const goUrl = process.env.GO_BACKEND as string;
@@ -19,7 +19,6 @@ export async function nextSignUp(data: props) {
 
     return await response.json();
   } catch (err) {
-    console.log(err);
     return err;
   }
 }
@@ -36,8 +35,6 @@ export async function goSignUp(data: props) {
 
     return await res.json();
   } catch (err) {
-    console.log(err);
-
     const message = {
       error: 'Fetch failed',
       message: 'Something went wrong',

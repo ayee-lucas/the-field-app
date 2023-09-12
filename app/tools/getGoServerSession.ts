@@ -21,8 +21,6 @@ export async function getGoSession() {
 
     return json as Session;
   } catch (err) {
-    console.log(err);
-
     return null;
   }
 }

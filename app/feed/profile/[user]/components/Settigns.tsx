@@ -9,10 +9,7 @@ function Settigns() {
     dark:bg-zinc-900 dark:text-gray-300 border dark:border-gray-300"
     >
       <CiSettings />
-      <span className="max-sm:text-[12px]">
-
-        Preferences
-      </span>
+      <span className="max-sm:text-[12px]">Preferences</span>
     </button>
   );
 }

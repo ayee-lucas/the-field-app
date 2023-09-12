@@ -16,8 +16,6 @@ export async function ServerSessionRoutes(sessionId: string) {
 
     return json as Session;
   } catch (err) {
-    console.log(err);
-
     return null;
   }
 }

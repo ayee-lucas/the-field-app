@@ -10,7 +10,8 @@ function NavProfile() {
     after:content-[''] after:w-full after:h-1 after:bg-fieldGreen after:absolute after:bottom-0 after:left-0 cursor-pointer
     "
     >
-      <ul className=" flex justify-start text-black items-center bg-gray-100 dark:bg-black dark:text-white max-sm:text-[13px]
+      <ul
+        className=" flex justify-start text-black items-center bg-gray-100 dark:bg-black dark:text-white max-sm:text-[13px]
       px-7 max-sm:px-2 py-6 gap-4 font-medium overflow-x-auto"
       >
         <li className="max-sm:hidden">Recent 🕑</li>
@@ -24,64 +25,54 @@ function NavProfile() {
         <li className="max-sm:hidden">Likes ❤️</li>
 
         <li
-          className={`flex items-center justify-center gap-3 border ${selectedIndex === 0 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          className={`flex items-center justify-center gap-3 border ${
+            selectedIndex === 0 && 'border-fieldGreen text-fieldGreen'
+          } rounded-xl p-2`}
           onClick={() => setSelectedIndex(0)}
           aria-hidden
         >
-          <span>
-            Recent
-          </span>
-          <span>
-            🕑
-          </span>
+          <span>Recent</span>
+          <span>🕑</span>
         </li>
         <li
-          className={`flex items-center justify-center gap-3 border ${selectedIndex === 1 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          className={`flex items-center justify-center gap-3 border ${
+            selectedIndex === 1 && 'border-fieldGreen text-fieldGreen'
+          } rounded-xl p-2`}
           onClick={() => setSelectedIndex(1)}
           aria-hidden
         >
-          <span>
-            Posts
-          </span>
-          <span>
-            📈
-          </span>
+          <span>Posts</span>
+          <span>📈</span>
         </li>
         <li
-          className={`flex items-center justify-center gap-3 border ${selectedIndex === 2 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          className={`flex items-center justify-center gap-3 border ${
+            selectedIndex === 2 && 'border-fieldGreen text-fieldGreen'
+          } rounded-xl p-2`}
           onClick={() => setSelectedIndex(2)}
           aria-hidden
         >
-          <span>
-            Starred
-          </span>
-          <span>
-            ⭐️
-          </span>
+          <span>Starred</span>
+          <span>⭐️</span>
         </li>
         <li
-          className={`flex items-center justify-center gap-3 border ${selectedIndex === 3 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          className={`flex items-center justify-center gap-3 border ${
+            selectedIndex === 3 && 'border-fieldGreen text-fieldGreen'
+          } rounded-xl p-2`}
           onClick={() => setSelectedIndex(3)}
           aria-hidden
         >
-          <span>
-            Comments
-          </span>
-          <span>
-            📢
-          </span>
+          <span>Comments</span>
+          <span>📢</span>
         </li>
         <li
-          className={`flex items-center justify-center gap-3 border ${selectedIndex === 4 && 'border-fieldGreen text-fieldGreen'} rounded-xl p-2`}
+          className={`flex items-center justify-center gap-3 border ${
+            selectedIndex === 4 && 'border-fieldGreen text-fieldGreen'
+          } rounded-xl p-2`}
           onClick={() => setSelectedIndex(4)}
           aria-hidden
         >
-          <span>
-            Likes
-          </span>
-          <span>
-            ❤️
-          </span>
+          <span>Likes</span>
+          <span>❤️</span>
         </li>
       </ul>
     </nav>

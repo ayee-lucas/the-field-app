@@ -9,7 +9,9 @@ export default function TopBar() {
   const context = useContext(OuterLClientContext);
 
   if (!context) {
-    throw new Error('OuterLClientContext must be used within <OuterLClientContext.Provider>');
+    throw new Error(
+      'OuterLClientContext must be used within <OuterLClientContext.Provider>'
+    );
   }
 
   const { session } = context;
@@ -35,7 +37,8 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div className={`fixed transition-all flex items-center max-sm:flex-row-reverse justify-between z-[998] 
+    <div
+      className={`fixed transition-all flex items-center max-sm:flex-row-reverse justify-between z-[998] 
       w-full py-2 px-4 bg-white/70 max-sm:bg-white/80 backdrop-blur-lg backdrop-saturate-150 ${shadow}
       dark:bg-black/70
       `}

@@ -43,7 +43,6 @@ export async function finishUser(
 
     return json;
   } catch (err) {
-    console.log(err);
     return {
       message: 'Something went wrong',
       error: 'FetchError',
@@ -97,7 +96,6 @@ export async function getCountries(): Promise<
 
     return data;
   } catch (err) {
-    console.log(err);
     return {
       error: JSON.stringify(err),
       message: 'Error fetching countries',
@@ -155,7 +153,6 @@ export async function finishOrg(
 
     return json;
   } catch (err) {
-    console.log(err);
     return {
       error: 'Fetch Error',
       message: 'Something went wrong',
@@ -216,7 +213,6 @@ export async function finishAthl(
 
     return json;
   } catch (err) {
-    console.log(err);
     return {
       error: 'Fetch Error',
       message: 'Something went wrong',

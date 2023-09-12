@@ -32,20 +32,18 @@ export default function MultiUploader() {
 
   return (
     <div className="min-h-screen w-full p-2">
-      <div {...getRootProps()} className="w-full h-56 p-5 border border-gray-300">
+      <div
+        {...getRootProps()}
+        className="w-full h-56 p-5 border border-gray-300"
+      >
         <input {...getInputProps()} className="w-full h-full" />
-
         Drop file
       </div>
       {file && ( // change to single file
-        <button
-          type="button"
-          onClick={() => startUpload([file])}
-        >
+        <button type="button" onClick={() => startUpload([file])}>
           Upload file
         </button>
       )}
     </div>
-
   );
 }

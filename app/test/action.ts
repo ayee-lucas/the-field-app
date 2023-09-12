@@ -5,6 +5,5 @@
 import { utapi } from 'uploadthing/server';
 
 export const handleDelete = async (str: string) => {
-  const res = await utapi.deleteFiles(str);
-  console.log(res);
+  await utapi.deleteFiles(str);
 };

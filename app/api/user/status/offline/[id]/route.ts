@@ -71,7 +71,6 @@ export async function PUT(
       }
     );
   } catch (err) {
-    console.log(err);
     return new Response(JSON.stringify({ message: serverError, error: err }), {
       status: 500,
     });

@@ -3,9 +3,7 @@
 
 'use client';
 
-import React, {
-  useRef, MouseEvent, useState, useEffect,
-} from 'react';
+import React, { useRef, MouseEvent, useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -24,7 +22,7 @@ function LoginClient() {
   const error = params.get('error');
 
   const [classError, setClassError] = useState(
-    'border-fieldGreen focus:ring-fieldGreen',
+    'border-fieldGreen focus:ring-fieldGreen'
   );
   const [isFormValid, setIsFormValid] = useState(true);
 
@@ -61,9 +59,7 @@ function LoginClient() {
         <div className="min-w-[300px] max-sm:w-full min-h-[300px] w-[500px] h-[550px] bg-white rounded-lg flex flex-col items-center justify-between">
           <div className="flex flex-col justify-center items-center w-full pt-10 pb-5">
             <h1 className="text-6xl max-sm:text-4xl font-bold">
-              THE
-              {' '}
-              <span className="text-fieldGreen">FIELD</span>
+              THE <span className="text-fieldGreen">FIELD</span>
             </h1>
           </div>
           <h3 className="font-medium ml-1">Welcome back!</h3>
@@ -73,9 +69,7 @@ function LoginClient() {
           >
             <div className="w-full">
               {isFormValid ? (
-                <label className="text-sm">
-                  Username
-                </label>
+                <label className="text-sm">Username</label>
               ) : (
                 <label
                   htmlFor=""
