@@ -18,6 +18,7 @@ export default function CountryList({ form }: Props) {
   const [countries, setCountries] = useState<CountryResponse[] | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     const getData = async () => {
       const data = await getCountries();
 
@@ -31,6 +32,10 @@ export default function CountryList({ form }: Props) {
 
     getData();
   }, []);
+
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
   return (
     <CommandGroup>
