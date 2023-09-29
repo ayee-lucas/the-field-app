@@ -45,7 +45,7 @@ export default async function goSignIn(
 type GetUserType = {
   message: string;
   error?: string;
-  user?: User;
+  data?: User;
 };
 
 export async function goGetUserById(id: string): Promise<GetUserType> {
