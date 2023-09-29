@@ -15,7 +15,7 @@ type Context = {
 
 export const NewPostContext = createContext<Context | undefined>(undefined);
 
-export default function NewPostHandlera() {
+export default function NewPostHandler() {
   const [loading, setLoading] = useState<boolean>(false);
   const [toggleEditor, setToggleEditor] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
