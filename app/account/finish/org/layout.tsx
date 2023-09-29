@@ -1,5 +1,4 @@
 import { montserrat } from '@/app/fonts';
-import { goGetUserById } from '@/app/server-actions/signin/actions';
 import { getGoSession } from '@/app/tools/getGoServerSession';
 import { redirect } from 'next/navigation';
 
@@ -13,11 +12,7 @@ export default async function Layout({
   if (!session?.user?.username) {
     return redirect('/auth/signin');
   }
-  const getUser = await goGetUserById(session?.user?.sub);
 
-  if (getUser.user?.finished) {
-    return redirect('/Home');
-  }
   return (
     <section className={`w-full min-h-screen p-2 ${montserrat.variable}`}>
       <h1 className="text-center py-4 text-2xl font-montserrat font-light">
