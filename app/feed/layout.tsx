@@ -17,14 +17,18 @@ export default async function HomeLayout({
   if (session?.user) {
     const getUser = await goGetUserById(session?.user?.sub);
 
-    if (!getUser.user?.profile_id) {
-      return redirect(ROUTES.feed);
+    if (!getUser.data) {
+      return redirect(ROUTES.signin);
     }
 
-    const profile = await getProfile(getUser.user.profile_id);
+    if (!getUser.data.profile_id) {
+      return redirect(ROUTES.finishAcc);
+    }
+
+    const profile = await getProfile(getUser.data.profile_id);
 
     if ('error' in profile) {
-      return redirect(ROUTES.feed);
+      return redirect(ROUTES.signin);
     }
 
     if (!profile.data.finished) {
