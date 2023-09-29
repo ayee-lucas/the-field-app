@@ -15,11 +15,15 @@ export default async function Page() {
 
   const getUser = await goGetUserById(session?.user?.sub);
 
-  if (!getUser.user?.profile_id) {
+  if (!getUser.data) {
     return redirect('/auth/signin');
   }
 
-  const profile = await getProfile(getUser.user.profile_id);
+  if (!getUser.data.profile_id) {
+    return redirect('/auth/signin');
+  }
+
+  const profile = await getProfile(getUser.data.profile_id);
 
   if ('error' in profile) {
     return redirect('/auth/signin/');
